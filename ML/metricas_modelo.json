@@ -1,0 +1,8 @@
+{
+    "best_model": "Bosque aleatorio",
+    "accuracy": 0.796812749003984,
+    "precision_no_show": 0.5806451612903226,
+    "recall_no_show": 0.8181818181818182,
+    "f1_no_show": 0.6792452830188679,
+    "roc_auc": 0.9064291564291563
+}

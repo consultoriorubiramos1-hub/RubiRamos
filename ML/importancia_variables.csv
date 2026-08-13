@@ -1,0 +1,7 @@
+variable,importancia
+previous_completed,0.3470430832799289
+previous_attendance_rate,0.29890180087304175
+appointment_hour,0.11502754262983904
+previous_no_show,0.09980622250799416
+previous_cancelled,0.07546622942623911
+day_of_week,0.0637551212829571
