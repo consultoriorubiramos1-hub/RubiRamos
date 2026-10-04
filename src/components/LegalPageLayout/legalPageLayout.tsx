@@ -14,40 +14,39 @@ interface LegalPageLayoutProps {
   sections: LegalSection[];
 }
 
-export default function legalPageLayout({ title, introduction, sections }: LegalPageLayoutProps) {
+export default function LegalPageLayout({ title, introduction, sections }: LegalPageLayoutProps) {
   return (
-    <section className="min-h-screen bg-gray-50 text-gray-900 py-20">
-      <div className="container mx-auto px-4 max-w-4xl">
-
-        <div className="text-center mb-12">
-          <h1 className="text-5xl lg:text-6xl font-bold mb-4 bg-gradient-to-r from-cyan-400 to-teal-600 bg-clip-text text-transparent">
+    <section className="min-h-screen bg-[#FAF9F7] py-16 text-[#2C3E34] sm:py-20">
+      <div className="mx-auto w-full max-w-4xl px-5 sm:px-8">
+        <div className="mb-12 text-center">
+          <h1 className="mb-4 font-serif text-3xl font-bold text-[#2C3E34] sm:text-4xl lg:text-5xl">
             {title}
           </h1>
-          <p className="text-xl text-gray-600">
+          <p className="mx-auto max-w-2xl text-lg leading-relaxed text-[#6E7C72]">
             {introduction}
           </p>
         </div>
 
-        <div className="bg-white rounded-xl p-8 border border-gray-200 shadow-lg">
-          {sections.map((section, index) => (
-            <div key={index} className="mb-8 last:mb-0">
-              <h2 className="text-3xl font-bold text-cyan-700 mb-4 flex items-center">
-                <ChevronRightIcon className="h-6 w-6 text-cyan-500 mr-2" />
+        <div className="rounded-2xl border border-[#E6E3DE] bg-white p-6 shadow-sm sm:p-10">
+          {sections.map((section) => (
+            <section key={section.subtitle} className="border-b border-[#E6E3DE] py-7 first:pt-0 last:border-0 last:pb-0">
+              <h2 className="mb-4 flex items-start gap-2 font-serif text-xl font-bold text-[#2C3E34] sm:text-2xl">
+                <ChevronRightIcon className="mt-1 h-5 w-5 shrink-0 text-[#BD7D4A]" aria-hidden="true" />
                 {section.subtitle}
               </h2>
-              <div className="space-y-4 text-gray-700 leading-relaxed">
-                {section.paragraphs.map((paragraph, pIndex) => (
-                  <p key={pIndex}>{paragraph}</p>
+              <div className="space-y-4 break-words leading-relaxed text-[#6E7C72]">
+                {section.paragraphs.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
                 ))}
-                {section.list && ( 
-                  <ul className="list-disc pl-8 space-y-2">
-                    {section.list.map((item, itemIndex) => (
-                      <li key={itemIndex}>{item}</li>
+                {section.list && (
+                  <ul className="list-disc space-y-2 pl-6 marker:text-[#5A8C7A]">
+                    {section.list.map((item) => (
+                      <li key={item}>{item}</li>
                     ))}
                   </ul>
                 )}
               </div>
-            </div>
+            </section>
           ))}
         </div>
       </div>

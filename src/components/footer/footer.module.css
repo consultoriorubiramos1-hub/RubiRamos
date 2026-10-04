@@ -4,18 +4,21 @@
   color: #FAF9F7;
   font-size: 0.95rem;
   border-top: 1px solid #7CB38C;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 2.5rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
 }
 
 .section {
-  margin-bottom: 1.5rem;
+  min-width: 0;
 }
 
 .sectionTitle {
@@ -55,6 +58,7 @@
   display: inline-block;
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;
+  overflow-wrap: anywhere;
 }
 
 .navLink:hover {
@@ -77,6 +81,12 @@
   gap: 0.9rem;
   color: #E6E3DE;
   line-height: 1.5;
+  min-width: 0;
+}
+
+.contactList span {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .contactIcon {
@@ -120,15 +130,16 @@
   color: rgba(250, 249, 247, 0.8);
   font-size: 0.85rem;
   font-family: 'Open Sans', sans-serif;
+  overflow-wrap: anywhere;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .footer {
     padding: 2.5rem 1.5rem 1.5rem;
   }
   
   .container {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 2rem;
   }
   
@@ -138,7 +149,7 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 560px) {
   .container {
     grid-template-columns: 1fr;
     gap: 2rem;
@@ -146,7 +157,6 @@
   
   .section {
     text-align: center;
-    margin-bottom: 2rem;
   }
   
   .sectionTitle::after {
@@ -155,10 +165,8 @@
   }
   
   .contactList li {
-    justify-content: center;
+    align-items: center;
     text-align: center;
-    flex-direction: column;
-    gap: 0.5rem;
   }
   
   .contactIcon {
