@@ -1,9 +1,10 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ClientWrapper from "@/components/layout/ClientWrapper";
 import SessionProviderWrapper from "@/components/SessionProviderWrapper";
 import { ReactNode } from "react";
+import ServiceWorkerRegistration from '@/components/pwa/ServiceWorkerRegistration';
 
 export const metadata: Metadata = {
   title: {
@@ -13,6 +14,15 @@ export const metadata: Metadata = {
   description:
     "Sistema Integral Multiplataforma para la Gestión de Consultorio Nutricional",
   manifest: "/manifest.json",
+  appleWebApp: { capable: true, title: 'Rubí Ramos', statusBarStyle: 'default' },
+  icons: { apple: '/icons/icon-192x192.png' },
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
+  themeColor: '#6B8E7B',
 };
 
 const geistSans = Geist({
@@ -31,9 +41,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}
       >
+        <a className="skip-link" href="#main-content">Ir al contenido</a>
         <SessionProviderWrapper>
           <ClientWrapper>{children}</ClientWrapper>
         </SessionProviderWrapper>
+        <ServiceWorkerRegistration />
       </body>
     </html>
   );
