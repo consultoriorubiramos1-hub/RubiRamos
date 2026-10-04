@@ -110,7 +110,9 @@ Se comprueban apertura/cierre y foco de modales, precarga de edición, envío si
 
 ## 19. Pull Request
 
-La URL se añadirá al crear el PR. Objetivo: `main`. La rama conserva commits agrupados por calendario, PDF, responsive/UI, PWA y validación. **Sin merge automático.**
+PR **[#3](https://github.com/consultoriorubiramos1-hub/RubiRamos/pull/3)**. Objetivo: `main`. La rama conserva commits agrupados por calendario, PDF, responsive/UI, PWA y validación. **Sin merge automático.**
+
+Se publicó mediante la conexión GitHub de Codex. La credencial Git local (`Ricardo-Meraz`) no tiene permiso de escritura; los futuros `git push` desde terminal requieren una cuenta autorizada. Se conserva una copia de los commits originales en la rama local `codex/ui-responsive-pwa-local`.
 
 ## Evidencia visual
 
