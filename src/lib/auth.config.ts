@@ -1,9 +1,8 @@
 import CredentialsProvider from "next-auth/providers/credentials";
 import type { AuthOptions, User, Session } from "next-auth";
 import type { JWT } from "next-auth/jwt";
-import { Usuario, UsuarioAuth } from "./definitions";
-import { query } from "@/lib/db";
-import bcrypt from "bcrypt";
+import { UsuarioAuth } from "./definitions";
+import { authenticateCredentials } from "@/lib/user-auth";
 
 declare module "next-auth" {
   interface Session {
@@ -70,33 +69,7 @@ export const authConfig: AuthOptions = {
         if (!credentials?.username || !credentials?.password) {
           return null;
         }
-
-        const res = await query(
-          `SELECT id, username, email, password_hash, rol_id, verified, active 
-           FROM tblusers 
-           WHERE username = $1 AND active = true`,
-          [credentials.username]
-        );
-
-        const user = res.rows[0] as Usuario | undefined;
-
-        if (!user) return null;
-
-        const isValid = await bcrypt.compare(
-          credentials.password,
-          user.password_hash
-        );
-
-        if (!isValid) return null;
-
-        return {
-          id: user.id.toString(),
-          username: user.username,
-          email: user.email,
-          verified: user.verified,
-          active: user.active,
-          rol_id: user.rol_id,
-        } satisfies UsuarioAuth;
+        return authenticateCredentials(credentials.username, credentials.password);
       },
     }),
   ],
