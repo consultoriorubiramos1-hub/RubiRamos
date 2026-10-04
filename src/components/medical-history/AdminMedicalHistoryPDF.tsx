@@ -1,23 +1,22 @@
 'use client';
 
-import { Document, Page, Text, View, StyleSheet, Image, Font } from '@react-pdf/renderer';
+import { Document, Page, Text, View, StyleSheet, Image } from '@react-pdf/renderer';
 
-// Registrar fuentes
-Font.register({
-  family: 'Roboto',
-  fonts: [
-    { src: 'https://fonts.gstatic.com/s/roboto/v27/KFOmCnqEu92Fr1Mu4mxP.ttf' },
-    { src: 'https://fonts.gstatic.com/s/roboto/v27/KFOlCnqEu92Fr1MmWUlfBBc9.ttf', fontWeight: 'bold' }
-  ]
-});
+// Use the renderer standard font so exports do not depend on network font loading.
 
 const styles = StyleSheet.create({
   page: {
-    padding: 40,
+    paddingTop: 108,
+    paddingHorizontal: 40,
+    paddingBottom: 76,
     backgroundColor: '#ffffff',
-    fontFamily: 'Roboto'
+    fontFamily: 'Helvetica'
   },
   header: {
+    position: 'absolute',
+    top: 30,
+    left: 40,
+    right: 40,
     marginBottom: 20,
     borderBottom: 2,
     borderBottomColor: '#BD7D4A',
@@ -36,8 +35,7 @@ const styles = StyleSheet.create({
     marginTop: 5
   },
   section: {
-    marginBottom: 15,
-    breakInside: 'avoid'
+    marginBottom: 15
   },
   sectionTitle: {
     fontSize: 14,
@@ -103,18 +101,22 @@ const styles = StyleSheet.create({
   tableCell: {
     fontSize: 8,
     paddingHorizontal: 4,
-    flex: 1
+    flexGrow: 0,
+    flexShrink: 0,
+    width: '20%'
   },
   tableCellHeader: {
     fontSize: 8,
     fontWeight: 'bold',
     paddingHorizontal: 4,
-    flex: 1
+    flexGrow: 0,
+    flexShrink: 0,
+    width: '20%'
   },
   image: {
     marginVertical: 10,
-    maxWidth: '100%',
-    maxHeight: 300,
+    width: 480,
+    height: 260,
     objectFit: 'contain'
   },
   footer: {
@@ -148,10 +150,7 @@ const styles = StyleSheet.create({
     color: '#2C3E34',
     lineHeight: 1.4
   },
-  pageBreak: {
-    pageBreakBefore: 'always'
-  },
-  mealTimeText: {
+mealTimeText: {
     fontSize: 10,
     color: '#2C3E34',
     marginBottom: 2
@@ -261,13 +260,18 @@ export default function AdminMedicalHistoryPDF({
     <Document>
       {/* Página 1 - Información del paciente y evaluación inicial */}
       <Page size="A4" style={styles.page}>
-        <View style={styles.header}>
+        <View style={styles.footer} fixed>
+          <Text>Documento generado el {new Date().toLocaleDateString('es-ES')}</Text>
+          <Text>Consultorio Rubí Ramos - Todos los derechos reservados</Text>
+          <Text render={({ pageNumber, totalPages }) => `Página ${pageNumber} de ${totalPages}`} />
+        </View>
+        <View style={styles.header} fixed>
           <Text style={styles.headerTitle}>Consultorio Rubí Ramos</Text>
           <Text style={styles.headerSubtitle}>Historial Médico del Paciente</Text>
         </View>
 
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Información del Paciente</Text>
+          <Text minPresenceAhead={32} style={styles.sectionTitle}>Información del Paciente</Text>
           <View style={styles.row}>
             <View style={styles.col}>
               <Text style={styles.text}><Text style={styles.label}>Nombre completo:</Text> {patient.nombre_completo}</Text>
@@ -284,14 +288,14 @@ export default function AdminMedicalHistoryPDF({
 
         {initialEvaluation && (
           <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Evaluación Inicial</Text>
+            <Text minPresenceAhead={32} style={styles.sectionTitle}>Evaluación Inicial</Text>
             
-            <Text style={styles.subsectionTitle}>Motivo de Consulta</Text>
+            <Text minPresenceAhead={32} style={styles.subsectionTitle}>Motivo de Consulta</Text>
             <Text style={styles.text}>Objetivo principal: {initialEvaluation.consultation_reason?.main_goal || '—'}</Text>
             <Text style={styles.text}>Desde cuándo: {initialEvaluation.consultation_reason?.onset_date ? formatDate(initialEvaluation.consultation_reason.onset_date) : '—'}</Text>
             <Text style={styles.text}>Expectativas: {initialEvaluation.consultation_reason?.treatment_expectations || '—'}</Text>
 
-            <Text style={styles.subsectionTitle}>Antecedentes Heredofamiliares</Text>
+            <Text minPresenceAhead={32} style={styles.subsectionTitle}>Antecedentes Heredofamiliares</Text>
             <View style={styles.grid}>
               <View style={styles.gridItem}><Text style={styles.text}>• Diabetes: {initialEvaluation.family_history?.diabetes ? 'Sí' : 'No'}</Text></View>
               <View style={styles.gridItem}><Text style={styles.text}>• Hipertensión: {initialEvaluation.family_history?.hypertension ? 'Sí' : 'No'}</Text></View>
@@ -302,7 +306,7 @@ export default function AdminMedicalHistoryPDF({
               <View style={styles.gridItem}><Text style={styles.text}>• SOP: {initialEvaluation.family_history?.pcos ? 'Sí' : 'No'}</Text></View>
             </View>
 
-            <Text style={styles.subsectionTitle}>Antecedentes Personales Patológicos</Text>
+            <Text minPresenceAhead={32} style={styles.subsectionTitle}>Antecedentes Personales Patológicos</Text>
             <Text style={styles.text}>Enfermedades actuales: {initialEvaluation.personal_history?.current_diseases || '—'}</Text>
             <Text style={styles.text}>Enfermedades previas: {initialEvaluation.personal_history?.past_diseases || '—'}</Text>
             <Text style={styles.text}>Cirugías: {initialEvaluation.personal_history?.surgeries || '—'}</Text>
@@ -310,52 +314,55 @@ export default function AdminMedicalHistoryPDF({
             <Text style={styles.text}>Suplementos: {initialEvaluation.personal_history?.supplements || '—'}</Text>
             <Text style={styles.text}>Alergias/intolerancias: {initialEvaluation.personal_history?.allergies_intolerances || '—'}</Text>
 
-            <Text style={styles.subsectionTitle}>Antecedentes No Patológicos</Text>
+            <Text minPresenceAhead={32} style={styles.subsectionTitle}>Antecedentes No Patológicos</Text>
             <Text style={styles.text}>Actividad física: {initialEvaluation.non_pathological_history?.physical_activity_type || '—'}</Text>
             <Text style={styles.text}>Alcohol: {initialEvaluation.non_pathological_history?.alcohol_consumption || '—'}</Text>
             <Text style={styles.text}>Tabaquismo: {initialEvaluation.non_pathological_history?.smoking || '—'}</Text>
             <Text style={styles.text}>Calidad de sueño: {initialEvaluation.non_pathological_history?.sleep_quality || '—'}</Text>
             <Text style={styles.text}>Estrés: {initialEvaluation.non_pathological_history?.stress_level || '—'}</Text>
 
-            <Text style={styles.subsectionTitle}>Evaluación Dietética</Text>
+            <Text minPresenceAhead={32} style={styles.subsectionTitle}>Evaluación Dietética</Text>
             <Text style={styles.text}>Desayuno: {initialEvaluation.dietary_recall?.breakfast || '—'}</Text>
             <Text style={styles.text}>Comida: {initialEvaluation.dietary_recall?.lunch || '—'}</Text>
             <Text style={styles.text}>Cena: {initialEvaluation.dietary_recall?.dinner || '—'}</Text>
           </View>
         )}
-
-        <View style={styles.pageBreak} />
       </Page>
 
       {/* Página 2 - Progreso */}
       {followUpEvaluations.length > 0 && (
         <Page size="A4" style={styles.page}>
-          <View style={styles.header}>
+        <View style={styles.footer} fixed>
+          <Text>Documento generado el {new Date().toLocaleDateString('es-ES')}</Text>
+          <Text>Consultorio Rubí Ramos - Todos los derechos reservados</Text>
+          <Text render={({ pageNumber, totalPages }) => `Página ${pageNumber} de ${totalPages}`} />
+        </View>
+          <View style={styles.header} fixed>
             <Text style={styles.headerTitle}>Consultorio Rubí Ramos</Text>
             <Text style={styles.headerSubtitle}>Historial de Progreso - {patient.nombre_completo}</Text>
           </View>
 
           <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Resultados de Seguimiento</Text>
+            <Text minPresenceAhead={32} style={styles.sectionTitle}>Resultados de Seguimiento</Text>
             <View style={styles.table}>
-              <View style={styles.tableHeader}>
-                <Text style={[styles.tableCellHeader, { width: '12%' }]}>FECHA</Text>
-                <Text style={[styles.tableCellHeader, { width: '8%' }]}>PESO</Text>
-                <Text style={[styles.tableCellHeader, { width: '8%' }]}>%GRASA</Text>
-                <Text style={[styles.tableCellHeader, { width: '8%' }]}>%MÚSCULO</Text>
-                <Text style={[styles.tableCellHeader, { width: '8%' }]}>CINTURA</Text>
-                <Text style={[styles.tableCellHeader, { width: '8%' }]}>CADERA</Text>
-                <Text style={[styles.tableCellHeader, { width: '8%' }]}>T/A</Text>
+              <View minPresenceAhead={24} wrap={false} style={styles.tableHeader}>
+                <Text style={[styles.tableCellHeader, { width: '20%' }]}>FECHA</Text>
+                <Text style={[styles.tableCellHeader, { width: '13.3333%' }]}>PESO</Text>
+                <Text style={[styles.tableCellHeader, { width: '13.3333%' }]}>%GRASA</Text>
+                <Text style={[styles.tableCellHeader, { width: '13.3333%' }]}>%MÚSCULO</Text>
+                <Text style={[styles.tableCellHeader, { width: '13.3333%' }]}>CINTURA</Text>
+                <Text style={[styles.tableCellHeader, { width: '13.3333%' }]}>CADERA</Text>
+                <Text style={[styles.tableCellHeader, { width: '13.3333%' }]}>T/A</Text>
               </View>
               {followUpEvaluations.map((evaluation, idx) => (
-                <View key={idx} style={styles.tableRow}>
-                  <Text style={[styles.tableCell, { width: '12%' }]}>{formatDate(evaluation.evaluation_date)}</Text>
-                  <Text style={[styles.tableCell, { width: '8%' }]}>{formatNumber(evaluation.anthropometric?.weight)}</Text>
-                  <Text style={[styles.tableCell, { width: '8%' }]}>{formatNumber(evaluation.anthropometric?.body_fat_percentage)}</Text>
-                  <Text style={[styles.tableCell, { width: '8%' }]}>{formatNumber(evaluation.anthropometric?.muscle_percentage)}</Text>
-                  <Text style={[styles.tableCell, { width: '8%' }]}>{formatNumber(evaluation.anthropometric?.waist_circumference)}</Text>
-                  <Text style={[styles.tableCell, { width: '8%' }]}>{formatNumber(evaluation.anthropometric?.hip_circumference)}</Text>
-                  <Text style={[styles.tableCell, { width: '8%' }]}>
+                <View key={idx} wrap={false} style={styles.tableRow}>
+                  <Text style={[styles.tableCell, { width: '20%' }]}>{formatDate(evaluation.evaluation_date)}</Text>
+                  <Text style={[styles.tableCell, { width: '13.3333%' }]}>{formatNumber(evaluation.anthropometric?.weight)}</Text>
+                  <Text style={[styles.tableCell, { width: '13.3333%' }]}>{formatNumber(evaluation.anthropometric?.body_fat_percentage)}</Text>
+                  <Text style={[styles.tableCell, { width: '13.3333%' }]}>{formatNumber(evaluation.anthropometric?.muscle_percentage)}</Text>
+                  <Text style={[styles.tableCell, { width: '13.3333%' }]}>{formatNumber(evaluation.anthropometric?.waist_circumference)}</Text>
+                  <Text style={[styles.tableCell, { width: '13.3333%' }]}>{formatNumber(evaluation.anthropometric?.hip_circumference)}</Text>
+                  <Text style={[styles.tableCell, { width: '13.3333%' }]}>
                     {evaluation.anthropometric?.blood_pressure_systolic ? 
                       `${evaluation.anthropometric.blood_pressure_systolic}/${evaluation.anthropometric.blood_pressure_diastolic || '—'}` : '—'}
                   </Text>
@@ -363,21 +370,24 @@ export default function AdminMedicalHistoryPDF({
               ))}
             </View>
           </View>
-
-          <View style={styles.pageBreak} />
         </Page>
       )}
 
       {/* Página 3 - Plan Alimenticio */}
       {nutritionPlan && (
         <Page size="A4" style={styles.page}>
-          <View style={styles.header}>
+        <View style={styles.footer} fixed>
+          <Text>Documento generado el {new Date().toLocaleDateString('es-ES')}</Text>
+          <Text>Consultorio Rubí Ramos - Todos los derechos reservados</Text>
+          <Text render={({ pageNumber, totalPages }) => `Página ${pageNumber} de ${totalPages}`} />
+        </View>
+          <View style={styles.header} fixed>
             <Text style={styles.headerTitle}>Consultorio Rubí Ramos</Text>
             <Text style={styles.headerSubtitle}>Plan Alimenticio - {patient.nombre_completo}</Text>
           </View>
 
           <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Horarios de Comidas</Text>
+            <Text minPresenceAhead={32} style={styles.sectionTitle}>Horarios de Comidas</Text>
             {MEAL_TYPES.map(meal => {
               const mealTime = nutritionPlan.meal_times?.[meal];
               if (!mealTime?.start && meal !== 'COLACION') return null;
@@ -390,41 +400,31 @@ export default function AdminMedicalHistoryPDF({
           </View>
 
           <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Plan de Comidas Semanal</Text>
-            <View style={styles.table}>
-              <View style={styles.tableHeader}>
-                <Text style={[styles.tableCellHeader, { width: '20%' }]}>Comida</Text>
-                {MENUS.map(menu => (
-                  <View key={menu.id} style={{ width: '20%', flexDirection: 'column' }}>
-                    <Text style={[styles.tableCellHeader, { textAlign: 'center' }]}>{menu.name}</Text>
-                    <Text style={[styles.tableCellHeader, { textAlign: 'center', fontSize: 7 }]}>{menu.days}</Text>
+            <Text minPresenceAhead={32} style={styles.sectionTitle}>Plan de Comidas Semanal</Text>
+            {MENUS.map(menu => (
+              <View key={menu.id} style={styles.section}>
+                <Text minPresenceAhead={48} style={styles.subsectionTitle}>{menu.name} · {menu.days}</Text>
+                {MEAL_TYPES.map(meal => (
+                  <View key={meal} style={{ marginBottom: 8 }}>
+                    <Text minPresenceAhead={24} style={styles.label}>{meal}</Text>
+                    <Text orphans={2} widows={2} style={styles.text}>{getMealContent(menu.id, meal) || '—'}</Text>
                   </View>
                 ))}
               </View>
-              {MEAL_TYPES.map(meal => (
-                <View key={meal} style={styles.tableRow}>
-                  <Text style={[styles.tableCell, { width: '20%', fontWeight: 'bold' }]}>{meal}</Text>
-                  {MENUS.map(menu => {
-                    const content = getMealContent(menu.id, meal);
-                    return (
-                      <Text key={menu.id} style={[styles.tableCell, { width: '20%', fontSize: 8 }]}>
-                        {content || '—'}
-                      </Text>
-                    );
-                  })}
-                </View>
-              ))}
-            </View>
+            ))}
           </View>
-
-          <View style={styles.pageBreak} />
         </Page>
       )}
 
       {/* Página 4 - Recomendaciones Generales */}
       {generalRecommendations.length > 0 && (
         <Page size="A4" style={styles.page}>
-          <View style={styles.header}>
+        <View style={styles.footer} fixed>
+          <Text>Documento generado el {new Date().toLocaleDateString('es-ES')}</Text>
+          <Text>Consultorio Rubí Ramos - Todos los derechos reservados</Text>
+          <Text render={({ pageNumber, totalPages }) => `Página ${pageNumber} de ${totalPages}`} />
+        </View>
+          <View style={styles.header} fixed>
             <Text style={styles.headerTitle}>Consultorio Rubí Ramos</Text>
             <Text style={styles.headerSubtitle}>Recomendaciones Generales</Text>
           </View>
@@ -435,7 +435,7 @@ export default function AdminMedicalHistoryPDF({
               .sort((a, b) => a.display_order - b.display_order)
               .map((recommendation) => (
                 <View key={recommendation.id} style={styles.recommendationBox}>
-                  <Text style={styles.recommendationTitle}>{recommendation.title}</Text>
+                  <Text minPresenceAhead={32} style={styles.recommendationTitle}>{recommendation.title}</Text>
                   {recommendation.type === 'image' && recommendation.image_url ? (
                     <Image src={recommendation.image_url} style={styles.image} />
                   ) : (
@@ -453,11 +453,6 @@ export default function AdminMedicalHistoryPDF({
                   )}
                 </View>
               ))}
-          </View>
-
-          <View style={styles.footer}>
-            <Text>Documento generado el {new Date().toLocaleDateString('es-ES')}</Text>
-            <Text>Consultorio Rubí Ramos - Todos los derechos reservados</Text>
           </View>
         </Page>
       )}
