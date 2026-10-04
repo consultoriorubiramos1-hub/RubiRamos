@@ -34,7 +34,7 @@ export default async function MedicalHistoryPage({ searchParams }: PageProps) {
 
   return (
     <div className="min-h-screen bg-[#FAF9F7]">
-      <Suspense fallback={<div className="p-6 text-center text-[#6E7C72]">Cargando historial médico...</div>}>
+      <Suspense fallback={<div className="p-4 sm:p-6 text-center text-[#6E7C72]">Cargando historial médico...</div>}>
         <MedicalHistoryClient preselectedPatient={preselectedPatient} />
       </Suspense>
     </div>

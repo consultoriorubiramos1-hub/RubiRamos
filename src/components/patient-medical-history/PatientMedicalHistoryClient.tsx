@@ -71,7 +71,7 @@ export default function PatientMedicalHistoryClient({
   return (
     <div className="space-y-6">
       {/* Encabezado con botón de PDF */}
-      <div className="flex justify-between items-center">
+      <div className="flex flex-wrap gap-3 justify-between items-center">
         <div>
           <h1 className="text-2xl font-bold text-[#5A8C7A]">Mi Historial Médico</h1>
           <p className="text-sm text-[#6E7C72] mt-1">Consulta toda tu información médica, evaluaciones y plan alimenticio</p>
@@ -105,7 +105,7 @@ export default function PatientMedicalHistoryClient({
       </div>
 
       {/* Tarjeta de información del paciente */}
-      <div className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-6">
+      <div className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-4 sm:p-6">
         <h2 className="text-xl font-bold text-[#5A8C7A] mb-4">Mis Datos</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-sm">
           <div><span className="font-semibold text-[#2C3E34]">Nombre completo:</span> <span className="text-[#6E7C72]">{patient.nombre_completo}</span></div>
@@ -127,28 +127,28 @@ export default function PatientMedicalHistoryClient({
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-2 border-b border-[#E6E3DE] overflow-x-auto">
+      <div className="flex flex-wrap gap-2 border-b border-[#E6E3DE] ">
         <button
           onClick={() => setActiveTab('initial')}
-          className={`px-6 py-2 font-semibold transition-colors whitespace-nowrap ${activeTab === 'initial' ? 'text-[#5A8C7A] border-b-2 border-[#5A8C7A]' : 'text-[#6E7C72] hover:text-[#2C3E34]'}`}
+          className={`px-3 sm:px-6 py-2 font-semibold transition-colors ${activeTab === 'initial' ? 'text-[#5A8C7A] border-b-2 border-[#5A8C7A]' : 'text-[#6E7C72] hover:text-[#2C3E34]'}`}
         >
           Evaluación Inicial
         </button>
         <button
           onClick={() => setActiveTab('progress')}
-          className={`px-6 py-2 font-semibold transition-colors whitespace-nowrap ${activeTab === 'progress' ? 'text-[#5A8C7A] border-b-2 border-[#5A8C7A]' : 'text-[#6E7C72] hover:text-[#2C3E34]'}`}
+          className={`px-3 sm:px-6 py-2 font-semibold transition-colors ${activeTab === 'progress' ? 'text-[#5A8C7A] border-b-2 border-[#5A8C7A]' : 'text-[#6E7C72] hover:text-[#2C3E34]'}`}
         >
           Progreso ({followUpEvaluations.length} registros)
         </button>
         <button
           onClick={() => setActiveTab('nutrition')}
-          className={`px-6 py-2 font-semibold transition-colors whitespace-nowrap ${activeTab === 'nutrition' ? 'text-[#5A8C7A] border-b-2 border-[#5A8C7A]' : 'text-[#6E7C72] hover:text-[#2C3E34]'}`}
+          className={`px-3 sm:px-6 py-2 font-semibold transition-colors ${activeTab === 'nutrition' ? 'text-[#5A8C7A] border-b-2 border-[#5A8C7A]' : 'text-[#6E7C72] hover:text-[#2C3E34]'}`}
         >
           Plan Alimenticio
         </button>
         <button
           onClick={() => setActiveTab('predictive')}
-          className={`px-6 py-2 font-semibold transition-colors whitespace-nowrap ${activeTab === 'predictive' ? 'text-[#5A8C7A] border-b-2 border-[#5A8C7A]' : 'text-[#6E7C72] hover:text-[#2C3E34]'}`}
+          className={`px-3 sm:px-6 py-2 font-semibold transition-colors ${activeTab === 'predictive' ? 'text-[#5A8C7A] border-b-2 border-[#5A8C7A]' : 'text-[#6E7C72] hover:text-[#2C3E34]'}`}
         >
           Mi Progreso
         </button>
@@ -159,7 +159,7 @@ export default function PatientMedicalHistoryClient({
         initialEvaluation ? (
           <div className="space-y-6">
             {/* Motivo de consulta */}
-            <div className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-6">
+            <div className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-4 sm:p-6">
               <h3 className="text-lg font-bold text-[#5A8C7A] mb-4">Motivo de Consulta</h3>
               <div className="space-y-3">
                 <div><span className="font-semibold text-[#2C3E34]">Objetivo principal:</span> <span className="text-[#6E7C72]">{initialEvaluation.consultation_reason?.main_goal || '—'}</span></div>
@@ -169,9 +169,9 @@ export default function PatientMedicalHistoryClient({
             </div>
 
             {/* Antecedentes Heredofamiliares */}
-            <div className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-6">
+            <div className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-4 sm:p-6">
               <h3 className="text-lg font-bold text-[#5A8C7A] mb-4">Antecedentes Heredofamiliares</h3>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
                 <div className="flex items-center gap-2">
                   <div className={`w-4 h-4 rounded ${initialEvaluation.family_history?.diabetes ? 'bg-[#5A8C7A]' : 'bg-[#E6E3DE]'}`}></div>
                   <span className="text-sm">Diabetes</span>
@@ -207,7 +207,7 @@ export default function PatientMedicalHistoryClient({
             </div>
 
             {/* Antecedentes Personales Patológicos */}
-            <div className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-6">
+            <div className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-4 sm:p-6">
               <h3 className="text-lg font-bold text-[#5A8C7A] mb-4">Antecedentes Personales Patológicos</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <div><span className="font-semibold">Enfermedades actuales:</span> <span className="text-[#6E7C72]">{initialEvaluation.personal_history?.current_diseases || '—'}</span></div>
@@ -220,7 +220,7 @@ export default function PatientMedicalHistoryClient({
             </div>
 
             {/* Antecedentes No Patológicos */}
-            <div className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-6">
+            <div className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-4 sm:p-6">
               <h3 className="text-lg font-bold text-[#5A8C7A] mb-4">Antecedentes No Patológicos</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <div><span className="font-semibold">Actividad física:</span> <span className="text-[#6E7C72]">{initialEvaluation.non_pathological_history?.physical_activity_type || '—'} ({initialEvaluation.non_pathological_history?.physical_activity_frequency || '—'})</span></div>
@@ -235,7 +235,7 @@ export default function PatientMedicalHistoryClient({
 
             {/* Historia Ginecológica */}
             {initialEvaluation.gynecological_history && (
-              <div className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-6">
+              <div className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-4 sm:p-6">
                 <h3 className="text-lg font-bold text-[#5A8C7A] mb-4">Historia Ginecológica</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   <div><span className="font-semibold">Edad de menarca:</span> <span className="text-[#6E7C72]">{initialEvaluation.gynecological_history.menarche_age || '—'}</span></div>
@@ -249,7 +249,7 @@ export default function PatientMedicalHistoryClient({
             )}
 
             {/* Evaluación Dietética */}
-            <div className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-6">
+            <div className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-4 sm:p-6">
               <h3 className="text-lg font-bold text-[#5A8C7A] mb-4">Evaluación Dietética</h3>
               
               <h4 className="font-semibold text-[#2C3E34] mb-2">Recordatorio 24 horas</h4>
@@ -263,7 +263,7 @@ export default function PatientMedicalHistoryClient({
               </div>
 
               <h4 className="font-semibold text-[#2C3E34] mb-2">Frecuencia de consumo</h4>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 mb-4">
                 <div><span className="font-semibold">Frutas:</span> <span className="text-[#6E7C72]">{initialEvaluation.food_frequency?.fruits || '—'}</span></div>
                 <div><span className="font-semibold">Verduras:</span> <span className="text-[#6E7C72]">{initialEvaluation.food_frequency?.vegetables || '—'}</span></div>
                 <div><span className="font-semibold">Proteínas:</span> <span className="text-[#6E7C72]">{initialEvaluation.food_frequency?.proteins || '—'}</span></div>
@@ -284,7 +284,7 @@ export default function PatientMedicalHistoryClient({
             </div>
           </div>
         ) : (
-          <div className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-8 text-center">
+          <div className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-5 sm:p-8 text-center">
             <p className="text-[#6E7C72]">No hay evaluación inicial registrada aún</p>
             <p className="text-sm text-[#6E7C72] mt-2">Tu nutriólogo completará esta información en tu primera consulta</p>
           </div>

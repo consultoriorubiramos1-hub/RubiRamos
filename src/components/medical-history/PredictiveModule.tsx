@@ -6,6 +6,7 @@ import {
   useMemo,
   useState,
 } from 'react';
+import AdaptiveTable from "@/components/ui/AdaptiveTable";
 
 import {
   Activity,
@@ -844,7 +845,7 @@ export default function PredictiveModule({
           border
           border-[#DDE5E1]
           bg-white
-          p-8
+          p-5 sm:p-8
         "
       >
         <div
@@ -903,7 +904,7 @@ export default function PredictiveModule({
           border
           border-amber-200
           bg-amber-50
-          p-8
+          p-5 sm:p-8
         "
       >
         <div
@@ -1168,7 +1169,7 @@ export default function PredictiveModule({
           className="
             grid
             gap-4
-            p-6
+            p-4 sm:p-6
             sm:grid-cols-2
             xl:grid-cols-4
           "
@@ -1411,7 +1412,7 @@ export default function PredictiveModule({
           className={`
             rounded-2xl
             border
-            p-6
+            p-4 sm:p-6
             ${goalConfiguration.cardClass}
           `}
         >
@@ -1565,7 +1566,7 @@ export default function PredictiveModule({
           className={`
             rounded-2xl
             border
-            p-6
+            p-4 sm:p-6
             ${tendencyConfiguration.cardClass}
           `}
         >
@@ -1599,7 +1600,7 @@ export default function PredictiveModule({
             <div
               className="
                 min-w-0
-                flex-1
+                min-w-0 flex-1
               "
             >
               <div
@@ -1814,7 +1815,7 @@ export default function PredictiveModule({
             className="
               grid
               gap-4
-              p-6
+              p-4 sm:p-6
               sm:grid-cols-2
             "
           >
@@ -2069,7 +2070,7 @@ export default function PredictiveModule({
             className="
               grid
               gap-4
-              p-6
+              p-4 sm:p-6
               sm:grid-cols-2
             "
           >
@@ -2218,7 +2219,7 @@ export default function PredictiveModule({
             overflow-x-auto
           "
         >
-          <table
+          <AdaptiveTable mobile="scroll" label="Tabla de comparación y detalles"><table
             className="
               w-full
               min-w-[850px]
@@ -2428,7 +2429,7 @@ export default function PredictiveModule({
                 )
               }
             </tbody>
-          </table>
+          </table></AdaptiveTable>
         </div>
       </article>
 

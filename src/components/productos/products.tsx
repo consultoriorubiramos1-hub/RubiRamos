@@ -1,6 +1,8 @@
 'use client';
+import ModalSurface from "@/components/ui/ModalSurface";
 
 import { useState, useEffect, useCallback } from 'react';
+import AdaptiveTable from "@/components/ui/AdaptiveTable";
 import { Producto, Categoria } from '@/lib/definitions';
 import { eliminarProducto } from '@/lib/productos-actions';
 import ModalProducto from './modalProducto';
@@ -190,8 +192,8 @@ export default function ProductosClient({
 
   return (
     <>
-      <div className="p-6">
-        <div className="flex justify-between items-center mb-6">
+      <div className="p-4 sm:p-6">
+        <div className="flex flex-wrap gap-3 justify-between items-center mb-6">
           <h1 className="text-2xl font-bold text-[#5A8C7A]">Productos</h1>
           <button
             onClick={handleCrear}
@@ -204,9 +206,9 @@ export default function ProductosClient({
 
         {/* Filtros */}
         <div className="bg-white rounded-xl shadow-sm p-4 mb-6 border border-[#E6E3DE]">
-          <div className="flex gap-4 items-end">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-end">
             {/* Búsqueda por nombre/descripción */}
-            <div className="flex-1">
+            <div className="min-w-0 flex-1">
               <label className="block text-sm font-semibold text-[#2C3E34] mb-2">
                 Buscar producto
               </label>
@@ -235,7 +237,7 @@ export default function ProductosClient({
             </div>
 
             {/* Filtro por categoría */}
-            <div className="w-64">
+            <div className="w-full sm:w-64">
               <label className="block text-sm font-semibold text-[#2C3E34] mb-2">
                 Filtrar por categoría
               </label>
@@ -253,15 +255,16 @@ export default function ProductosClient({
               </select>
             </div>
 
-            {/* Botón limpiar filtros - X roja */}
+            {/* Acción secundaria de filtros */}
             <button
               onClick={limpiarFiltros}
-              className="px-3 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-colors"
+              className="inline-flex self-start sm:self-auto items-center gap-2 px-3 py-2 border border-[#E6E3DE] bg-white hover:bg-[#FAF9F7] text-[#6E7C72] rounded-lg transition-colors"
               title="Limpiar filtros"
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
+              <span>Limpiar filtros</span>
             </button>
           </div>
 
@@ -277,11 +280,11 @@ export default function ProductosClient({
 
         {/* Tabla de productos */}
         {cargando && productos.length === 0 ? (
-          <div className="bg-white rounded-xl shadow-sm p-8 text-center border border-[#E6E3DE]">
+          <div className="bg-white rounded-xl shadow-sm p-5 sm:p-8 text-center border border-[#E6E3DE]">
             <p className="text-[#6E7C72]">Cargando productos...</p>
           </div>
         ) : productos.length === 0 ? (
-          <div className="bg-white rounded-xl shadow-sm p-8 text-center border border-[#E6E3DE]">
+          <div className="bg-white rounded-xl shadow-sm p-5 sm:p-8 text-center border border-[#E6E3DE]">
             <p className="text-[#6E7C72]">No hay productos registrados</p>
             <button
               onClick={handleCrear}
@@ -294,7 +297,7 @@ export default function ProductosClient({
           <>
             <div className="bg-white rounded-xl shadow-sm overflow-hidden border border-[#E6E3DE]">
               <div className="overflow-x-auto">
-                <table className="min-w-full divide-y divide-[#E6E3DE]">
+                <AdaptiveTable mobile="records" label="Registros y acciones"><table className="min-w-full divide-y divide-[#E6E3DE]">
                   <thead className="bg-[#FAF9F7]">
                     <tr>
                       <th 
@@ -387,13 +390,13 @@ export default function ProductosClient({
                       </tr>
                     ))}
                   </tbody>
-                </table>
+                </table></AdaptiveTable>
               </div>
             </div>
 
             {/* Paginación */}
             {totalPaginas > 1 && (
-              <div className="flex justify-between items-center mt-4">
+              <div className="flex flex-wrap gap-3 justify-between items-center mt-4">
                 <div className="text-sm text-[#6E7C72]">
                   Mostrando {((paginaActual - 1) * itemsPorPagina) + 1} - {Math.min(paginaActual * itemsPorPagina, total)} de {total} productos
                 </div>
@@ -458,8 +461,8 @@ export default function ProductosClient({
       {/* Modal de confirmación para eliminar */}
       {deleteConfirm.isOpen && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[60] p-4">
-          <div className="bg-white rounded-xl shadow-xl max-w-md w-full border border-[#E6E3DE]">
-            <div className="p-6">
+          <ModalSurface onClose={handleCancelDelete} className="modal-surface bg-white rounded-xl shadow-xl max-w-md w-full border border-[#E6E3DE]">
+            <div className="p-4 sm:p-6">
               <div className="flex items-center justify-center mb-4">
                 <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center">
                   <svg className="w-6 h-6 text-[#F58634]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -474,7 +477,7 @@ export default function ProductosClient({
                 ¿Estás seguro de que deseas eliminar el producto <strong className="text-[#2C3E34]">"{deleteConfirm.productName}"</strong>?<br />
                 Esta acción no se puede deshacer.
               </p>
-              <div className="flex justify-end gap-3">
+              <div className="flex flex-wrap justify-end gap-3">
                 <button
                   onClick={handleCancelDelete}
                   className="px-4 py-2 border border-[#E6E3DE] rounded-lg text-[#6E7C72] hover:bg-[#FAF9F7] transition-colors"
@@ -489,7 +492,7 @@ export default function ProductosClient({
                 </button>
               </div>
             </div>
-          </div>
+          </ModalSurface>
         </div>
       )}
     </>

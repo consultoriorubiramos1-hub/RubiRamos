@@ -120,7 +120,7 @@ export default function CatalogClient({
               <div>
                 <label className="block text-sm font-medium text-[#2C3E34] mb-2">Rango de precio</label>
                 <div className="flex gap-2">
-                  <div className="flex-1">
+                  <div className="min-w-0 flex-1">
                     <input
                       type="number"
                       value={priceMin}
@@ -130,7 +130,7 @@ export default function CatalogClient({
                     />
                   </div>
                   <span className="text-[#6E7C72] self-center">-</span>
-                  <div className="flex-1">
+                  <div className="min-w-0 flex-1">
                     <input
                       type="number"
                       value={priceMax}
@@ -145,7 +145,7 @@ export default function CatalogClient({
           </div>
 
           {/* Grid de productos */}
-          <div className="flex-1">
+          <div className="min-w-0 flex-1">
             <div className="mb-5 pb-3 border-b border-[#E6E3DE]">
               <p className="text-sm text-[#6E7C72]">
                 {productosIniciales.length} producto{productosIniciales.length !== 1 ? 's' : ''} encontrado{productosIniciales.length !== 1 ? 's' : ''}

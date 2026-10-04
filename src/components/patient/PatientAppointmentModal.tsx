@@ -1,4 +1,5 @@
 'use client';
+import ModalSurface from "@/components/ui/ModalSurface";
 
 import {
   ChangeEvent,
@@ -611,8 +612,8 @@ export default function PatientAppointmentModal({
         }
       }
     >
-      <div
-        className="
+      <ModalSurface onClose={handleClose}
+        className="modal-surface
           flex
           max-h-[92vh]
           w-full
@@ -1526,7 +1527,7 @@ export default function PatientAppointmentModal({
             )}
           </button>
         </div>
-      </div>
+      </ModalSurface>
     </div>
   );
 }

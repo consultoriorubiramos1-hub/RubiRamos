@@ -73,7 +73,7 @@ export default function SideNav({ mobile = false, onClose }: SideNavProps) {
           >
             <UserCircleIcon className="h-6 w-6" style={{ color: '#FFFFFF' }} />
           </div>
-          <div>
+          <div className="min-w-0">
             <p className="text-sm font-semibold" style={{ color: '#FFFFFF' }}>
               {isAdmin ? 'Lic. Rubí Ramos' : userName.split('@')[0]}
             </p>

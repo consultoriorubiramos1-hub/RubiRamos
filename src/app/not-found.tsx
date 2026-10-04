@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <main className="min-h-screen flex items-center justify-center bg-[#FAF9F7] p-6">
+    <main className="min-h-screen flex items-center justify-center bg-[#FAF9F7] p-4 sm:p-6">
       <div className="max-w-4xl w-full">
         {/* Encabezado con logo sutil */}
         <div className="text-center mb-12">
@@ -24,15 +24,15 @@ export default function NotFound() {
             {/* Fruta principal */}
             <div className="relative w-64 h-64 mx-auto">
               {/* Fondo orgánico */}
-              <div className="absolute inset-0 bg-gradient-to-br from-[#6B8E7B]/5 to-[#BD7D4A]/5 rounded-[40%_60%_60%_40%/60%_40%_60%_40%] animate-[morph_8s_ease-in-out_infinite]"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-[#6B8E7B]/5 to-[#BD7D4A]/5 rounded-[40%_60%_60%_40%/60%_40%_60%_40%]"></div>
               
               {/* Brócoli "perdido" */}
               <div className="relative z-10 w-full h-full flex items-center justify-center">
-                <div className="text-8xl animate-[float_3s_ease-in-out_infinite]">🥦</div>
+                <div className="text-8xl">🥦</div>
                 
                 {/* Líneas de búsqueda */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-32 border-2 border-[#E6E3DE] border-dashed rounded-full animate-pulse"></div>
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-40 border border-[#E6E3DE] border-dashed rounded-full animate-pulse animate-delay-500"></div>
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-32 border-2 border-[#E6E3DE] border-dashed rounded-full"></div>
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-40 border border-[#E6E3DE] border-dashed rounded-full"></div>
                 
                 {/* Signos de interrogación */}
                 <div className="absolute -top-2 -left-2 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center">
@@ -45,8 +45,8 @@ export default function NotFound() {
             </div>
             
             {/* Elementos decorativos */}
-            <div className="absolute -bottom-6 -left-6 w-24 h-24 bg-gradient-to-br from-[#A8CF45]/10 to-[#6B8E7B]/10 rounded-full"></div>
-            <div className="absolute -top-6 -right-6 w-20 h-20 bg-gradient-to-br from-[#BD7D4A]/10 to-[#F58634]/10 rounded-full"></div>
+            <div className="absolute -bottom-6 left-0 md:-left-6 w-24 h-24 bg-gradient-to-br from-[#A8CF45]/10 to-[#6B8E7B]/10 rounded-full"></div>
+            <div className="absolute -top-6 right-0 md:-right-6 w-20 h-20 bg-gradient-to-br from-[#BD7D4A]/10 to-[#F58634]/10 rounded-full"></div>
           </div>
 
           {/* Texto y acción */}

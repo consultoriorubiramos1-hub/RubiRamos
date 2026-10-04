@@ -19,7 +19,7 @@ export default async function AuditoriaPage() {
 
   return (
     <div className="min-h-screen bg-[#FAF9F7]">
-      <div className="p-6">
+      <div className="p-4 sm:p-6">
         <div className="mb-6">
           <h1 className="text-2xl font-bold text-[#6B8E7B]">
             Dashboard de Monitoreo
@@ -32,7 +32,7 @@ export default async function AuditoriaPage() {
         <Suspense fallback={
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
             {[1, 2, 3, 4].map(i => (
-              <div key={i} className="bg-white rounded-xl shadow-sm p-6 animate-pulse">
+              <div key={i} className="bg-white rounded-xl shadow-sm p-4 sm:p-6 animate-pulse">
                 <div className="h-4 bg-[#E6E3DE] rounded w-1/2 mb-4"></div>
                 <div className="h-8 bg-[#E6E3DE] rounded w-3/4"></div>
               </div>

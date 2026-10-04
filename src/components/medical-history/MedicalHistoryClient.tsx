@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import AdaptiveTable from "@/components/ui/AdaptiveTable";
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import { useSearchParams } from 'next/navigation';
 import { searchPatientsForHistory, getPatientInitialEvaluation, getPatientFollowUpEvaluations } from '@/lib/medical-history-actions';
@@ -204,7 +205,7 @@ export default function MedicalHistoryClient({ initialPatients = [], preselected
   const fileName = selectedPatient ? `${sanitizeFileName(selectedPatient.nombre_completo)}_Historial_Medico.pdf` : 'historial_medico.pdf';
 
   return (
-    <div className="min-h-screen bg-[#FAF9F7] p-6">
+    <div className="min-h-screen bg-[#FAF9F7] p-4 sm:p-6">
       <div className="max-w-7xl mx-auto">
         {/* Título y botones */}
         <div className="flex justify-between items-center mb-6 flex-wrap gap-4">
@@ -257,7 +258,7 @@ export default function MedicalHistoryClient({ initialPatients = [], preselected
         {!selectedPatient && (
           <div className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-4 mb-6">
             <div className="flex gap-4 items-end">
-              <div className="flex-1">
+              <div className="min-w-0 flex-1">
                 <label className="block text-sm font-semibold text-[#2C3E34] mb-2">Buscar paciente</label>
                 <div className="relative">
                   <input
@@ -306,11 +307,11 @@ export default function MedicalHistoryClient({ initialPatients = [], preselected
         {selectedPatient && (
           <>
             {/* Tarjeta de información del paciente */}
-            <div className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-6 mb-6">
-              <div className="flex justify-between items-start">
+            <div className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-4 sm:p-6 mb-6">
+              <div className="flex flex-wrap gap-3 justify-between items-start">
                 <div>
                   <h2 className="text-xl font-bold text-[#5A8C7A]">{selectedPatient.nombre_completo}</h2>
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-3 text-sm">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mt-3 text-sm">
                     <div><span className="font-semibold text-[#2C3E34]">Email:</span> <span className="text-[#6E7C72]">{selectedPatient.email}</span></div>
                     <div><span className="font-semibold text-[#2C3E34]">Teléfono:</span> <span className="text-[#6E7C72]">{selectedPatient.phone || '—'}</span></div>
                     <div><span className="font-semibold text-[#2C3E34]">Edad:</span> <span className="text-[#6E7C72]">{selectedPatient.age} años</span></div>
@@ -345,14 +346,14 @@ export default function MedicalHistoryClient({ initialPatients = [], preselected
             </div>
 
            {/* Tabs */}
-            <div className="flex gap-2 mb-6 border-b border-[#E6E3DE] overflow-x-auto">
+            <div className="flex flex-wrap gap-2 mb-6 border-b border-[#E6E3DE] ">
               <button
                 onClick={() => {
                   setShowInitialEvaluation(true);
                   setShowNutritionPlan(false);
                   setShowPredictiveModule(false);
                 }}
-                className={`px-6 py-2 font-semibold transition-colors whitespace-nowrap ${
+                className={`px-3 sm:px-6 py-2 font-semibold transition-colors ${
                   showInitialEvaluation &&
                   !showNutritionPlan &&
                   !showPredictiveModule
@@ -369,7 +370,7 @@ export default function MedicalHistoryClient({ initialPatients = [], preselected
                   setShowNutritionPlan(false);
                   setShowPredictiveModule(false);
                 }}
-                className={`px-6 py-2 font-semibold transition-colors whitespace-nowrap ${
+                className={`px-3 sm:px-6 py-2 font-semibold transition-colors ${
                   !showInitialEvaluation &&
                   !showNutritionPlan &&
                   !showPredictiveModule
@@ -386,7 +387,7 @@ export default function MedicalHistoryClient({ initialPatients = [], preselected
                   setShowNutritionPlan(false);
                   setShowPredictiveModule(true);
                 }}
-                className={`px-6 py-2 font-semibold transition-colors whitespace-nowrap ${
+                className={`px-3 sm:px-6 py-2 font-semibold transition-colors ${
                   showPredictiveModule
                     ? 'text-[#5A8C7A] border-b-2 border-[#5A8C7A]'
                     : 'text-[#6E7C72] hover:text-[#2C3E34]'
@@ -401,7 +402,7 @@ export default function MedicalHistoryClient({ initialPatients = [], preselected
                   setShowNutritionPlan(true);
                   setShowPredictiveModule(false);
                 }}
-                className={`px-6 py-2 font-semibold transition-colors whitespace-nowrap ${
+                className={`px-3 sm:px-6 py-2 font-semibold transition-colors ${
                   showNutritionPlan
                     ? 'text-[#5A8C7A] border-b-2 border-[#5A8C7A]'
                     : 'text-[#6E7C72] hover:text-[#2C3E34]'
@@ -413,14 +414,14 @@ export default function MedicalHistoryClient({ initialPatients = [], preselected
 
             {/* Contenido según la pestaña seleccionada */}
             {loading ? (
-              <div className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-8 text-center">
+              <div className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-5 sm:p-8 text-center">
                 <p className="text-[#6E7C72]">Cargando información...</p>
               </div>
             ) : showInitialEvaluation ? (
               initialEvaluation ? (
                 <div className="space-y-6">
                   {/* Motivo de consulta */}
-                  <div className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-6">
+                  <div className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-4 sm:p-6">
                     <h3 className="text-lg font-bold text-[#5A8C7A] mb-4">Motivo de Consulta</h3>
                     <div className="space-y-3">
                       <div><span className="font-semibold text-[#2C3E34]">Objetivo principal:</span> <span className="text-[#6E7C72]">{initialEvaluation.consultation_reason?.main_goal || '—'}</span></div>
@@ -430,9 +431,9 @@ export default function MedicalHistoryClient({ initialPatients = [], preselected
                   </div>
 
                   {/* Antecedentes Heredofamiliares */}
-                  <div className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-6">
+                  <div className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-4 sm:p-6">
                     <h3 className="text-lg font-bold text-[#5A8C7A] mb-4">Antecedentes Heredofamiliares</h3>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
                       <div className="flex items-center gap-2"><input type="checkbox" checked={initialEvaluation.family_history?.diabetes} readOnly className="rounded text-[#5A8C7A]" /><span>Diabetes</span></div>
                       <div className="flex items-center gap-2"><input type="checkbox" checked={initialEvaluation.family_history?.hypertension} readOnly className="rounded text-[#5A8C7A]" /><span>Hipertensión</span></div>
                       <div className="flex items-center gap-2"><input type="checkbox" checked={initialEvaluation.family_history?.obesity} readOnly className="rounded text-[#5A8C7A]" /><span>Obesidad</span></div>
@@ -447,7 +448,7 @@ export default function MedicalHistoryClient({ initialPatients = [], preselected
                   </div>
 
                   {/* Antecedentes Personales Patológicos */}
-                  <div className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-6">
+                  <div className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-4 sm:p-6">
                     <h3 className="text-lg font-bold text-[#5A8C7A] mb-4">Antecedentes Personales Patológicos</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                       <div><span className="font-semibold">Enfermedades actuales:</span> <span className="text-[#6E7C72]">{initialEvaluation.personal_history?.current_diseases || '—'}</span></div>
@@ -460,7 +461,7 @@ export default function MedicalHistoryClient({ initialPatients = [], preselected
                   </div>
 
                   {/* Antecedentes No Patológicos */}
-                  <div className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-6">
+                  <div className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-4 sm:p-6">
                     <h3 className="text-lg font-bold text-[#5A8C7A] mb-4">Antecedentes No Patológicos</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                       <div><span className="font-semibold">Actividad física:</span> <span className="text-[#6E7C72]">{initialEvaluation.non_pathological_history?.physical_activity_type || '—'} ({initialEvaluation.non_pathological_history?.physical_activity_frequency || '—'})</span></div>
@@ -475,7 +476,7 @@ export default function MedicalHistoryClient({ initialPatients = [], preselected
 
                   {/* Historia Ginecológica */}
                   {initialEvaluation.gynecological_history && (
-                    <div className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-6">
+                    <div className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-4 sm:p-6">
                       <h3 className="text-lg font-bold text-[#5A8C7A] mb-4">Historia Ginecológica</h3>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                         <div><span className="font-semibold">Edad de menarca:</span> <span className="text-[#6E7C72]">{initialEvaluation.gynecological_history.menarche_age || '—'}</span></div>
@@ -489,7 +490,7 @@ export default function MedicalHistoryClient({ initialPatients = [], preselected
                   )}
 
                   {/* Evaluación Dietética */}
-                  <div className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-6">
+                  <div className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-4 sm:p-6">
                     <h3 className="text-lg font-bold text-[#5A8C7A] mb-4">Evaluación Dietética</h3>
                     
                     <h4 className="font-semibold text-[#2C3E34] mb-2">Recordatorio 24 horas</h4>
@@ -503,7 +504,7 @@ export default function MedicalHistoryClient({ initialPatients = [], preselected
                     </div>
 
                     <h4 className="font-semibold text-[#2C3E34] mb-2">Frecuencia de consumo</h4>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 mb-4">
                       <div><span className="font-semibold">Frutas:</span> <span className="text-[#6E7C72]">{initialEvaluation.food_frequency?.fruits || '—'}</span></div>
                       <div><span className="font-semibold">Verduras:</span> <span className="text-[#6E7C72]">{initialEvaluation.food_frequency?.vegetables || '—'}</span></div>
                       <div><span className="font-semibold">Proteínas:</span> <span className="text-[#6E7C72]">{initialEvaluation.food_frequency?.proteins || '—'}</span></div>
@@ -523,7 +524,7 @@ export default function MedicalHistoryClient({ initialPatients = [], preselected
                     </div>
                   </div>
 
-                  <div className="flex justify-end">
+                  <div className="flex flex-wrap justify-end">
                     <button
                       onClick={handleEditInitialEvaluation}
                       className="px-4 py-2 bg-[#BD7D4A] text-white rounded-lg hover:bg-[#F58634] transition-colors text-sm font-semibold"
@@ -533,7 +534,7 @@ export default function MedicalHistoryClient({ initialPatients = [], preselected
                   </div>
                 </div>
               ) : (
-                <div className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-8 text-center">
+                <div className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-5 sm:p-8 text-center">
                   <p className="text-[#6E7C72]">No hay evaluación inicial registrada para este paciente</p>
                   <button
                     onClick={handleEditInitialEvaluation}
@@ -559,7 +560,7 @@ export default function MedicalHistoryClient({ initialPatients = [], preselected
                       <h3 className="text-lg font-bold text-[#5A8C7A]">Resultados</h3>
                     </div>
                     <div className="overflow-x-auto">
-                      <table className="min-w-full divide-y divide-[#E6E3DE]">
+                      <AdaptiveTable mobile="records" label="Registros y acciones"><table className="min-w-full divide-y divide-[#E6E3DE]">
                         <thead className="bg-[#FAF9F7]">
                           <tr>
                             <th className="px-3 py-2 text-left text-xs font-semibold text-[#6E7C72]">FECHA</th>
@@ -600,7 +601,7 @@ export default function MedicalHistoryClient({ initialPatients = [], preselected
                             </tr>
                           ))}
                         </tbody>
-                      </table>
+                      </table></AdaptiveTable>
                     </div>
                   </div>
 
@@ -610,7 +611,7 @@ export default function MedicalHistoryClient({ initialPatients = [], preselected
                       <h3 className="text-lg font-bold text-[#5A8C7A]">Medidas por Extremidad</h3>
                     </div>
                     <div className="overflow-x-auto">
-                      <table className="min-w-full divide-y divide-[#E6E3DE]">
+                      <AdaptiveTable mobile="records" label="Registros y acciones"><table className="min-w-full divide-y divide-[#E6E3DE]">
                         <thead className="bg-[#FAF9F7]">
                           <tr>
                             <th rowSpan={2} className="px-4 py-2 text-left text-xs font-semibold text-[#6E7C72] border-r border-[#E6E3DE]">Fecha</th>
@@ -650,7 +651,7 @@ export default function MedicalHistoryClient({ initialPatients = [], preselected
                             </tr>
                           ))}
                         </tbody>
-                      </table>
+                      </table></AdaptiveTable>
                     </div>
                   </div>
 
@@ -658,7 +659,7 @@ export default function MedicalHistoryClient({ initialPatients = [], preselected
                   <div className="space-y-6">
                     {followUpEvaluations.map((evaluation) => (
                       <div key={evaluation.id} className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] overflow-hidden">
-                        <div className="bg-[#FAF9F7] px-6 py-4 border-b border-[#E6E3DE] flex justify-between items-center">
+                        <div className="bg-[#FAF9F7] px-6 py-4 border-b border-[#E6E3DE] flex flex-wrap gap-3 justify-between items-center">
                           <div>
                             <h3 className="text-lg font-bold text-[#5A8C7A]">Evaluación del {formatDate(evaluation.evaluation_date)} {evaluation.start_time ? `- ${evaluation.start_time.slice(0,5)}` : ''}</h3>
                             {evaluation.status && (
@@ -672,12 +673,12 @@ export default function MedicalHistoryClient({ initialPatients = [], preselected
                             Editar cita
                           </button>
                         </div>
-                        <div className="p-6 space-y-4">
+                        <div className="p-4 sm:p-6 space-y-4">
                           {evaluation.biochemical_params && (evaluation.biochemical_params.glucose !== null || evaluation.biochemical_params.insulin !== null || 
                             evaluation.biochemical_params.total_cholesterol !== null || evaluation.biochemical_params.triglycerides !== null) && (
                             <div>
                               <h4 className="font-semibold text-[#2C3E34] mb-2">Parámetros Bioquímicos</h4>
-                              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+                              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 text-sm">
                                 {evaluation.biochemical_params.glucose !== null && evaluation.biochemical_params.glucose !== undefined && <div><span className="font-medium">Glucosa:</span> {evaluation.biochemical_params.glucose}</div>}
                                 {evaluation.biochemical_params.insulin !== null && evaluation.biochemical_params.insulin !== undefined && <div><span className="font-medium">Insulina:</span> {evaluation.biochemical_params.insulin}</div>}
                                 {evaluation.biochemical_params.homa_ir !== null && evaluation.biochemical_params.homa_ir !== undefined && <div><span className="font-medium">HOMA-IR:</span> {evaluation.biochemical_params.homa_ir}</div>}
@@ -736,7 +737,7 @@ export default function MedicalHistoryClient({ initialPatients = [], preselected
                   </div>
                 </div>
               ) : (
-                <div className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-8 text-center">
+                <div className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-5 sm:p-8 text-center">
                   <p className="text-[#6E7C72]">No hay registros de progreso para este paciente</p>
                 </div>
               )

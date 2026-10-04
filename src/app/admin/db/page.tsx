@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import AdaptiveTable from "@/components/ui/AdaptiveTable";
 import type { ComponentType, ReactNode, SVGProps } from "react";
 import {
   CircleStackIcon,
@@ -139,7 +140,7 @@ type SectionCardProps = Readonly<{
 
 function SectionCard({ title, subtitle, children }: SectionCardProps) {
   return (
-    <div className="rounded-2xl bg-white p-6 shadow-sm border border-[#E6E3DE]">
+    <div className="rounded-2xl bg-white p-4 sm:p-6 shadow-sm border border-[#E6E3DE]">
       <div className="flex flex-col gap-1">
         <h2 className="text-lg font-bold font-serif text-[#2C3E34]">{title}</h2>
         {subtitle ? (
@@ -369,9 +370,9 @@ export default function AdminDbPage() {
   const activeCount = rows.filter((r) => r.active === true).length;
 
   return (
-    <div className="p-6 bg-[#FAF9F7] min-h-screen">
+    <div className="p-4 sm:p-6 bg-[#FAF9F7] min-h-screen">
       {/* Header principal */}
-      <div className="rounded-2xl bg-white p-6 shadow-sm border border-[#E6E3DE] mb-6">
+      <div className="rounded-2xl bg-white p-4 sm:p-6 shadow-sm border border-[#E6E3DE] mb-6">
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div className="flex items-center gap-3">
             <div className="rounded-xl bg-[#6B8E7B]/10 p-3">
@@ -534,7 +535,7 @@ export default function AdminDbPage() {
             </div>
 
             <div className="mt-4 overflow-x-auto rounded-xl border border-[#E6E3DE]">
-              <table className="min-w-full text-left text-sm">
+              <AdaptiveTable mobile="scroll" label="Tabla de comparación y detalles"><table className="min-w-full text-left text-sm">
                 <thead className="bg-[#6B8E7B]/5 text-xs text-[#6B8E7B] border-b border-[#E6E3DE]">
                   <tr>
                     <th className="px-4 py-3 font-semibold">ID</th>
@@ -592,7 +593,7 @@ export default function AdminDbPage() {
                       </tr>
                     ))}
                 </tbody>
-              </table>
+              </table></AdaptiveTable>
             </div>
           </SectionCard>
         </div>
@@ -605,7 +606,7 @@ export default function AdminDbPage() {
           subtitle="Descarga cualquier respaldo generado anteriormente"
         >
           <div className="overflow-x-auto rounded-xl border border-[#E6E3DE]">
-            <table className="min-w-full text-left text-sm">
+            <AdaptiveTable mobile="scroll" label="Tabla de comparación y detalles"><table className="min-w-full text-left text-sm">
               <thead className="bg-[#6B8E7B]/5 text-xs text-[#6B8E7B] border-b border-[#E6E3DE]">
                 <tr>
                   <th className="px-4 py-3 font-semibold">Archivo</th>
@@ -657,7 +658,7 @@ export default function AdminDbPage() {
                   </tr>
                 ))}
               </tbody>
-            </table>
+            </table></AdaptiveTable>
           </div>
         </SectionCard>
       </div>

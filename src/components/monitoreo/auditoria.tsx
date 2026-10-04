@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import AdaptiveTable from "@/components/ui/AdaptiveTable";
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
 
@@ -28,7 +29,7 @@ export default function AuditoriaClient({ auditoriaInicial, total }: AuditoriaCl
   return (
     <div className="bg-white rounded-xl shadow-sm overflow-hidden border border-[#E6E3DE]">
       <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-[#E6E3DE]">
+        <AdaptiveTable mobile="scroll" label="Tabla de comparación y detalles"><table className="min-w-full divide-y divide-[#E6E3DE]">
           <thead className="bg-[#FAF9F7]">
             <tr>
               <th className="px-6 py-3 text-left text-xs font-semibold text-[#6E7C72] uppercase tracking-wider">
@@ -105,7 +106,7 @@ export default function AuditoriaClient({ auditoriaInicial, total }: AuditoriaCl
               </tr>
             ))}
           </tbody>
-        </table>
+        </table></AdaptiveTable>
       </div>
       {total > 50 && (
         <div className="px-6 py-4 border-t border-[#E6E3DE] text-center text-sm text-[#6E7C72] bg-[#FAF9F7]">

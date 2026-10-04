@@ -1,4 +1,5 @@
 'use client';
+import ModalSurface from "@/components/ui/ModalSurface";
 
 import { useState, useEffect } from 'react';
 import { Producto, Categoria } from '@/lib/definitions';
@@ -200,7 +201,7 @@ export default function ModalProducto({
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-[#E6E3DE]">
+      <ModalSurface onClose={onClose} className="modal-surface bg-white rounded-xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-[#E6E3DE]">
         <div className="sticky top-0 bg-white border-b border-[#E6E3DE] px-6 py-4 bg-[#FAF9F7]">
           <h2 className="text-xl font-bold text-[#6B8E7B]">
             {producto ? 'Editar Producto' : 'Nuevo Producto'}
@@ -215,7 +216,7 @@ export default function ModalProducto({
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="p-6 space-y-4">
+        <form onSubmit={handleSubmit} className="p-4 sm:p-6 space-y-4">
           {/* Nombre con validación en tiempo real */}
           <div>
             <label className="block text-sm font-semibold text-[#2C3E34] mb-2">
@@ -266,7 +267,7 @@ export default function ModalProducto({
           </div>
 
           {/* Precio y Stock */}
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-semibold text-[#2C3E34] mb-2">
                 Precio (MXN) *
@@ -331,7 +332,7 @@ export default function ModalProducto({
             {cargandoCategorias ? (
               <div className="text-center py-4 text-[#6E7C72]">Cargando categorías...</div>
             ) : (
-              <div className="grid grid-cols-2 gap-2 max-h-48 overflow-y-auto border border-[#E6E3DE] rounded-lg p-3 bg-[#FAF9F7]">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-48 overflow-y-auto border border-[#E6E3DE] rounded-lg p-3 bg-[#FAF9F7]">
                 {categorias.map((categoria) => (
                   <label key={categoria.id} className="flex items-center space-x-2 hover:bg-white p-2 rounded-lg transition-colors cursor-pointer">
                     <input
@@ -353,7 +354,7 @@ export default function ModalProducto({
           </div>
 
           {/* Botones */}
-          <div className="flex justify-end space-x-3 pt-4 border-t border-[#E6E3DE]">
+          <div className="flex flex-wrap justify-end space-x-3 pt-4 border-t border-[#E6E3DE]">
             <button
               type="button"
               onClick={onClose}
@@ -380,7 +381,7 @@ export default function ModalProducto({
             </button>
           </div>
         </form>
-      </div>
+      </ModalSurface>
     </div>
   );
 }

@@ -1,4 +1,5 @@
 'use client';
+import ModalSurface from "@/components/ui/ModalSurface";
 
 import { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
@@ -179,8 +180,8 @@ export default function SettingsModal({ isOpen, onClose, onSave, type, selectedD
   return (
     <>
       <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-        <div className="bg-white rounded-xl shadow-xl max-w-md w-full max-h-[90vh] overflow-y-auto border border-[#E6E3DE]">
-          <div className="sticky top-0 bg-white border-b border-[#E6E3DE] px-6 py-4 bg-[#FAF9F7] flex justify-between items-center">
+        <ModalSurface onClose={onClose} className="modal-surface bg-white rounded-xl shadow-xl max-w-md w-full max-h-[90vh] overflow-y-auto border border-[#E6E3DE]">
+          <div className="sticky top-0 bg-white border-b border-[#E6E3DE] px-6 py-4 bg-[#FAF9F7] flex flex-wrap gap-3 justify-between items-center">
             <h2 className="text-xl font-bold text-[#6B8E7B]">
               {type === 'general' ? 'Configuración General' : `Configuración del día ${selectedDate?.toLocaleDateString('es-ES')}`}
             </h2>
@@ -191,7 +192,7 @@ export default function SettingsModal({ isOpen, onClose, onSave, type, selectedD
             </button>
           </div>
 
-          <div className="p-6 space-y-4">
+          <div className="p-4 sm:p-6 space-y-4">
             {type === 'day' && (
               <label className="flex items-center gap-2">
                 <input type="checkbox" checked={isWorkingDay} onChange={(e) => setIsWorkingDay(e.target.checked)} className="rounded text-[#6B8E7B]" />
@@ -199,7 +200,7 @@ export default function SettingsModal({ isOpen, onClose, onSave, type, selectedD
               </label>
             )}
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-semibold text-[#2C3E34] mb-1">Hora de inicio</label>
                 <input type="time" value={startTime} onChange={(e) => setStartTime(e.target.value)} className="w-full px-3 py-2 border border-[#E6E3DE] rounded-lg" />
@@ -210,7 +211,7 @@ export default function SettingsModal({ isOpen, onClose, onSave, type, selectedD
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-semibold text-[#2C3E34] mb-1">Inicio comida</label>
                 <input type="time" value={lunchStart} onChange={(e) => setLunchStart(e.target.value)} className="w-full px-3 py-2 border border-[#E6E3DE] rounded-lg" />
@@ -230,7 +231,7 @@ export default function SettingsModal({ isOpen, onClose, onSave, type, selectedD
 
             {type === 'day' && (
               <div>
-                <div className="flex justify-between items-center mb-2">
+                <div className="flex flex-wrap gap-3 justify-between items-center mb-2">
                   <label className="block text-sm font-semibold text-[#2C3E34]">Horas deshabilitadas</label>
                   {dayAppointments.length > 0 && (
                     <button
@@ -288,14 +289,14 @@ export default function SettingsModal({ isOpen, onClose, onSave, type, selectedD
               </div>
             )}
 
-            <div className="flex justify-end gap-3 pt-4 border-t border-[#E6E3DE]">
+            <div className="flex flex-wrap justify-end gap-3 pt-4 border-t border-[#E6E3DE]">
               <button onClick={onClose} className="px-4 py-2 border border-[#E6E3DE] rounded-lg text-[#6E7C72] hover:bg-[#FAF9F7]">Cancelar</button>
               <button onClick={handleSave} disabled={loading} className="px-4 py-2 bg-[#BD7D4A] text-white rounded-lg hover:bg-[#F58634] disabled:opacity-50">
                 {loading ? 'Guardando...' : 'Guardar'}
               </button>
             </div>
           </div>
-        </div>
+        </ModalSurface>
       </div>
 
       <DisableHoursModal

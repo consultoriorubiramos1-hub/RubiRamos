@@ -1,4 +1,5 @@
 'use client';
+import ModalSurface from "@/components/ui/ModalSurface";
 
 import { useState, useEffect } from 'react';
 import { updatePatient } from '@/lib/patients-actions';
@@ -101,8 +102,8 @@ export default function PatientModal({ isOpen, onClose, patient, mode, onSuccess
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-xl shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto border border-[#E6E3DE]">
-        <div className="sticky top-0 bg-white border-b border-[#E6E3DE] px-6 py-4 bg-[#FAF9F7] flex justify-between items-center">
+      <ModalSurface onClose={onClose} className="modal-surface bg-white rounded-xl shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto border border-[#E6E3DE]">
+        <div className="sticky top-0 bg-white border-b border-[#E6E3DE] px-6 py-4 bg-[#FAF9F7] flex flex-wrap gap-3 justify-between items-center">
           <h2 className="text-xl font-bold text-[#6B8E7B]">
             {isViewMode ? 'Detalles del Paciente' : 'Editar Paciente'}
           </h2>
@@ -113,14 +114,14 @@ export default function PatientModal({ isOpen, onClose, patient, mode, onSuccess
           </button>
         </div>
 
-        <div className="p-6">
+        <div className="p-4 sm:p-6">
           {isViewMode ? (
             // Modo vista - mostrar información
             <div className="space-y-6">
               {/* Información personal */}
               <div>
                 <h3 className="text-lg font-semibold text-[#6B8E7B] mb-3">Información Personal</h3>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div><span className="font-semibold text-[#2C3E34]">Nombre:</span> <span className="text-[#6E7C72]">{patient.first_name} {patient.second_name}</span></div>
                   <div><span className="font-semibold text-[#2C3E34]">Apellidos:</span> <span className="text-[#6E7C72]">{patient.first_lastname} {patient.second_lastname}</span></div>
                   <div><span className="font-semibold text-[#2C3E34]">Edad:</span> <span className="text-[#6E7C72]">{patient.age}</span></div>
@@ -148,7 +149,7 @@ export default function PatientModal({ isOpen, onClose, patient, mode, onSuccess
                     Estadísticas de Asistencia
                   </h3>
 
-                  <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:grid-cols-3">
                     <div className="rounded-lg border border-[#E6E3DE] bg-[#FAF9F7] p-3 text-center">
                       <p className="text-2xl font-bold text-[#2C3E34]">
                         {patient.estadisticas?.total_citas || 0}
@@ -354,7 +355,7 @@ export default function PatientModal({ isOpen, onClose, patient, mode, onSuccess
           ) : (
             // Modo edición - formulario
             <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-semibold text-[#2C3E34] mb-1">Nombre *</label>
                   <input type="text" value={formData.first_name} onChange={(e) => setFormData({...formData, first_name: e.target.value})} className="w-full px-3 py-2 border border-[#E6E3DE] rounded-lg" required />
@@ -416,7 +417,7 @@ export default function PatientModal({ isOpen, onClose, patient, mode, onSuccess
                   <textarea value={formData.notes} onChange={(e) => setFormData({...formData, notes: e.target.value})} rows={3} className="w-full px-3 py-2 border border-[#E6E3DE] rounded-lg" />
                 </div>
               </div>
-              <div className="flex justify-end gap-3 pt-4 border-t border-[#E6E3DE]">
+              <div className="flex flex-wrap justify-end gap-3 pt-4 border-t border-[#E6E3DE]">
                 <button type="button" onClick={onClose} className="px-4 py-2 border border-[#E6E3DE] rounded-lg text-[#6E7C72] hover:bg-[#FAF9F7]">Cancelar</button>
                 <button type="submit" disabled={loading} className="px-4 py-2 bg-[#BD7D4A] text-white rounded-lg hover:bg-[#F58634] disabled:opacity-50">
                   {loading ? 'Guardando...' : 'Guardar cambios'}
@@ -425,7 +426,7 @@ export default function PatientModal({ isOpen, onClose, patient, mode, onSuccess
             </form>
           )}
         </div>
-      </div>
+      </ModalSurface>
     </div>
   );
 }

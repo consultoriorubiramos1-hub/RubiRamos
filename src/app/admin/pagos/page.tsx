@@ -47,7 +47,7 @@ export default async function PaymentsPage() {
 
   return (
     <div className="min-h-screen bg-[#FAF9F7]">
-      <div className="p-6">
+      <div className="p-4 sm:p-6">
         <div className="mx-auto max-w-7xl">
           {/* Encabezado */}
           <div className="mb-6">

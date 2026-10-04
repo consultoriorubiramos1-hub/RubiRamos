@@ -1,4 +1,5 @@
 'use client';
+import ModalSurface from "@/components/ui/ModalSurface";
 
 import { useState, useEffect } from 'react';
 import { searchPatients, createPatientAndUser, checkUsernameExists } from '@/lib/patients-actions';
@@ -192,8 +193,8 @@ export default function AppointmentModal({ isOpen, onClose, selectedDate, onSucc
   return (
     <>
       <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-        <div className="bg-white rounded-xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-[#E6E3DE]">
-          <div className="sticky top-0 bg-white border-b border-[#E6E3DE] px-6 py-4 bg-[#FAF9F7] flex justify-between items-center">
+        <ModalSurface onClose={onClose} className="modal-surface bg-white rounded-xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-[#E6E3DE]">
+          <div className="sticky top-0 bg-white border-b border-[#E6E3DE] px-6 py-4 bg-[#FAF9F7] flex flex-wrap gap-3 justify-between items-center">
             <h2 className="text-xl font-bold text-[#6B8E7B]">Nueva Cita</h2>
             <button onClick={onClose} className="text-[#6E7C72] hover:text-[#2C3E34]">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -202,7 +203,7 @@ export default function AppointmentModal({ isOpen, onClose, selectedDate, onSucc
             </button>
           </div>
 
-          <div className="p-6 space-y-4">
+          <div className="p-4 sm:p-6 space-y-4">
             {!selectedPatient ? (
               <>
                 <div className="flex gap-4 border-b border-[#E6E3DE] pb-2">
@@ -228,7 +229,7 @@ export default function AppointmentModal({ isOpen, onClose, selectedDate, onSucc
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                         placeholder="Buscar por nombre, apellido o email..."
-                        className="flex-1 px-3 py-2 border border-[#E6E3DE] rounded-lg focus:ring-2 focus:ring-[#6B8E7B]"
+                        className="min-w-0 flex-1 px-3 py-2 border border-[#E6E3DE] rounded-lg focus:ring-2 focus:ring-[#6B8E7B]"
                       />
                       <button onClick={handleSearchPatients} className="px-4 py-2 bg-[#6B8E7B] text-white rounded-lg hover:bg-[#4A7C6A]">Buscar</button>
                     </div>
@@ -250,7 +251,7 @@ export default function AppointmentModal({ isOpen, onClose, selectedDate, onSucc
 
                 {step === 'new-patient' && (
                   <div className="space-y-3">
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <input type="text" placeholder="Nombre *" value={newPatient.first_name} onChange={(e) => setNewPatient({...newPatient, first_name: e.target.value})} className="px-3 py-2 border border-[#E6E3DE] rounded-lg" />
                       <input type="text" placeholder="Segundo nombre" value={newPatient.second_name} onChange={(e) => setNewPatient({...newPatient, second_name: e.target.value})} className="px-3 py-2 border border-[#E6E3DE] rounded-lg" />
                       <input type="text" placeholder="Apellido paterno *" value={newPatient.first_lastname} onChange={(e) => setNewPatient({...newPatient, first_lastname: e.target.value})} className="px-3 py-2 border border-[#E6E3DE] rounded-lg" />
@@ -323,7 +324,7 @@ export default function AppointmentModal({ isOpen, onClose, selectedDate, onSucc
               </div>
             )}
           </div>
-        </div>
+        </ModalSurface>
       </div>
 
       <ConfirmationModal

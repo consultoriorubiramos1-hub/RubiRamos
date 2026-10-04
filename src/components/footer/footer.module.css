@@ -1,5 +1,5 @@
 .footer {
-  background-color: #6B8E7B;
+  background-color: #2C3E34;
   padding: 3rem 1.5rem 1.5rem;
   color: #FAF9F7;
   font-size: 0.95rem;
@@ -62,8 +62,8 @@
 }
 
 .navLink:hover {
-  color: #BD7D4A;
-  transform: translateX(5px);
+  color: #F58634;
+  text-decoration: underline;
 }
 
 .contactList {
@@ -107,8 +107,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   background-color: rgba(124, 179, 140, 0.3);
   border: 1px solid rgba(124, 179, 140, 0.5);

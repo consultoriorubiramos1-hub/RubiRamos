@@ -45,10 +45,11 @@ export default function TimeSlotPicker({ date, patientId, onSelectSlot, selected
   }
 
   return (
-    <div className="grid grid-cols-3 gap-2 max-h-64 overflow-y-auto p-2">
+    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 max-h-64 overflow-y-auto p-2">
       {availableSlots.map(slot => (
         <button
           key={slot}
+          aria-pressed={selectedTime === slot}
           onClick={() => onSelectSlot(slot)}
           className={`py-2 px-3 rounded-lg text-sm font-medium transition-all ${
             selectedTime === slot

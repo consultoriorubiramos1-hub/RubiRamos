@@ -20,7 +20,7 @@ export default async function MuroPage() {
 
   return (
     <div className="min-h-screen bg-[#FAF9F7]">
-        <Suspense fallback={<div className="p-6 text-center text-[#6E7C72]">Cargando publicaciones...</div>}>
+        <Suspense fallback={<div className="p-4 sm:p-6 text-center text-[#6E7C72]">Cargando publicaciones...</div>}>
           <PostsList initialPosts={posts} userId={userId} userRole={userRole} />
         </Suspense>
     </div>

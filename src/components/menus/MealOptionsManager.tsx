@@ -1,4 +1,5 @@
 'use client';
+import ModalSurface from "@/components/ui/ModalSurface";
 
 import {
   useMemo,
@@ -640,7 +641,7 @@ export default function MealOptionsManager({
           <div
             className="
               grid
-              flex-1
+              min-w-0 flex-1
               grid-cols-1
               gap-4
               sm:grid-cols-2
@@ -970,7 +971,7 @@ export default function MealOptionsManager({
                   <div
                     className="
                       max-h-52
-                      flex-1
+                      min-w-0 flex-1
                       overflow-y-auto
                       whitespace-pre-line
                       rounded-lg
@@ -1005,7 +1006,7 @@ export default function MealOptionsManager({
                           )
                       }
                       className="
-                        flex-1
+                        min-w-0 flex-1
                         rounded-lg
                         border
                         border-[#5A8C7A]
@@ -1034,7 +1035,7 @@ export default function MealOptionsManager({
                         option.id
                       }
                       className={`
-                        flex-1
+                        min-w-0 flex-1
                         rounded-lg
                         px-3
                         py-2
@@ -1090,8 +1091,8 @@ export default function MealOptionsManager({
             }
           }
         >
-          <div
-            className="
+          <ModalSurface onClose={closeModal}
+            className="modal-surface
               max-h-[92vh]
               w-full
               max-w-2xl
@@ -1156,7 +1157,7 @@ export default function MealOptionsManager({
                 handleSubmit
               }
             >
-              <div className="space-y-5 p-6">
+              <div className="space-y-5 p-4 sm:p-6">
                 <div>
                   <label
                     htmlFor="form-meal-type"
@@ -1401,7 +1402,7 @@ Preparar en un sartén y acompañar con agua natural.`}
                 </button>
               </div>
             </form>
-          </div>
+          </ModalSurface>
         </div>
       )}
     </div>

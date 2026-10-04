@@ -1,4 +1,5 @@
 'use client';
+import AdaptiveTable from '@/components/ui/AdaptiveTable';
 
 interface PatientProgressViewProps {
   followUpEvaluations: any[];
@@ -23,7 +24,7 @@ export default function PatientProgressView({ followUpEvaluations }: PatientProg
 
   if (followUpEvaluations.length === 0) {
     return (
-      <div className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-8 text-center">
+      <div className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-5 sm:p-8 text-center">
         <p className="text-[#6E7C72]">No hay registros de progreso para este paciente</p>
       </div>
     );
@@ -37,7 +38,7 @@ export default function PatientProgressView({ followUpEvaluations }: PatientProg
           <h3 className="text-lg font-bold text-[#5A8C7A]">Resultados</h3>
         </div>
         <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-[#E6E3DE]">
+          <AdaptiveTable mobile="records" label="Registros y acciones"><table className="min-w-full divide-y divide-[#E6E3DE]">
             <thead className="bg-[#FAF9F7]">
               <tr>
                 <th className="px-3 py-2 text-left text-xs font-semibold text-[#6E7C72]">FECHA</th>
@@ -81,7 +82,7 @@ export default function PatientProgressView({ followUpEvaluations }: PatientProg
                 </tr>
               ))}
             </tbody>
-          </table>
+          </table></AdaptiveTable>
         </div>
       </div>
 
@@ -91,7 +92,7 @@ export default function PatientProgressView({ followUpEvaluations }: PatientProg
           <h3 className="text-lg font-bold text-[#5A8C7A]">Medidas por Extremidad</h3>
         </div>
         <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-[#E6E3DE]">
+          <AdaptiveTable mobile="records" label="Registros y acciones"><table className="min-w-full divide-y divide-[#E6E3DE]">
             <thead className="bg-[#FAF9F7]">
               <tr>
                 <th rowSpan={2} className="px-4 py-2 text-left text-xs font-semibold text-[#6E7C72] border-r border-[#E6E3DE]">Fecha</th>
@@ -131,7 +132,7 @@ export default function PatientProgressView({ followUpEvaluations }: PatientProg
                 </tr>
               ))}
             </tbody>
-          </table>
+          </table></AdaptiveTable>
         </div>
       </div>
 
@@ -147,13 +148,13 @@ export default function PatientProgressView({ followUpEvaluations }: PatientProg
                 )}
               </div>
             </div>
-            <div className="p-6 space-y-4">
+            <div className="p-4 sm:p-6 space-y-4">
               {/* Parámetros Bioquímicos */}
               {evaluation.biochemical_params && (evaluation.biochemical_params.glucose !== null || evaluation.biochemical_params.insulin !== null || 
                 evaluation.biochemical_params.total_cholesterol !== null || evaluation.biochemical_params.triglycerides !== null) && (
                 <div>
                   <h4 className="font-semibold text-[#2C3E34] mb-2">Parámetros Bioquímicos</h4>
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 text-sm">
                     {evaluation.biochemical_params.glucose !== null && evaluation.biochemical_params.glucose !== undefined && 
                       <div><span className="font-medium">Glucosa:</span> {evaluation.biochemical_params.glucose}</div>}
                     {evaluation.biochemical_params.insulin !== null && evaluation.biochemical_params.insulin !== undefined && 

@@ -195,7 +195,7 @@ export default function PatientProfileForm({ initialProfile, userId }: PatientPr
         </button>
       </div>
 
-      <div className="p-6">
+      <div className="p-4 sm:p-6">
         {/* Datos Personales */}
         {activeTab === 'personal' && (
           <form onSubmit={handlePersonalSubmit} className="space-y-6">
@@ -349,7 +349,7 @@ export default function PatientProfileForm({ initialProfile, userId }: PatientPr
               </p>
             </div>
             
-            <div className="flex justify-end pt-4 border-t border-[#E6E3DE]">
+            <div className="flex flex-wrap justify-end pt-4 border-t border-[#E6E3DE]">
               <button
                 type="submit"
                 disabled={loading}
@@ -408,7 +408,7 @@ export default function PatientProfileForm({ initialProfile, userId }: PatientPr
               )}
             </div>
             
-            <div className="flex justify-end pt-4 border-t border-[#E6E3DE]">
+            <div className="flex flex-wrap justify-end pt-4 border-t border-[#E6E3DE]">
               <button
                 type="submit"
                 disabled={loading}
@@ -478,7 +478,7 @@ export default function PatientProfileForm({ initialProfile, userId }: PatientPr
               </ul>
             </div>
             
-            <div className="flex justify-end pt-4 border-t border-[#E6E3DE]">
+            <div className="flex flex-wrap justify-end pt-4 border-t border-[#E6E3DE]">
               <button
                 type="submit"
                 disabled={loading}

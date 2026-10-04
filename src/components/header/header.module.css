@@ -1,7 +1,7 @@
 /* Estilos base del header */
 .header {
   width: 100%;
-  background-color: #6B8E7B; /* Verde salvia - profesional y calmado */
+  background-color: #2C3E34;
   border-bottom: 1px solid rgba(230, 227, 222, 0.3);
   box-shadow: 0 2px 8px rgba(107, 142, 123, 0.15);
   position: relative;
@@ -13,6 +13,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 1rem;
   position: relative;
 }
 
@@ -20,6 +21,8 @@
   display: flex;
   align-items: center;
   z-index: 50;
+  min-width: 0;
+  flex-shrink: 0;
 }
 
 .logo {
@@ -52,7 +55,8 @@
 /* Navegación escritorio */
 .desktopNav {
   display: flex;
-  width: 100%;
+  flex: 1;
+  min-width: 0;
 }
 
 .navList {
@@ -76,11 +80,13 @@
   font-weight: 600;
   font-size: 0.9rem;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  gap: .5rem;
   align-items: center;
   transition: all 0.3s ease;
   padding: 0.5rem 0.8rem;
-  border-radius: 4px;
+  border-radius: 12px;
+  min-height: 44px;
   min-width: 80px;
 }
 
@@ -96,7 +102,7 @@
 }
 
 .icon {
-  margin-bottom: 5px;
+  flex-shrink: 0;
   transition: color 0.3s ease;
   color: #FFFFFF;
 }
@@ -110,7 +116,9 @@
 }
 
 .activeIndicator {
-  width: 70%;
+  position: absolute;
+  bottom: 2px;
+  width: 40%;
   height: 3px;
   background-color: #F58634;
   border-radius: 2px;
@@ -139,11 +147,11 @@
 
 .mobileMenuContent {
   background-color: rgba(255, 255, 255, 0.98); /* Fondo blanco con alta opacidad */
-  backdrop-filter: blur(10px);
-  border-radius: 8px;
+  border-radius: 16px;
+  max-height: calc(100dvh - 6rem);
+  overflow-y: auto;
   box-shadow: 0 4px 20px rgba(124, 179, 140, 0.15);
   border: 1px solid rgba(230, 227, 222, 0.5);
-  overflow: hidden;
 }
 
 .mobileNavList {
@@ -171,6 +179,8 @@
   font-weight: 500;
   transition: all 0.3s ease;
   position: relative;
+  width: 100%;
+  min-height: 48px;
 }
 
 .mobileNavLink:hover {
@@ -267,7 +277,7 @@
 }
 
 .mobileLogout:hover {
-  background-color: #F58634/10 !important;
+  background-color: rgba(245, 134, 52, .1) !important;
   color: #BD7D4A !important;
 }
 
@@ -298,7 +308,7 @@
   }
 
   .logo {
-    width: 200px;
+    width: min(200px, 60vw);
     height: auto;
   }
 }
@@ -309,7 +319,7 @@
   }
 
   .logo {
-    width: 180px;
+    width: min(180px, 60vw);
   }
 
   .mobileMenu {
@@ -324,6 +334,22 @@
     padding: 0.875rem 1.25rem;
     font-size: 0.95rem;
   }
+}
+
+.mobileMenuButton {
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+.navLink span, .mobileNavLink span {
+  overflow-wrap: anywhere;
+  min-width: 0;
+}
+
+.userMenuContainer .navLink {
+  max-width: 15rem;
 }
 
 @media (min-width: 769px) {

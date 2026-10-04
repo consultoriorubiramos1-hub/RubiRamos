@@ -91,7 +91,7 @@ export default function ReestablecerForm() {
 
   if (loading) {
     return (
-      <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-8 text-center border border-[#E6E3DE]">
+      <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-5 sm:p-8 text-center border border-[#E6E3DE]">
         <div className="flex justify-center">
           <svg className="animate-spin h-8 w-8 text-[#6B8E7B]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
@@ -106,13 +106,13 @@ export default function ReestablecerForm() {
   if (!tokenValido) {
     return (
       <div className="w-full max-w-md bg-white rounded-xl shadow-lg overflow-hidden border border-[#E6E3DE]">
-        <div className="bg-[#6B8E7B] p-6 text-white text-center border-b-2 border-[#F58634]">
+        <div className="bg-[#6B8E7B] p-4 sm:p-6 text-white text-center border-b-2 border-[#F58634]">
           <div className="flex items-center justify-center space-x-2">
             <Lock className="h-6 w-6 text-[#F58634]" />
             <h2 className="text-xl font-bold">Token Inválido</h2>
           </div>
         </div>
-        <div className="p-8">
+        <div className="p-5 sm:p-8">
           <div className="bg-red-50 border-l-4 border-[#F58634] p-4 rounded">
             <p className="text-red-700">{error || 'El enlace de restablecimiento no es válido o ha expirado.'}</p>
           </div>
@@ -137,7 +137,7 @@ export default function ReestablecerForm() {
       </div>
 
       <div className="relative z-10">
-        <div className="bg-[#6B8E7B] p-6 text-white text-center border-b-2 border-[#F58634]">
+        <div className="bg-[#6B8E7B] p-4 sm:p-6 text-white text-center border-b-2 border-[#F58634]">
           <div className="flex items-center justify-center space-x-2">
             <Key className="h-6 w-6 text-[#F58634]" />
             <h2 className="text-xl font-bold">Nueva Contraseña</h2>
@@ -147,7 +147,7 @@ export default function ReestablecerForm() {
           </p>
         </div>
 
-        <form onSubmit={(e) => { e.preventDefault(); cambiar(); }} className="p-8 space-y-6">
+        <form onSubmit={(e) => { e.preventDefault(); cambiar(); }} className="p-5 sm:p-8 space-y-6">
           <div className="space-y-5">
             <div className="flex flex-col">
               <label htmlFor="nueva-contrasena" className="text-sm font-medium text-[#2C3E34] mb-1 flex items-center">

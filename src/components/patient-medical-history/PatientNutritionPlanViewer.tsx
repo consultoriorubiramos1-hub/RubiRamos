@@ -1,4 +1,5 @@
 'use client';
+import AdaptiveTable from '@/components/ui/AdaptiveTable';
 
 type MealType = 'DESAYUNO' | 'ALMUERZO' | 'COLACION' | 'COMIDA' | 'CENA';
 type MenuType = 'MENU_1' | 'MENU_2' | 'MENU_3' | 'MENU_4';
@@ -18,7 +19,7 @@ interface PatientNutritionPlanViewerProps {
 export default function PatientNutritionPlanViewer({ nutritionPlan }: PatientNutritionPlanViewerProps) {
   if (!nutritionPlan) {
     return (
-      <div className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-8 text-center">
+      <div className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-5 sm:p-8 text-center">
         <p className="text-[#6E7C72]">No hay plan alimenticio activo</p>
         <p className="text-sm text-[#6E7C72] mt-2">Tu nutriólogo compartirá tu plan alimenticio pronto</p>
       </div>
@@ -59,7 +60,7 @@ export default function PatientNutritionPlanViewer({ nutritionPlan }: PatientNut
                   <div className="w-28">
                     <span className="text-sm font-semibold text-[#2C3E34]">{meal}</span>
                   </div>
-                  <div className="flex-1">
+                  <div className="min-w-0 flex-1">
                     {meal === 'COLACION' ? (
                       <span className="text-sm text-[#6E7C72]">A elección</span>
                     ) : (
@@ -79,7 +80,7 @@ export default function PatientNutritionPlanViewer({ nutritionPlan }: PatientNut
           <h3 className="text-md font-bold text-white">Mi Plan Alimenticio</h3>
         </div>
         <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-[#E6E3DE]">
+          <AdaptiveTable mobile="scroll" label="Tabla de comparación y detalles"><table className="min-w-full divide-y divide-[#E6E3DE]">
             <thead className="bg-[#FAF9F7]">
               <tr>
                 <th className="px-4 py-3 text-left text-xs font-semibold text-[#6E7C72] uppercase tracking-wider align-top">Comida</th>
@@ -114,7 +115,7 @@ export default function PatientNutritionPlanViewer({ nutritionPlan }: PatientNut
                 </tr>
               ))}
             </tbody>
-          </table>
+          </table></AdaptiveTable>
         </div>
       </div>
     </div>

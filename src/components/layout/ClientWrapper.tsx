@@ -17,7 +17,7 @@ export default function ClientWrapper({ children }: { children: ReactNode }) {
   return (
     <>
       <Header />
-      <main className="main-content flex-1">
+      <main id="main-content" className="main-content min-w-0 flex-1">
         <Breadcrumbs />
         {children}
       </main>

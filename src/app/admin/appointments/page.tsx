@@ -51,7 +51,7 @@ export default async function CitasPage() {
 
   return (
     <div className="min-h-screen bg-[#FAF9F7]">
-      <div className="p-6">
+      <div className="p-4 sm:p-6">
         <div className="mx-auto max-w-7xl">
           <div className="mb-6">
             <h1

@@ -18,7 +18,7 @@ export function Button({
   ...rest
 }: ButtonProps) {
   const baseClasses = clsx(
-    'font-medium rounded-lg transition-colors duration-200 flex items-center justify-center gap-2',
+    'min-h-11 font-medium rounded-xl transition-all duration-200 flex items-center justify-center gap-2 active:scale-[0.98]',
     'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#6B8E7B]',
     'disabled:opacity-60 disabled:cursor-not-allowed',
     {

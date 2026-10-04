@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import AdaptiveTable from "@/components/ui/AdaptiveTable";
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
 
@@ -56,7 +57,7 @@ export default function PatientDashboardClient({
       </div>
       
       {/* Tarjetas de estadísticas */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <div className="bg-white rounded-xl shadow-sm p-4 border-l-4 border-[#5A8C7A]">
           <p className="text-[#6E7C72] text-sm">Total de citas</p>
           <p className="text-2xl font-bold text-[#2C3E34]">{stats.totalCitas}</p>
@@ -86,7 +87,7 @@ export default function PatientDashboardClient({
           <div className="bg-[#FAF9F7] px-6 py-4 border-b border-[#E6E3DE]">
             <h2 className="text-lg font-bold text-[#5A8C7A]">Próxima cita</h2>
           </div>
-          <div className="p-6">
+          <div className="p-4 sm:p-6">
             {stats.proximaCita ? (
               <div className="space-y-3">
                 <p className="text-2xl font-bold text-[#2C3E34]">
@@ -123,10 +124,10 @@ export default function PatientDashboardClient({
           <div className="bg-[#FAF9F7] px-6 py-4 border-b border-[#E6E3DE]">
             <h2 className="text-lg font-bold text-[#5A8C7A]">Mi progreso</h2>
           </div>
-          <div className="p-6">
+          <div className="p-4 sm:p-6">
             {stats.pesoInicial && stats.pesoActual ? (
               <div className="space-y-4">
-                <div className="flex justify-between items-center">
+                <div className="flex flex-wrap gap-3 justify-between items-center">
                   <div>
                     <p className="text-sm text-[#6E7C72]">Peso inicial</p>
                     <p className="text-xl font-bold text-[#2C3E34]">{formatWeight(stats.pesoInicial)}</p>
@@ -177,7 +178,7 @@ export default function PatientDashboardClient({
         </div>
         <div className="overflow-x-auto">
           {upcomingAppointments.length > 0 ? (
-            <table className="min-w-full divide-y divide-[#E6E3DE]">
+            <AdaptiveTable mobile="records" label="Registros y acciones"><table className="min-w-full divide-y divide-[#E6E3DE]">
               <thead className="bg-[#FAF9F7]">
                 <tr>
                   <th className="px-6 py-3 text-left text-xs font-semibold text-[#6E7C72] uppercase tracking-wider">Fecha</th>
@@ -208,7 +209,7 @@ export default function PatientDashboardClient({
                   </tr>
                 ))}
               </tbody>
-            </table>
+            </table></AdaptiveTable>
           ) : (
             <div className="text-center py-8 text-[#6E7C72]">
               No tienes próximas citas agendadas
@@ -222,7 +223,7 @@ export default function PatientDashboardClient({
         <div className="bg-[#FAF9F7] px-6 py-4 border-b border-[#E6E3DE]">
           <h2 className="text-lg font-bold text-[#5A8C7A]">Anuncios y novedades</h2>
         </div>
-        <div className="p-6 space-y-4">
+        <div className="p-4 sm:p-6 space-y-4">
           {posts.length > 0 ? (
             posts.map((post) => (
               <div key={post.id} className="border-b border-[#E6E3DE] pb-4 last:border-0 last:pb-0">
@@ -258,7 +259,7 @@ export default function PatientDashboardClient({
         </div>
         <div className="overflow-x-auto">
           {appointmentHistory.length > 0 ? (
-            <table className="min-w-full divide-y divide-[#E6E3DE]">
+            <AdaptiveTable mobile="records" label="Registros y acciones"><table className="min-w-full divide-y divide-[#E6E3DE]">
               <thead className="bg-[#FAF9F7]">
                 <tr>
                   <th className="px-6 py-3 text-left text-xs font-semibold text-[#6E7C72] uppercase tracking-wider">Fecha</th>
@@ -289,7 +290,7 @@ export default function PatientDashboardClient({
                   </tr>
                 ))}
               </tbody>
-            </table>
+            </table></AdaptiveTable>
           ) : (
             <div className="text-center py-8 text-[#6E7C72]">
               No hay citas en el historial
