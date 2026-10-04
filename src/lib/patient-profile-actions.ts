@@ -128,19 +128,22 @@ export async function updateUserProfile(userId: number, data: {
       }
     }
     
-    const updates: Record<string, any> = { updated_at: new Date() };
-    if (data.username) updates.username = data.username;
-    if (data.email) updates.email = data.email;
-    
-    const setClause = Object.keys(updates)
-      .map((key) => `${key} = ${sql.unsafe(`$${Object.keys(updates).indexOf(key) + 1}`)}`)
-      .join(', ');
-    
-    await sql.unsafe(`
-      UPDATE tblusers
-      SET ${setClause}
-      WHERE id = ${userId}
-    `);
+    if (data.username && data.email) {
+      await sql`
+        UPDATE tblusers SET username = ${data.username}, email = ${data.email}, updated_at = NOW()
+        WHERE id = ${userId}
+      `;
+    } else if (data.username) {
+      await sql`
+        UPDATE tblusers SET username = ${data.username}, updated_at = NOW()
+        WHERE id = ${userId}
+      `;
+    } else if (data.email) {
+      await sql`
+        UPDATE tblusers SET email = ${data.email}, updated_at = NOW()
+        WHERE id = ${userId}
+      `;
+    }
     
     revalidatePath('/patient/perfil');
     return { success: true };
