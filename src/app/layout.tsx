@@ -10,6 +10,9 @@ export const metadata: Metadata = {
     template: "%s | RubiRamos",
     default: "RubiRamos",
   },
+  description:
+    "Sistema Integral Multiplataforma para la Gestión de Consultorio Nutricional",
+  manifest: "/manifest.json",
 };
 
 const geistSans = Geist({
@@ -25,7 +28,9 @@ const geistMono = Geist_Mono({
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="es">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}
+      >
         <SessionProviderWrapper>
           <ClientWrapper>{children}</ClientWrapper>
         </SessionProviderWrapper>
