@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import Image from 'next/image';
+import Link from 'next/link';
 import {
   HeartIcon,
   UserCircleIcon,
@@ -22,9 +23,9 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
+    <div className="min-h-screen">
       {/* HERO SECTION - CON FONDO Y FOTO DE LA DOCTORA */}
-      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[80svh] flex items-center justify-center overflow-hidden">
         {/* Imagen de fondo */}
         <div className="absolute inset-0 z-0">
           <Image
@@ -40,21 +41,21 @@ export default function Home() {
         </div>
 
         {/* Contenido sobre la imagen */}
-        <div className="container mx-auto px-4 relative z-10 py-16">
+        <div className="container mx-auto px-4 relative z-10 py-12 sm:py-16">
           <div className="max-w-6xl mx-auto">
             
             {/* Contenido principal - Foto y texto lado a lado */}
-            <div className="flex flex-col md:flex-row items-center gap-10 mb-12">
+            <div className="grid grid-cols-1 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] items-center gap-8 lg:gap-12 mb-10">
               
               {/* Foto de la doctora - Izquierda */}
-              <div className="md:w-2/5 flex justify-center">
-                <div className="relative">
+              <div className="min-w-0 flex justify-center p-4">
+                <div className="relative w-full max-w-72 md:max-w-96">
                   {/* Marco decorativo detrás de la foto */}
                   <div className="absolute -top-4 -left-4 w-full h-full rounded-3xl bg-gradient-to-br from-[#BD7D4A] to-[#F58634] opacity-50"></div>
                   <div className="absolute -bottom-4 -right-4 w-full h-full rounded-3xl bg-gradient-to-br from-[#7CB38C] to-[#A8CF45] opacity-50"></div>
                   
                   {/* Contenedor de la foto - Tamaño fijo para que no se corte */}
-                  <div className="relative w-72 h-72 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-2xl overflow-hidden shadow-2xl border-4 border-white/90 bg-white/10">
+                  <div className="relative w-full aspect-square rounded-2xl overflow-hidden shadow-lg border-4 border-white/90 bg-white/10">
                     <Image
                       src="/rubiramos.png"
                       alt="Lic. Rubí Ramos Álvarez - Nutrióloga"
@@ -75,17 +76,17 @@ export default function Home() {
               </div>
 
               {/* Texto - Derecha */}
-              <div className="md:w-3/5 text-center md:text-left">
-                <h1 className="text-3xl md:text-5xl font-bold mb-3 font-serif" style={{ color: '#FFFFFF' }}>
+              <div className="min-w-0 text-center md:text-left">
+                <h1 className="text-[clamp(1.75rem,4vw,3rem)] leading-tight font-bold mb-3 font-serif" style={{ color: '#FFFFFF' }}>
                   Consultorio Nutricional
                 </h1>
-                <h2 className="text-xl md:text-3xl font-semibold mb-5" style={{ color: '#BD7D4A' }}>
+                <h2 className="text-xl md:text-3xl font-semibold mb-5" style={{ color: '#F58634' }}>
                   Nutrióloga Rubí Ramos Álvarez
                 </h2>
                 
                 {/* Dirección */}
-                <div className="inline-flex items-center justify-center md:justify-start gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full mb-6 border border-white/30">
-                  <MapPinIcon className="h-4 w-4" style={{ color: '#FFFFFF' }} />
+                <div className="inline-flex max-w-full items-start justify-center md:justify-start gap-3 bg-white/10 px-4 py-3 rounded-2xl mb-6 border border-white/30">
+                  <MapPinIcon className="h-5 w-5 shrink-0 mt-0.5" style={{ color: '#FFFFFF' }} />
                   <span className="text-xs md:text-sm" style={{ color: '#FFFFFF' }}>
                     C. Juan Mogica Ugalde #10, Huejutla de Reyes <p>
                       Clinica Huejutla, Piso 2, Consultorio 14
@@ -102,18 +103,18 @@ export default function Home() {
                 
                 {/* Botones */}
                 <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                  <button 
-                    className="px-6 py-3 rounded-xl font-bold text-sm md:text-base shadow-2xl transition-all duration-300 hover:shadow-3xl transform hover:-translate-y-1 hover:scale-105 flex items-center justify-center gap-2"
+                  <Link href="/citas"
+                    className="px-6 py-3 rounded-xl font-bold text-sm md:text-base shadow-md transition-all duration-300 hover:shadow-lg transform hover:-translate-y-1 active:scale-[0.98] flex items-center justify-center gap-2"
                     style={{ 
                       backgroundColor: '#F58634',
-                      color: '#FFFFFF'
+                      color: '#2C3E34'
                     }}
                   >
                     <CalendarIcon className="h-4 w-4 md:h-5 md:w-5" />
                     Agenda tu Primera Consulta
-                  </button>
-                  <button 
-                    className="px-6 py-3 border-2 rounded-xl font-bold text-sm md:text-base transition-all duration-300 hover:bg-white/10 transform hover:-translate-y-1 hover:scale-105 flex items-center justify-center gap-2"
+                  </Link>
+                  <Link href="/servicios"
+                    className="px-6 py-3 border-2 rounded-xl font-bold text-sm md:text-base transition-all duration-300 hover:bg-white/10 transform hover:-translate-y-1 active:scale-[0.98] flex items-center justify-center gap-2"
                     style={{ 
                       borderColor: '#FFFFFF',
                       color: '#FFFFFF'
@@ -121,21 +122,21 @@ export default function Home() {
                   >
                     <UserCircleIcon className="h-4 w-4 md:h-5 md:w-5" />
                     Conoce Nuestros Servicios
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>
 
             {/* Información de contacto inmediata */}
-            <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl p-6 border border-[#E6E3DE]">
+            <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-md p-4 sm:p-6 border border-[#E6E3DE]">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="flex items-center justify-center gap-3 p-3 rounded-xl hover:bg-[#FAF9F7] transition-colors">
-                  <div className="h-10 w-10 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#7CB38C' }}>
+                <div className="flex min-w-0 items-center justify-start gap-3 p-2 rounded-xl hover:bg-[#FAF9F7] transition-colors">
+                  <div className="h-10 w-10 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#2C3E34' }}>
                     <PhoneIcon className="h-5 w-5 text-white" />
                   </div>
-                  <div>
+                  <div className="min-w-0">
                     <p className="text-xs font-semibold" style={{ color: '#6E7C72' }}>TELÉFONO</p>
-                    <p className="font-bold text-sm md:text-base" style={{ color: '#2C3E34' }}>+52 77 1720 6956</p>
+                    <a href="tel:+527717206956" className="font-semibold text-sm md:text-base hover:underline" style={{ color: '#2C3E34' }}>+52 77 1720 6956</a>
                   </div>
                 </div>
                 <div className="flex items-center justify-center gap-3 p-3 rounded-xl hover:bg-[#FAF9F7] transition-colors">
@@ -144,7 +145,7 @@ export default function Home() {
                   </div>
                   <div>
                     <p className="text-xs font-semibold" style={{ color: '#6E7C72' }}>EMAIL</p>
-                    <p className="font-bold text-sm md:text-base" style={{ color: '#2C3E34' }}>contacto@rubinutricion.com</p>
+                    <a href="mailto:contacto@rubinutricion.com" className="break-words font-semibold text-sm md:text-base hover:underline" style={{ color: '#2C3E34' }}>contacto@rubinutricion.com</a>
                   </div>
                 </div>
                 <div className="flex items-center justify-center gap-3 p-3 rounded-xl hover:bg-[#FAF9F7] transition-colors">
@@ -163,9 +164,9 @@ export default function Home() {
       </section>
 
       {/* SERVICIOS SECTION */}
-      <section className="py-20 bg-white">
+      <section className="py-12 sm:py-20 bg-white">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
+          <div className="text-center mb-10 sm:mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 font-serif" style={{ color: '#2C3E34' }}>
               Nuestros Servicios Profesionales
             </h2>
@@ -204,7 +205,7 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             <div 
-              className="p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
+              className="ui-card p-5 sm:p-8 rounded-2xl"
               style={{ backgroundColor: '#FFFFFF' }}
             >
               <div className="h-14 w-14 rounded-full flex items-center justify-center mb-6" style={{ backgroundColor: '#7CB38C' }}>
@@ -216,7 +217,7 @@ export default function Home() {
               </p>
             </div>
             <div 
-              className="p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
+              className="p-5 sm:p-8 rounded-2xl shadow-lg hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
               style={{ backgroundColor: '#FFFFFF' }}
             >
               <div className="h-14 w-14 rounded-full flex items-center justify-center mb-6" style={{ backgroundColor: '#BD7D4A' }}>
@@ -228,7 +229,7 @@ export default function Home() {
               </p>
             </div>
             <div 
-              className="p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
+              className="p-5 sm:p-8 rounded-2xl shadow-lg hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
               style={{ backgroundColor: '#FFFFFF' }}
             >
               <div className="h-14 w-14 rounded-full flex items-center justify-center mb-6" style={{ backgroundColor: '#F58634' }}>
@@ -295,25 +296,25 @@ export default function Home() {
       </section>
 
       {/* CTA FINAL */}
-      <section className="py-16" style={{ backgroundColor: '#7CB38C' }}>
+      <section className="py-16" style={{ backgroundColor: '#2C3E34' }}>
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6 font-serif" style={{ color: '#FFFFFF' }}>
             ¿Listo para transformar tu salud?
           </h2>
-          <p className="text-xl mb-10 max-w-2xl mx-auto" style={{ color: '#E6E3DE' }}>
+          <p className="text-xl mb-10 max-w-2xl mx-auto" style={{ color: '#FFFFFF' }}>
             Agenda tu primera consulta y comienza tu camino hacia una vida más saludable con acompañamiento profesional.
           </p>
-          <button 
-            className="px-12 py-5 rounded-xl font-bold text-lg shadow-2xl transition-all duration-300 hover:shadow-3xl transform hover:scale-105"
+          <Link href="/citas"
+            className="inline-flex min-h-12 items-center justify-center px-6 sm:px-12 py-4 rounded-xl font-bold text-lg shadow-md transition-all duration-300 hover:shadow-lg transform active:scale-[0.98]"
             style={{ 
               backgroundColor: '#F58634',
-              color: '#FFFFFF'
+              color: '#2C3E34'
             }}
           >
             Comienza Hoy Mismo
-          </button>
+          </Link>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

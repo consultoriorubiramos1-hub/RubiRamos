@@ -9,9 +9,6 @@ import {
   FaHome, 
   FaUserAlt, 
   FaShoppingBag, 
-  FaCalendarAlt, 
-  FaShoppingCart, 
-  FaAddressCard,
   FaBars,
   FaTimes,
   FaUserCircle,
@@ -39,6 +36,7 @@ const Header = () => {
   // Cerrar menú móvil al hacer clic fuera
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
+      if (event.target instanceof Element && event.target.closest('[aria-controls="public-mobile-menu"]')) return;
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
         setIsMenuOpen(false);
       }
@@ -72,13 +70,16 @@ const Header = () => {
     //{ href: '/calendar', icon: FaCalendarAlt, label: 'Agendar Cita' },
   ];
 
-  // Enlace de perfil/sesión (se muestra al final)
-  const authLink = isAuthenticated
-    ? { href: profilePath, icon: FaUserCircle, label: 'Perfil', isProfile: true }
-    : { href: '/login', icon: FaUserAlt, label: 'Iniciar Sesión' };
-
-  // Todos los enlaces (incluyendo el de perfil al final)
-  const allNavLinks = [...navLinks, authLink];
+  useEffect(() => {
+    function closeOnEscape(event: KeyboardEvent) {
+      if (event.key === 'Escape') {
+        setIsMenuOpen(false);
+        setIsUserMenuOpen(false);
+      }
+    }
+    document.addEventListener('keydown', closeOnEscape);
+    return () => document.removeEventListener('keydown', closeOnEscape);
+  }, []);
 
   const handleLogout = async () => {
     await signOut({ callbackUrl: '/' });
@@ -107,17 +108,20 @@ const Header = () => {
           className={styles.mobileMenuButton}
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label={isMenuOpen ? "Cerrar menú" : "Abrir menú"}
+          aria-expanded={isMenuOpen}
+          aria-controls="public-mobile-menu"
         >
           {isMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
         </button>
 
         {/* Navegación escritorio */}
-        <nav className={styles.desktopNav}>
+        <nav className={styles.desktopNav} aria-label="Navegación principal">
           <ul className={styles.navList}>
             {navLinks.map((link) => (
               <li key={link.href} className={styles.navItem}>
                 <Link
                   href={link.href}
+                  aria-current={isActive(link.href) ? 'page' : undefined}
                   className={`${styles.navLink} ${isActive(link.href) ? styles.active : ""}`}
                 >
                   <link.icon size={20} className={styles.icon} />
@@ -135,6 +139,8 @@ const Header = () => {
                 <div className={styles.userMenuContainer} ref={userMenuRef}>
                   <button
                     onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+                    aria-expanded={isUserMenuOpen}
+                    aria-controls="public-user-menu"
                     className={`${styles.navLink} ${isActive(profilePath) ? styles.active : ''}`}
                   >
                     <FaUserCircle size={20} className={styles.icon} />
@@ -143,7 +149,7 @@ const Header = () => {
                   </button>
                   
                   {isUserMenuOpen && (
-                    <div className={styles.userDropdown}>
+                    <div id="public-user-menu" className={styles.userDropdown}>
                       <Link 
                         href={profilePath}
                         className={styles.dropdownItem}
@@ -179,7 +185,7 @@ const Header = () => {
 
       {/* Menú móvil desplegable */}
       {isMenuOpen && (
-        <div ref={menuRef} className={styles.mobileMenu}>
+        <div id="public-mobile-menu" ref={menuRef} className={styles.mobileMenu}>
           <div className={styles.mobileMenuContent}>
             <ul className={styles.mobileNavList}>
               {navLinks.map((link) => (

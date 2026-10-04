@@ -10,7 +10,7 @@ interface Breadcrumb {
 export default function AdminBreadcrumbs({ breadcrumbs }: { breadcrumbs: Breadcrumb[] }) {
   return (
     <nav className="flex mb-6" aria-label="Breadcrumb">
-      <ol className="inline-flex items-center space-x-1 md:space-x-2">
+      <ol className="inline-flex flex-wrap items-center gap-1 md:gap-2">
         {breadcrumbs.map((breadcrumb, index) => (
           <li key={breadcrumb.href} className="inline-flex items-center">
             {index > 0 && (
@@ -18,7 +18,7 @@ export default function AdminBreadcrumbs({ breadcrumbs }: { breadcrumbs: Breadcr
             )}
             <Link
               href={breadcrumb.href}
-              className={`text-sm font-medium ${breadcrumb.active ? 'text-[#1e343b]' : 'text-gray-500 hover:text-[#66b0ca]'}`}
+              className={`text-sm font-medium ${breadcrumb.active ? 'text-[#2C3E34]' : 'text-[#6E7C72] hover:text-[#5A8C7A]'}`}
               aria-current={breadcrumb.active ? 'page' : undefined}
             >
               {breadcrumb.label}

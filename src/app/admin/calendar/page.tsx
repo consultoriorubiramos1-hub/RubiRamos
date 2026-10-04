@@ -158,17 +158,17 @@ export default function CalendarPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#FAF9F7] p-6 flex items-center justify-center">
+      <div className="min-h-screen bg-[#FAF9F7] p-4 sm:p-6 flex items-center justify-center">
         <div className="text-[#6E7C72]">Cargando calendario...</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#FAF9F7] p-6">
+    <div className="min-h-screen bg-[#FAF9F7] p-4 sm:p-6">
       <div className="max-w-7xl mx-auto">
         {/* Encabezado con botón de configuración general */}
-        <div className="flex justify-between items-center mb-6">
+        <div className="flex flex-wrap gap-3 justify-between items-center mb-6">
           <h1 className="text-2xl font-bold text-[#5A8C7A]">Calendario de Citas</h1>
           <button
             onClick={() => openSettings('general')}
@@ -183,7 +183,7 @@ export default function CalendarPage() {
         </div>
 
         {/* Tarjetas de estadísticas */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           <div className="bg-white rounded-xl shadow-sm p-4 border-l-4 border-[#5A8C7A]">
             <p className="text-[#6E7C72] text-sm">Citas esta semana</p>
             <p className="text-2xl font-bold text-[#2C3E34]">{weeklyCount}</p>
@@ -204,25 +204,27 @@ export default function CalendarPage() {
 
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           {/* Calendario */}
-          <div className="lg:col-span-3 bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-6">
-            <div className="flex justify-between items-center mb-4">
+          <div className="lg:col-span-3 bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-4 sm:p-6">
+            <div className="flex flex-wrap gap-3 justify-between items-center mb-4">
               <h2 className="text-xl font-bold text-[#5A8C7A]">{monthNames[currentDate.getMonth()]} {currentDate.getFullYear()}</h2>
               <div className="flex gap-2">
-                <button onClick={() => changeMonth(-1)} className="px-3 py-1 border border-[#E6E3DE] rounded-lg hover:bg-[#FAF9F7]">←</button>
-                <button onClick={() => changeMonth(1)} className="px-3 py-1 border border-[#E6E3DE] rounded-lg hover:bg-[#FAF9F7]">→</button>
+                <button aria-label="Mes anterior" onClick={() => changeMonth(-1)} className="px-3 py-1 border border-[#E6E3DE] rounded-lg hover:bg-[#FAF9F7]">←</button>
+                <button aria-label="Mes siguiente" onClick={() => changeMonth(1)} className="px-3 py-1 border border-[#E6E3DE] rounded-lg hover:bg-[#FAF9F7]">→</button>
               </div>
             </div>
-            <div className="grid grid-cols-7 gap-2 mb-2">
+            <p className="mb-3 text-sm text-[#6E7C72] sm:hidden">Desliza el calendario para ver todos los días ↔</p><div className="calendar-scroll" role="region" aria-label="Calendario mensual" tabIndex={0}><div className="grid calendar-grid grid-cols-7 gap-2 mb-2">
               {['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'].map(day => (
                 <div key={day} className="text-center text-sm font-semibold text-[#6E7C72] py-2">{day}</div>
               ))}
             </div>
-            <div className="grid grid-cols-7 gap-2">
+            <div className="grid calendar-grid grid-cols-7 gap-2">
               {calendarDays.map((day, idx) => (
                 <button
                   key={idx}
+                  aria-pressed={selectedDay?.toDateString() === day.date.toDateString()}
+                  aria-label={`${day.date.toLocaleDateString('es-MX', { weekday: 'long', day: 'numeric', month: 'long' })} · ${day.appointmentsCount} citas${!day.isWorkingDay ? ' · No laborable' : ''}`}
                   onClick={() => handleDayClick(day)}
-                  className={`p-3 rounded-xl border-2 transition-all text-center min-h-20 ${getDayColorClass(day)} ${
+                  className={`p-1 sm:p-3 rounded-xl border-2 transition-all text-center calendar-day min-h-20 ${getDayColorClass(day)} ${
                     day.isCurrentMonth ? '' : 'opacity-50'
                   } ${selectedDay?.toDateString() === day.date.toDateString() ? 'ring-2 ring-[#5A8C7A] ring-offset-2' : ''} ${
                     isToday(day.date) ? 'ring-2 ring-[#F58634] ring-offset-2' : ''
@@ -237,23 +239,23 @@ export default function CalendarPage() {
                     </div>
                   )}
                   {day.isWorkingDay === false && (
-                    <div className="text-xs mt-1 text-white">No laborable</div>
+                    <div className="text-xs mt-1 text-white">Cerrado</div>
                   )}
                 </button>
               ))}
-            </div>
+            </div></div>
           </div>
 
           {/* Panel lateral - usa variante sidebar */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-6 sticky top-4">
+            <div className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-4 sm:p-6 sticky top-4">
               {selectedDay ? (
                 <>
                   <h3 className="text-lg font-bold text-[#5A8C7A] mb-2">
                     {selectedDay.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' })}
                   </h3>
                   <div className="bg-[#FAF9F7] rounded-lg p-4 mb-4">
-                    <div className="flex justify-between items-center mb-3">
+                    <div className="flex flex-wrap gap-3 justify-between items-center mb-3">
                       <span className="text-sm text-[#6E7C72]">Citas agendadas:</span>
                       <span className="font-bold text-[#2C3E34]">{calendarDays.find(d => d.date.toDateString() === selectedDay.toDateString())?.appointmentsCount || 0}</span>
                     </div>

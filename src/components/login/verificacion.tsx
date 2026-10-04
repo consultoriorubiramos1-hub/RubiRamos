@@ -153,7 +153,7 @@ export default function VerificarForm() {
 
   return (
     <div className="min-h-screen flex flex-col lg:flex-row bg-[#FAF9F7]">
-      <div className="w-full lg:w-1/2 p-8 lg:p-12 flex items-center justify-center">
+      <div className="w-full lg:w-1/2 p-5 sm:p-8 lg:p-12 flex items-center justify-center">
         <div className="w-full max-w-md">
           <div className="text-center mb-8">
             <div className="flex items-center justify-center space-x-3 mb-3">
@@ -192,7 +192,7 @@ export default function VerificarForm() {
               </p>
             </div>
 
-            <div className="flex justify-center gap-3">
+            <div className="grid grid-cols-6 gap-1.5 sm:gap-3">
               {codigo.map((digit, idx) => (
                 <input
                   title="Ingrese un dígito del código"
@@ -207,7 +207,7 @@ export default function VerificarForm() {
                   onChange={(e) => handleDigitChange(idx, e.target.value)}
                   onPaste={handlePaste}
                   onKeyDown={(e) => handleKeyDown(idx, e)}
-                  className="w-12 h-14 text-2xl font-medium text-center border border-[#E6E3DE] rounded-lg focus:ring-2 focus:ring-[#6B8E7B] focus:border-[#6B8E7B] transition"
+                  className="min-w-0 w-full h-14 text-xl sm:text-2xl font-medium text-center border border-[#E6E3DE] rounded-lg focus:ring-2 focus:ring-[#6B8E7B] focus:border-[#6B8E7B] transition"
                   autoFocus={idx === 0}
                 />
               ))}
@@ -279,7 +279,7 @@ export default function VerificarForm() {
       </div>
 
       {/* Sección informativa */}
-      <div className="w-full lg:w-1/2 p-8 lg:p-12 flex items-center justify-center bg-white">
+      <div className="w-full lg:w-1/2 p-5 sm:p-8 lg:p-12 flex items-center justify-center bg-white">
         <div className="w-full max-w-md">
           <h3 className="text-2xl font-bold text-[#6B8E7B] mb-6">
             Sobre nuestro consultorio

@@ -1,4 +1,5 @@
 'use client';
+import ModalSurface from "@/components/ui/ModalSurface";
 
 import {
   useState,
@@ -1010,8 +1011,8 @@ export default function PendingPaymentsReview({
             }
           }
         >
-          <div
-            className="
+          <ModalSurface
+            className="modal-surface
               flex
               max-h-[94vh]
               w-full
@@ -1094,7 +1095,7 @@ export default function PendingPaymentsReview({
 
             <div
               className="
-                flex-1
+                min-w-0 flex-1
                 overflow-auto
                 bg-[#F4F2EE]
                 p-4
@@ -1115,7 +1116,7 @@ export default function PendingPaymentsReview({
                 "
               />
             </div>
-          </div>
+          </ModalSurface>
         </div>
       )}
 
@@ -1144,13 +1145,13 @@ export default function PendingPaymentsReview({
             }
           }
         >
-          <div
-            className="
+          <ModalSurface
+            className="modal-surface
               w-full
               max-w-md
               rounded-xl
               bg-white
-              p-6
+              p-4 sm:p-6
               shadow-2xl
             "
           >
@@ -1230,8 +1231,7 @@ export default function PendingPaymentsReview({
             <div
               className="
                 mt-5
-                flex
-                justify-end
+                flex flex-wrap justify-end
                 gap-3
               "
             >
@@ -1290,7 +1290,7 @@ export default function PendingPaymentsReview({
                   : 'Confirmar rechazo'}
               </button>
             </div>
-          </div>
+          </ModalSurface>
         </div>
       )}
     </>

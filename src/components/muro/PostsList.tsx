@@ -1,4 +1,5 @@
 'use client';
+import ModalSurface from "@/components/ui/ModalSurface";
 
 import { useState, useEffect } from 'react';
 import { getPosts, deletePost, toggleLikePost } from '@/lib/posts-actions';
@@ -132,8 +133,8 @@ export default function PostsList({ initialPosts = [], userId, userRole = 1 }: P
           <p className="text-sm text-[#6E7C72] mt-1">Comparte información importante con los pacientes</p>
         </div>
 
-        <div className="flex justify-between items-center gap-4">
-          <div className="flex-1">
+        <div className="flex flex-wrap gap-3 justify-between items-center gap-4">
+          <div className="min-w-0 flex-1">
             <div className="relative">
               <input
                 type="text"
@@ -166,7 +167,7 @@ export default function PostsList({ initialPosts = [], userId, userRole = 1 }: P
         {loading ? (
           <div className="text-center py-8 text-[#6E7C72]">Cargando publicaciones...</div>
         ) : posts.length === 0 ? (
-          <div className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-8 text-center">
+          <div className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-5 sm:p-8 text-center">
             <p className="text-[#6E7C72]">No hay publicaciones aún</p>
             {isAdmin && (
               <button
@@ -181,8 +182,8 @@ export default function PostsList({ initialPosts = [], userId, userRole = 1 }: P
           <div className="space-y-8">
             {posts.map((post) => (
               <div key={post.id} className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] overflow-hidden">
-                <div className="bg-[#FAF9F7] px-8 py-5 border-b border-[#E6E3DE] flex justify-between items-start">
-                  <div className="flex-1">
+                <div className="bg-[#FAF9F7] px-8 py-5 border-b border-[#E6E3DE] flex flex-wrap gap-3 justify-between items-start">
+                  <div className="min-w-0 flex-1">
                     <h3 className="text-xl font-bold text-[#5A8C7A]">{post.title || 'Sin título'}</h3>
                     <div className="flex flex-wrap gap-3 text-xs text-[#6E7C72] mt-2">
                       <span>Por: {post.username}</span>
@@ -290,8 +291,8 @@ export default function PostsList({ initialPosts = [], userId, userRole = 1 }: P
       {/* Modal de confirmación para eliminar */}
       {deleteConfirm.isOpen && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[60] p-4">
-          <div className="bg-white rounded-xl shadow-xl max-w-md w-full border border-[#E6E3DE]">
-            <div className="p-6">
+          <ModalSurface onClose={handleCancelDelete} className="modal-surface bg-white rounded-xl shadow-xl max-w-md w-full border border-[#E6E3DE]">
+            <div className="p-4 sm:p-6">
               <div className="flex items-center justify-center mb-4">
                 <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center">
                   <svg className="w-6 h-6 text-[#F58634]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -306,7 +307,7 @@ export default function PostsList({ initialPosts = [], userId, userRole = 1 }: P
                 ¿Estás seguro de que deseas eliminar la publicación <strong className="text-[#2C3E34]">"{deleteConfirm.postTitle}"</strong>?<br />
                 Esta acción no se puede deshacer.
               </p>
-              <div className="flex justify-end gap-3">
+              <div className="flex flex-wrap justify-end gap-3">
                 <button
                   onClick={handleCancelDelete}
                   className="px-4 py-2 border border-[#E6E3DE] rounded-lg text-[#6E7C72] hover:bg-[#FAF9F7] transition-colors"
@@ -321,7 +322,7 @@ export default function PostsList({ initialPosts = [], userId, userRole = 1 }: P
                 </button>
               </div>
             </div>
-          </div>
+          </ModalSurface>
         </div>
       )}
     </>

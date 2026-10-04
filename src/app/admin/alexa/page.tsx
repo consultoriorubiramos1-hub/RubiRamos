@@ -2,6 +2,7 @@ import {
     KeyIcon,
     SpeakerWaveIcon
 } from '@heroicons/react/24/outline';
+import AdaptiveTable from "@/components/ui/AdaptiveTable";
 
 interface AlexaCommand {
     intent: string;
@@ -203,7 +204,7 @@ export default function AlexaNutriControlPage() {
                     </div>
 
                     <div className="overflow-x-auto">
-                        <table className="min-w-full border-collapse">
+                        <AdaptiveTable mobile="scroll" label="Tabla de comparación y detalles"><table className="min-w-full border-collapse">
                             <thead>
                                 <tr className="bg-[#2C3E34] text-left text-sm text-white">
                                     <th className="w-1/2 px-5 py-4 font-semibold sm:px-6">
@@ -257,7 +258,7 @@ export default function AlexaNutriControlPage() {
                                     </tr>
                                 ))}
                             </tbody>
-                        </table>
+                        </table></AdaptiveTable>
                     </div>
                 </section>
             </div>

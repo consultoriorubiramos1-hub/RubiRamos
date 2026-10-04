@@ -52,7 +52,7 @@ export default function ResponsiveFilter({ columns }: { columns: FilterColumn[] 
               className={`cursor-pointer select-none flex items-center gap-1 rounded-lg border px-3 py-1.5 text-sm
                 ${
                   active
-                    ? 'bg-blue-50 text-blue-700 border-blue-600'
+                    ? 'bg-[#5A8C7A]/10 text-[#2C3E34] border-[#5A8C7A]'
                     : 'bg-white text-gray-700 border-gray-300 hover:border-gray-400 hover:shadow-sm'
                 }`}
             >
@@ -100,7 +100,7 @@ export default function ResponsiveFilter({ columns }: { columns: FilterColumn[] 
               leaveFrom="translate-y-0"
               leaveTo="translate-y-full"
             >
-              <Dialog.Panel className="w-full rounded-t-2xl bg-white p-6 shadow-2xl">
+              <Dialog.Panel className="modal-surface m-4 w-full rounded-2xl bg-white p-4 sm:p-6 shadow-2xl">
                 <div className="flex items-center justify-between mb-4">
                   <Dialog.Title className="text-lg font-semibold">
                     Ordenar
@@ -138,9 +138,9 @@ export default function ResponsiveFilter({ columns }: { columns: FilterColumn[] 
                     <button
                       key={d}
                       onClick={() => setDir(d as Direction)}
-                      className={`flex-1 rounded px-3 py-2 text-sm ${
+                      className={`min-w-0 flex-1 rounded px-3 py-2 text-sm ${
                         direction === d
-                          ? 'bg-blue-600 text-white'
+                          ? 'bg-[#5A8C7A] text-white'
                           : 'border border-gray-300 text-gray-700'
                       }`}
                     >
@@ -151,7 +151,7 @@ export default function ResponsiveFilter({ columns }: { columns: FilterColumn[] 
 
                 <button
                   onClick={applyMobile}
-                  className="w-full rounded bg-blue-600 py-2 text-white hover:bg-blue-700"
+                  className="w-full rounded bg-blue-600 py-2 text-white hover:bg-[#2C3E34]"
                 >
                   Aplicar
                 </button>

@@ -27,7 +27,7 @@ export default function LegalPageLayout({ title, introduction, sections }: Legal
           </p>
         </div>
 
-        <div className="rounded-2xl border border-[#E6E3DE] bg-white p-6 shadow-sm sm:p-10">
+        <div className="rounded-2xl border border-[#E6E3DE] bg-white p-4 sm:p-6 shadow-sm sm:p-10">
           {sections.map((section) => (
             <section key={section.subtitle} className="border-b border-[#E6E3DE] py-7 first:pt-0 last:border-0 last:pb-0">
               <h2 className="mb-4 flex items-start gap-2 font-serif text-xl font-bold text-[#2C3E34] sm:text-2xl">

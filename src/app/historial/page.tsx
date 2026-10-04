@@ -112,7 +112,7 @@ export default function PatientMedicalHistory() {
           {/* Columna izquierda - Información del paciente */}
           <div className="lg:col-span-1 space-y-6">
             {/* Tarjeta de información personal */}
-            <div className="bg-white rounded-2xl shadow-lg p-6">
+            <div className="bg-white rounded-2xl shadow-lg p-4 sm:p-6">
               <div className="text-center mb-6">
                 <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <FaUser className="text-blue-600 text-2xl" />
@@ -155,7 +155,7 @@ export default function PatientMedicalHistory() {
             </div>
 
             {/* Próxima cita */}
-            <div className="bg-white rounded-2xl shadow-lg p-6">
+            <div className="bg-white rounded-2xl shadow-lg p-4 sm:p-6">
               <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
                 <FaCalendar className="text-green-500" />
                 Próxima Cita
@@ -188,18 +188,18 @@ export default function PatientMedicalHistory() {
             </div>
 
             {/* Progreso de peso */}
-            <div className="bg-white rounded-2xl shadow-lg p-6">
+            <div className="bg-white rounded-2xl shadow-lg p-4 sm:p-6">
               <h3 className="text-lg font-semibold text-gray-800 mb-4">Mi Progreso</h3>
               <div className="space-y-4">
-                <div className="flex justify-between items-center">
+                <div className="flex flex-wrap gap-3 justify-between items-center">
                   <span className="text-gray-600">Peso inicial</span>
                   <span className="font-bold text-gray-800">{progressMetrics.initialWeight} kg</span>
                 </div>
-                <div className="flex justify-between items-center">
+                <div className="flex flex-wrap gap-3 justify-between items-center">
                   <span className="text-gray-600">Peso actual</span>
                   <span className="font-bold text-green-600">{progressMetrics.currentWeight} kg</span>
                 </div>
-                <div className="flex justify-between items-center">
+                <div className="flex flex-wrap gap-3 justify-between items-center">
                   <span className="text-gray-600">Peso objetivo</span>
                   <span className="font-bold text-blue-600">{progressMetrics.goalWeight} kg</span>
                 </div>
@@ -221,8 +221,8 @@ export default function PatientMedicalHistory() {
 
           {/* Columna derecha - Historial médico */}
           <div className="lg:col-span-2">
-            <div className="bg-white rounded-2xl shadow-lg p-6">
-              <div className="flex justify-between items-center mb-6">
+            <div className="bg-white rounded-2xl shadow-lg p-4 sm:p-6">
+              <div className="flex flex-wrap gap-3 justify-between items-center mb-6">
                 <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
                   <FaFileMedical className="text-blue-500" />
                   Historial de Consultas
@@ -244,7 +244,7 @@ export default function PatientMedicalHistory() {
                     }`}
                     onClick={() => setSelectedAppointment(appointment)}
                   >
-                    <div className="flex justify-between items-start mb-3">
+                    <div className="flex flex-wrap gap-3 justify-between items-start mb-3">
                       <div>
                         <h3 className="font-semibold text-gray-800 text-lg">
                           {appointment.type}

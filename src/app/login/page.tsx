@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function LoginPage() {
   return (
     <main className="min-h-screen flex items-center justify-center bg-[#FAF9F7]">
-      <div className="relative w-full max-w-5xl mx-auto flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16 p-6">
+      <div className="relative w-full max-w-5xl mx-auto flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16 p-4 sm:p-6">
         {/* Sección informativa */}
         <div className="w-full lg:w-1/2 max-w-md space-y-6 text-center lg:text-left">
           <div>
@@ -29,7 +29,7 @@ export default function LoginPage() {
           </p>
           
           <div className="hidden lg:block pt-8">
-            <div className="bg-white p-6 rounded-lg shadow-sm border border-[#E6E3DE]">
+            <div className="bg-white p-4 sm:p-6 rounded-lg shadow-sm border border-[#E6E3DE]">
               <h3 className="font-medium text-[#2C3E34] mb-3 flex items-center">
                 <HelpCircle className="h-5 w-5 text-[#6B8E7B] mr-2" />
                 ¿Necesitas ayuda?
@@ -45,7 +45,7 @@ export default function LoginPage() {
         {/* Formulario de inicio de sesión con Suspense */}
         <div className="w-full max-w-md flex items-center justify-center">
           <Suspense fallback={
-            <div className="bg-white rounded-xl shadow-lg p-8 text-center border border-[#E6E3DE]">
+            <div className="bg-white rounded-xl shadow-lg p-5 sm:p-8 text-center border border-[#E6E3DE]">
               <div className="flex justify-center">
                 <svg className="animate-spin h-8 w-8 text-[#5A8C7A]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>

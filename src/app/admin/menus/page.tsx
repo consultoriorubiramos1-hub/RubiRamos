@@ -15,7 +15,7 @@ export default async function MenusPage() {
 
 
   return (
-    <main className="min-h-screen bg-[#FAF9F7] p-6">
+    <main className="min-h-screen bg-[#FAF9F7] p-4 sm:p-6">
       <div className="mx-auto max-w-7xl">
         <div className="mb-6">
           <h1 className="text-2xl font-bold text-[#5A8C7A]">

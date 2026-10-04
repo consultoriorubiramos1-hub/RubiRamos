@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+import AdaptiveTable from "@/components/ui/AdaptiveTable";
 import { useRouter } from 'next/navigation';
 import { getPatients, getPatientsStats, deletePatient } from '@/lib/patients-actions';
 import PatientModal from './PatientModal';
@@ -137,7 +138,7 @@ export default function PatientsList({ initialPatients, initialTotal, initialSta
   const totalPages = Math.ceil(total / pageSize);
 
   return (
-    <div className="p-6">
+    <div className="p-4 sm:p-6">
       {/* Título de la página */}
       <div className="mb-6">
         <h1 className="text-2xl font-bold text-[#6B8E7B]">Pacientes</h1>
@@ -145,7 +146,7 @@ export default function PatientsList({ initialPatients, initialTotal, initialSta
       </div>
 
       {/* Tarjetas de estadísticas */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
         <div className="bg-white rounded-xl shadow-sm p-4 border-l-4 border-[#6B8E7B]">
           <p className="text-[#6E7C72] text-sm">Total Pacientes</p>
           <p className="text-2xl font-bold text-[#2C3E34]">{stats.total}</p>
@@ -166,8 +167,8 @@ export default function PatientsList({ initialPatients, initialTotal, initialSta
 
       {/* Filtros */}
       <div className="bg-white rounded-xl shadow-sm p-4 mb-6 border border-[#E6E3DE]">
-        <div className="flex gap-4 items-end">
-          <div className="flex-1">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-end">
+          <div className="min-w-0 flex-1">
             <label className="block text-sm font-semibold text-[#2C3E34] mb-2">Buscar</label>
             <input
               type="text"
@@ -177,7 +178,7 @@ export default function PatientsList({ initialPatients, initialTotal, initialSta
               className="w-full px-3 py-2 border border-[#E6E3DE] rounded-lg focus:ring-2 focus:ring-[#6B8E7B]"
             />
           </div>
-          <div className="w-48">
+          <div className="w-full sm:w-48">
             <label className="block text-sm font-semibold text-[#2C3E34] mb-2">Género</label>
             <select
               value={genderFilter}
@@ -195,7 +196,7 @@ export default function PatientsList({ initialPatients, initialTotal, initialSta
       {/* Tabla de pacientes */}
       <div className="bg-white rounded-xl shadow-sm overflow-hidden border border-[#E6E3DE]">
         <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-[#E6E3DE]">
+          <AdaptiveTable mobile="records" label="Registros y acciones"><table className="min-w-full divide-y divide-[#E6E3DE]">
             <thead className="bg-[#FAF9F7]">
               <tr>
                 <th onClick={() => handleSort('first_name')} className="px-6 py-3 text-left text-xs font-semibold text-[#6E7C72] uppercase tracking-wider cursor-pointer hover:text-[#6B8E7B]">
@@ -267,12 +268,12 @@ export default function PatientsList({ initialPatients, initialTotal, initialSta
                 ))
               )}
             </tbody>
-          </table>
+          </table></AdaptiveTable>
         </div>
         
         {/* Paginación */}
         {totalPages > 1 && (
-          <div className="px-6 py-4 border-t border-[#E6E3DE] flex justify-between items-center">
+          <div className="px-6 py-4 border-t border-[#E6E3DE] flex flex-wrap gap-3 justify-between items-center">
             <div className="text-sm text-[#6E7C72]">
               Mostrando {((currentPage - 1) * pageSize) + 1} - {Math.min(currentPage * pageSize, total)} de {total}
             </div>

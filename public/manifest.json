@@ -1,13 +1,13 @@
 {
-  "name": "Consultorio Nutricional Integral",
-  "short_name": "Consultorio",
+  "id": "/",
+  "name": "Consultorio Nutricional Rubí Ramos",
+  "short_name": "Rubí Ramos",
   "description": "Sistema Integral Multiplataforma para la Gestión de Consultorio Nutricional",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "background_color": "#FFFFFF",
-  "theme_color": "#1E3A8A",
-  "orientation": "portrait-primary",
+  "theme_color": "#6B8E7B",
   "lang": "es-MX",
   "icons": [
   {

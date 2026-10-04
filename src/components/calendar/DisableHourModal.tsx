@@ -1,4 +1,5 @@
 'use client';
+import ModalSurface from "@/components/ui/ModalSurface";
 
 import { FaPhone, FaEnvelope } from 'react-icons/fa';
 
@@ -25,8 +26,8 @@ export default function DisableHoursModal({ isOpen, onClose, onConfirm, appointm
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[70] p-4">
-      <div className="bg-white rounded-xl shadow-xl max-w-2xl w-full max-h-[80vh] overflow-y-auto border border-[#E6E3DE]">
-        <div className="sticky top-0 bg-white border-b border-[#E6E3DE] px-6 py-4 bg-[#FAF9F7] flex justify-between items-center">
+      <ModalSurface onClose={onClose} className="modal-surface bg-white rounded-xl shadow-xl max-w-2xl w-full max-h-[80vh] overflow-y-auto border border-[#E6E3DE]">
+        <div className="sticky top-0 bg-white border-b border-[#E6E3DE] px-6 py-4 bg-[#FAF9F7] flex flex-wrap gap-3 justify-between items-center">
           <h2 className="text-xl font-bold text-[#F58634]">Atención: Citas afectadas</h2>
           <button onClick={onClose} className="text-[#6E7C72] hover:text-[#2C3E34]">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -35,7 +36,7 @@ export default function DisableHoursModal({ isOpen, onClose, onConfirm, appointm
           </button>
         </div>
 
-        <div className="p-6">
+        <div className="p-4 sm:p-6">
           <p className="text-[#2C3E34] mb-4">
             Los siguientes horarios tienen citas registradas. Si los inhabilitas, deberás contactar a los pacientes para reprogramar:
           </p>
@@ -43,7 +44,7 @@ export default function DisableHoursModal({ isOpen, onClose, onConfirm, appointm
           <div className="space-y-3 max-h-96 overflow-y-auto mb-6">
             {affectedAppointments.map(app => (
               <div key={app.id} className="bg-[#FAF9F7] rounded-lg p-4 border border-[#E6E3DE]">
-                <div className="flex justify-between items-start">
+                <div className="flex flex-wrap gap-3 justify-between items-start">
                   <div>
                     <div className="font-bold text-[#F58634]">{app.start_time.slice(0,5)} - {app.end_time.slice(0,5)}</div>
                     <div className="font-medium text-[#2C3E34] mt-1">{app.nombre_completo}</div>
@@ -77,7 +78,7 @@ export default function DisableHoursModal({ isOpen, onClose, onConfirm, appointm
             </p>
           </div>
 
-          <div className="flex justify-end gap-3">
+          <div className="flex flex-wrap justify-end gap-3">
             <button onClick={onClose} className="px-4 py-2 border border-[#E6E3DE] rounded-lg text-[#6E7C72] hover:bg-[#FAF9F7]">
               Cancelar
             </button>
@@ -86,7 +87,7 @@ export default function DisableHoursModal({ isOpen, onClose, onConfirm, appointm
             </button>
           </div>
         </div>
-      </div>
+      </ModalSurface>
     </div>
   );
 }

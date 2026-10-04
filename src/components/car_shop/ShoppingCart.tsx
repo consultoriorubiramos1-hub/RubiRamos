@@ -60,7 +60,7 @@ export default function ShoppingCart() {
 
   if (cartItems.length === 0) {
     return (
-      <div className="max-w-4xl mx-auto p-6 bg-white rounded-2xl shadow-lg">
+      <div className="max-w-4xl mx-auto p-4 sm:p-6 bg-white rounded-2xl shadow-lg">
         <div className="text-center py-12">
           <FaShoppingCart className="text-gray-300 text-6xl mx-auto mb-4" />
           <h2 className="text-2xl font-bold text-gray-600 mb-2">Tu carrito está vacío</h2>
@@ -71,7 +71,7 @@ export default function ShoppingCart() {
   }
 
   return (
-    <div className="max-w-6xl mx-auto p-6 bg-white rounded-2xl shadow-lg">
+    <div className="max-w-6xl mx-auto p-4 sm:p-6 bg-white rounded-2xl shadow-lg">
       {/* Header */}
       <div className="border-b border-gray-200 pb-4 mb-6">
         <h1 className="text-3xl font-bold text-gray-800 flex items-center gap-3">
@@ -88,7 +88,7 @@ export default function ShoppingCart() {
         {cartItems.map((item) => (
           <div
             key={item.id}
-            className="flex items-center gap-6 p-4 bg-gray-50 rounded-xl border border-gray-200 hover:shadow-md transition-shadow"
+            className="flex flex-wrap items-center gap-4 p-4 bg-[#FAF9F7] rounded-xl border border-gray-200 hover:shadow-md transition-shadow"
           >
             {/* Imagen del producto */}
             <div className="w-20 h-20 relative flex-shrink-0">
@@ -101,8 +101,8 @@ export default function ShoppingCart() {
             </div>
 
             {/* Nombre del producto */}
-            <div className="flex-1 min-w-0">
-              <h3 className="text-lg font-semibold text-gray-800 truncate">
+            <div className="min-w-0 flex-1 min-w-0">
+              <h3 className="text-lg font-semibold text-[#2C3E34] break-words">
                 {item.name}
               </h3>
               <p className="text-green-600 font-bold text-xl">
@@ -156,21 +156,21 @@ export default function ShoppingCart() {
       </div>
 
       {/* Resumen del carrito */}
-      <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-xl p-6 border border-green-200">
-        <div className="flex justify-between items-center mb-4">
+      <div className="bg-[#FAF9F7] rounded-xl p-4 sm:p-6 border border-green-200">
+        <div className="flex flex-wrap gap-3 justify-between items-center mb-4">
           <span className="text-lg font-semibold text-gray-700">Subtotal:</span>
           <span className="text-xl font-bold text-gray-800">
             {formatPrice(getCartTotal())}
           </span>
         </div>
         
-        <div className="flex justify-between items-center mb-4">
+        <div className="flex flex-wrap gap-3 justify-between items-center mb-4">
           <span className="text-lg font-semibold text-gray-700">Envío:</span>
           <span className="text-xl font-bold text-green-600">Gratis</span>
         </div>
         
         <div className="border-t border-green-200 pt-4 mb-6">
-          <div className="flex justify-between items-center">
+          <div className="flex flex-wrap gap-3 justify-between items-center">
             <span className="text-2xl font-bold text-gray-800">Total:</span>
             <span className="text-3xl font-bold text-green-600">
               {formatPrice(getCartTotal())}
@@ -179,12 +179,12 @@ export default function ShoppingCart() {
         </div>
 
         {/* Botones de acción */}
-        <div className="flex gap-4">
-          <button className="flex-1 py-3 bg-gray-500 text-white font-semibold rounded-xl hover:bg-gray-600 transition-colors duration-300 text-center">
+        <div className="flex flex-col sm:flex-row gap-4">
+          <button className="min-w-0 flex-1 py-3 bg-gray-500 text-white font-semibold rounded-xl hover:bg-gray-600 transition-colors duration-300 text-center">
             Seguir Comprando
           </button>
           <button 
-            className="flex-1 py-3 bg-green-500 text-white font-semibold rounded-xl hover:bg-green-600 transition-colors duration-300 text-center shadow-lg"
+            className="min-w-0 flex-1 py-3 bg-green-500 text-white font-semibold rounded-xl hover:bg-green-600 transition-colors duration-300 text-center shadow-lg"
             style={{
               background: 'linear-gradient(135deg, #A8CF45, #7DA82E)'
             }}

@@ -1,4 +1,5 @@
 'use client';
+import ModalSurface from "@/components/ui/ModalSurface";
 
 import { useState, useEffect } from 'react';
 import { createPost, updatePost, uploadPostImages } from '@/lib/posts-actions';
@@ -150,8 +151,8 @@ export default function CreatePostModal({ isOpen, onClose, onSuccess, post, user
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-xl shadow-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto border border-[#E6E3DE]">
-        <div className="sticky top-0 bg-white border-b border-[#E6E3DE] px-6 py-4 bg-[#FAF9F7] flex justify-between items-center">
+      <ModalSurface onClose={onClose} className="modal-surface bg-white rounded-xl shadow-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto border border-[#E6E3DE]">
+        <div className="sticky top-0 bg-white border-b border-[#E6E3DE] px-6 py-4 bg-[#FAF9F7] flex flex-wrap gap-3 justify-between items-center">
           <h2 className="text-xl font-bold text-[#5A8C7A]">
             {post ? 'Editar Publicación' : 'Nueva Publicación'}
           </h2>
@@ -162,7 +163,7 @@ export default function CreatePostModal({ isOpen, onClose, onSuccess, post, user
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="p-6 space-y-4">
+        <form onSubmit={handleSubmit} className="p-4 sm:p-6 space-y-4">
           <div>
             <label className="block text-sm font-semibold text-[#2C3E34] mb-1">Título (opcional)</label>
             <input
@@ -239,14 +240,14 @@ export default function CreatePostModal({ isOpen, onClose, onSuccess, post, user
                   value={link.url}
                   onChange={(e) => updateLink(idx, 'url', e.target.value)}
                   placeholder="URL"
-                  className="flex-1 px-3 py-2 border border-[#E6E3DE] rounded-lg focus:ring-2 focus:ring-[#5A8C7A]"
+                  className="min-w-0 flex-1 px-3 py-2 border border-[#E6E3DE] rounded-lg focus:ring-2 focus:ring-[#5A8C7A]"
                 />
                 <input
                   type="text"
                   value={link.title}
                   onChange={(e) => updateLink(idx, 'title', e.target.value)}
                   placeholder="Titulo (opcional)"
-                  className="flex-1 px-3 py-2 border border-[#E6E3DE] rounded-lg focus:ring-2 focus:ring-[#5A8C7A]"
+                  className="min-w-0 flex-1 px-3 py-2 border border-[#E6E3DE] rounded-lg focus:ring-2 focus:ring-[#5A8C7A]"
                 />
                 {links.length > 1 && (
                   <button
@@ -270,7 +271,7 @@ export default function CreatePostModal({ isOpen, onClose, onSuccess, post, user
             </button>
           </div>
 
-          <div className="flex justify-end gap-3 pt-4 border-t border-[#E6E3DE]">
+          <div className="flex flex-wrap justify-end gap-3 pt-4 border-t border-[#E6E3DE]">
             <button
               type="button"
               onClick={onClose}
@@ -287,7 +288,7 @@ export default function CreatePostModal({ isOpen, onClose, onSuccess, post, user
             </button>
           </div>
         </form>
-      </div>
+      </ModalSurface>
     </div>
   );
 }

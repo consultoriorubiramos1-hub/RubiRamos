@@ -166,7 +166,7 @@ export default function CitasClient({
   return (
     <div className="space-y-4">
       {initialAppointments.length === 0 ? (
-        <div className="rounded-xl border border-[#E6E3DE] bg-white p-8 text-center shadow-sm">
+        <div className="rounded-xl border border-[#E6E3DE] bg-white p-5 sm:p-8 text-center shadow-sm">
           <p className="text-[#6E7C72]">
             No hay citas programadas para hoy
           </p>
@@ -186,7 +186,7 @@ export default function CitasClient({
             <div className="p-5">
               <div className="flex flex-wrap items-start justify-between gap-4">
                 {/* Información del paciente */}
-                <div className="flex-1">
+                <div className="min-w-0 flex-1">
                   <div className="mb-2 flex flex-wrap items-center gap-3">
                     <h3 className="text-lg font-semibold text-[#2C3E34]">
                       {

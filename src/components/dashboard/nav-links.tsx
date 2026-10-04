@@ -90,6 +90,7 @@ export default function NavLinks({ mobile = false, onLinkClick, userRole = 1 }: 
           <Link
             key={link.name}
             href={link.href}
+            aria-current={isActive ? 'page' : undefined}
             onClick={onLinkClick}
             className={clsx(
               'flex items-center gap-3 rounded-lg px-3 py-3 text-sm font-medium transition-all duration-200 relative mb-1',
@@ -122,7 +123,7 @@ export default function NavLinks({ mobile = false, onLinkClick, userRole = 1 }: 
               ></div>
             )}
             
-            <LinkIcon className="h-4 w-4" />
+            <LinkIcon className="h-5 w-5 shrink-0" aria-hidden="true" />
             <span>{link.name}</span>
           </Link>
         );
@@ -141,6 +142,7 @@ export default function NavLinks({ mobile = false, onLinkClick, userRole = 1 }: 
         {/* Botón de Configuración */}
         <button
           onClick={() => setIsConfigOpen(!isConfigOpen)}
+          aria-expanded={isConfigOpen || mobile}
           className={clsx(
             'flex items-center justify-between w-full rounded-lg px-3 py-3 text-sm font-medium transition-all duration-200 mb-1',
             isAnyConfigActive && !mobile && 'font-semibold'
@@ -178,6 +180,7 @@ export default function NavLinks({ mobile = false, onLinkClick, userRole = 1 }: 
                 <Link
                   key={link.name}
                   href={link.href}
+                  aria-current={isActive ? 'page' : undefined}
                   onClick={onLinkClick}
                   className={clsx(
                     'flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-all duration-200',

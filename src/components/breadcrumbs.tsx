@@ -12,9 +12,9 @@ export default function Breadcrumbs() {
   if (segments.length === 0) return null;
 
   return (
-    <nav className="w-full bg-white border-y border-[#E6E3DE] px-6 py-2.5 text-sm shadow-xs">
+    <nav aria-label="Ruta de navegación" className="w-full bg-white border-y border-[#E6E3DE] px-4 sm:px-6 py-2.5 text-sm">
       <div className="max-w-7xl mx-auto">
-        <ol className="flex items-center space-x-2">
+        <ol className="flex flex-wrap items-center gap-2">
           <li>
             <Link
               href="/"
@@ -35,7 +35,7 @@ export default function Breadcrumbs() {
                 .replace(/\b\w/g, char => char.toUpperCase());
 
             return (
-              <li key={href} className="flex items-center space-x-2">
+              <li key={href} className="flex min-w-0 items-center gap-2">
                 <ChevronRight className="w-3.5 h-3.5 text-[#6E7C72]" />
                 {isLast ? (
                   <span className="text-[#2C3E34] font-semibold">

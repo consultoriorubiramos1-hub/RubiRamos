@@ -13,7 +13,7 @@ export default async function ProductosPage() {
 
   return (
     <div className="min-h-screen bg-[#FAF9F7]">
-      <Suspense fallback={<div className="p-6 text-center text-[#6E7C72]">Cargando productos...</div>}>
+      <Suspense fallback={<div className="p-4 sm:p-6 text-center text-[#6E7C72]">Cargando productos...</div>}>
         <ProductosClient 
           productosIniciales={productosResult.productos}
           categorias={categorias}

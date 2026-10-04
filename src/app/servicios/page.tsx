@@ -45,7 +45,7 @@ export default function ServiciosPage() {
         <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
           {servicios.map((servicio) => <FeatureCard key={servicio.title} {...servicio} />)}
         </div>
-        <div className="mt-14 rounded-2xl border border-[#E6E3DE] bg-white p-8 text-center">
+        <div className="mt-14 rounded-2xl border border-[#E6E3DE] bg-white p-5 sm:p-8 text-center">
           <h2 className="mb-3 font-serif text-2xl font-bold">¿Te gustaría recibir orientación nutricional?</h2>
           <p className="mb-6 text-[#6E7C72]">Consulta cómo agendar una cita y los medios de contacto del consultorio.</p>
           <Link href="/citas" className="inline-flex rounded-xl bg-[#F58634] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#BD7D4A] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2C3E34]">

@@ -357,7 +357,7 @@ export default function DashboardClient({
     [];
 
   return (
-    <div className="p-6">
+    <div className="p-4 sm:p-6">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
@@ -532,7 +532,7 @@ export default function DashboardClient({
                   </h2>
                 </div>
 
-                <div className="p-6">
+                <div className="p-4 sm:p-6">
                   <div className="flex items-center justify-between flex-wrap gap-4">
                     <div>
                       <h3 className="text-xl font-bold text-[#2C3E34]">
@@ -566,14 +566,14 @@ export default function DashboardClient({
                   <div className="flex gap-3 mt-6">
                     <Link
                       href="/admin/pacientes"
-                      className="flex-1 py-2 bg-[#6B8E7B] text-white text-center font-semibold rounded-lg hover:bg-[#4A7C6A] transition-colors"
+                      className="min-w-0 flex-1 py-2 bg-[#6B8E7B] text-white text-center font-semibold rounded-lg hover:bg-[#4A7C6A] transition-colors"
                     >
                       Ver pacientes
                     </Link>
 
                     <Link
                       href="/admin/appointments"
-                      className="flex-1 py-2 bg-[#BD7D4A] text-white text-center font-semibold rounded-lg hover:bg-[#F58634] transition-colors"
+                      className="min-w-0 flex-1 py-2 bg-[#BD7D4A] text-white text-center font-semibold rounded-lg hover:bg-[#F58634] transition-colors"
                     >
                       Ver agenda
                     </Link>
@@ -894,7 +894,7 @@ export default function DashboardClient({
                 </h3>
               </div>
 
-              <div className="p-6 space-y-3">
+              <div className="p-4 sm:p-6 space-y-3">
                 {stats.weeklyStats.map(
                   day => (
                     <div
@@ -905,7 +905,7 @@ export default function DashboardClient({
                         {day.day}
                       </span>
 
-                      <div className="flex-1 mx-3">
+                      <div className="min-w-0 flex-1 mx-3">
                         <div
                           className="bg-[#6B8E7B] rounded-full h-2 transition-all duration-300"
                           style={{

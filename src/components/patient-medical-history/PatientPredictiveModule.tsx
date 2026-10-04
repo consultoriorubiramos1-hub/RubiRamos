@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import AdaptiveTable from "@/components/ui/AdaptiveTable";
 
 interface PatientPredictiveModuleProps {
   weightHistory: any[];
@@ -130,7 +131,7 @@ export default function PatientPredictiveModule({ weightHistory, patient }: Pati
 
   if (sortedWeightHistory.length < 2) {
     return (
-      <div className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-8 text-center">
+      <div className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-5 sm:p-8 text-center">
         <p className="text-[#6E7C72]">No hay suficientes datos para realizar predicciones.</p>
         <p className="text-sm text-[#6E7C72] mt-2">Se necesitan al menos 2 registros de peso para calcular el modelo.</p>
       </div>
@@ -140,9 +141,9 @@ export default function PatientPredictiveModule({ weightHistory, patient }: Pati
   return (
     <div className="space-y-6">
       {/* Tarjeta de resumen */}
-      <div className="bg-gradient-to-r from-[#5A8C7A] to-[#4A7C6A] rounded-xl shadow-sm p-6 text-white">
+      <div className="bg-gradient-to-r from-[#5A8C7A] to-[#4A7C6A] rounded-xl shadow-sm p-4 sm:p-6 text-white">
         <h3 className="text-lg font-bold mb-4">Resumen del Progreso</h3>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <div>
             <p className="text-sm opacity-90">Peso inicial</p>
             <p className="text-2xl font-bold">{formatWeight(initialWeight)}</p>
@@ -168,8 +169,8 @@ export default function PatientPredictiveModule({ weightHistory, patient }: Pati
       </div>
 
       {/* Barra de progreso */}
-      <div className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-6">
-        <div className="flex justify-between items-center mb-2">
+      <div className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-4 sm:p-6">
+        <div className="flex flex-wrap gap-3 justify-between items-center mb-2">
           <h4 className="font-semibold text-[#2C3E34]">Progreso hacia la meta</h4>
           <span className="text-sm font-bold text-[#5A8C7A]">{progressPercentage.toFixed(1)}%</span>
         </div>
@@ -184,7 +185,7 @@ export default function PatientPredictiveModule({ weightHistory, patient }: Pati
 
       {/* IMC y métricas */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-6">
+        <div className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-4 sm:p-6">
           <h4 className="font-semibold text-[#5A8C7A] mb-3">Índice de Masa Corporal (IMC)</h4>
           {patient.height ? (
             <>
@@ -204,7 +205,7 @@ export default function PatientPredictiveModule({ weightHistory, patient }: Pati
           )}
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-6">
+        <div className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-4 sm:p-6">
           <h4 className="font-semibold text-[#5A8C7A] mb-3">Modelo Matemático</h4>
           <p className="text-sm text-[#6E7C72] mb-2">Tasa de decremento mensual (k):</p>
           <p className="text-2xl font-mono font-bold text-[#2C3E34]">
@@ -218,7 +219,7 @@ export default function PatientPredictiveModule({ weightHistory, patient }: Pati
 
       {/* Cálculo del Peso Ideal */}
       {patient.height && idealWeight && (
-        <div className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-6">
+        <div className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] p-4 sm:p-6">
           <h4 className="font-semibold text-[#5A8C7A] mb-3">Determinación del Peso Objetivo</h4>
           <div className="space-y-3 text-sm text-[#2C3E34]">
             <p><strong>Fórmula:</strong> Peso Objetivo = IMC ideal × (Estatura en metros)²</p>
@@ -235,7 +236,7 @@ export default function PatientPredictiveModule({ weightHistory, patient }: Pati
 
       {/* Tiempo estimado para peso ideal */}
       {monthsToIdeal && monthsToIdeal > 0 && (
-        <div className="bg-[#FAF9F7] rounded-xl shadow-sm border border-[#E6E3DE] p-6">
+        <div className="bg-[#FAF9F7] rounded-xl shadow-sm border border-[#E6E3DE] p-4 sm:p-6">
           <h4 className="font-semibold text-[#5A8C7A] mb-2">Tiempo estimado para alcanzar el peso ideal</h4>
           <p className="text-3xl font-bold text-[#2C3E34]">{monthsToIdeal} meses</p>
           <p className="text-sm text-[#6E7C72] mt-2">
@@ -252,7 +253,7 @@ export default function PatientPredictiveModule({ weightHistory, patient }: Pati
             <p className="text-sm text-[#6E7C72] mt-1">Basado en el modelo exponencial P(t) = P₀ · e^(kt)</p>
           </div>
           <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-[#E6E3DE]">
+            <AdaptiveTable mobile="scroll" label="Tabla de comparación y detalles"><table className="min-w-full divide-y divide-[#E6E3DE]">
               <thead className="bg-[#FAF9F7]">
                 <tr>
                   <th className="px-6 py-3 text-left text-xs font-semibold text-[#6E7C72] uppercase tracking-wider">Mes</th>
@@ -281,7 +282,7 @@ export default function PatientPredictiveModule({ weightHistory, patient }: Pati
                   </tr>
                 ))}
               </tbody>
-            </table>
+            </table></AdaptiveTable>
           </div>
         </div>
       )}
@@ -292,7 +293,7 @@ export default function PatientPredictiveModule({ weightHistory, patient }: Pati
           <h3 className="text-lg font-bold text-[#5A8C7A]">Historial de mediciones</h3>
         </div>
         <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-[#E6E3DE]">
+          <AdaptiveTable mobile="scroll" label="Tabla de comparación y detalles"><table className="min-w-full divide-y divide-[#E6E3DE]">
             <thead className="bg-[#FAF9F7]">
               <tr>
                 <th className="px-6 py-3 text-left text-xs font-semibold text-[#6E7C72] uppercase tracking-wider">Fecha</th>
@@ -313,7 +314,7 @@ export default function PatientPredictiveModule({ weightHistory, patient }: Pati
                 </tr>
               ))}
             </tbody>
-          </table>
+          </table></AdaptiveTable>
         </div>
       </div>
 
@@ -321,7 +322,7 @@ export default function PatientPredictiveModule({ weightHistory, patient }: Pati
       <div className="bg-white rounded-xl shadow-sm border border-[#E6E3DE] overflow-hidden">
         <button
           onClick={() => setShowDetails(!showDetails)}
-          className="w-full px-6 py-4 flex justify-between items-center hover:bg-[#FAF9F7] transition-colors"
+          className="w-full px-6 py-4 flex flex-wrap gap-3 justify-between items-center hover:bg-[#FAF9F7] transition-colors"
         >
           <span className="font-semibold text-[#5A8C7A]">Ver detalles del modelo matemático</span>
           <svg className={`w-5 h-5 text-[#6E7C72] transition-transform ${showDetails ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">

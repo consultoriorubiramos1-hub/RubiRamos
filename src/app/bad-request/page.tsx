@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function BadRequestPage() {
   return (
-    <main className="min-h-screen flex items-center justify-center bg-[#FAF9F7] p-6">
+    <main className="min-h-screen flex items-center justify-center bg-[#FAF9F7] p-4 sm:p-6">
       <div className="max-w-4xl w-full">
         {/* Encabezado */}
         <div className="text-center mb-12">
@@ -24,7 +24,7 @@ export default function BadRequestPage() {
           {/* Visualización del problema */}
           <div className="relative">
             {/* Formulario "dañado" */}
-            <div className="bg-white rounded-2xl p-8 shadow-sm border border-[#E6E3DE] relative overflow-hidden">
+            <div className="bg-white rounded-2xl p-5 sm:p-8 shadow-sm border border-[#E6E3DE] relative overflow-hidden">
               {/* Título del formulario */}
               <h3 className="text-lg font-semibold mb-6 font-serif text-[#2C3E34]">
                 Análisis de la solicitud
@@ -113,7 +113,7 @@ export default function BadRequestPage() {
             </div>
 
             {/* Solución */}
-            <div className="bg-gradient-to-br from-[#6B8E7B]/5 to-[#A8CF45]/5 rounded-xl p-6 border border-[#6B8E7B]/20">
+            <div className="bg-gradient-to-br from-[#6B8E7B]/5 to-[#A8CF45]/5 rounded-xl p-4 sm:p-6 border border-[#6B8E7B]/20">
               <h3 className="text-lg font-semibold mb-4 font-serif text-[#6B8E7B]">
                 Solución recomendada:
               </h3>
@@ -139,7 +139,7 @@ export default function BadRequestPage() {
               <div className="flex flex-col sm:flex-row gap-4">
                 <button
                   onClick={() => window.history.back()}
-                  className="flex-1 bg-white border border-[#6B8E7B] text-[#6B8E7B] font-semibold px-6 py-3 rounded-lg hover:bg-[#6B8E7B] hover:text-white transition-all duration-300 flex items-center justify-center"
+                  className="min-w-0 flex-1 bg-white border border-[#6B8E7B] text-[#6B8E7B] font-semibold px-6 py-3 rounded-lg hover:bg-[#6B8E7B] hover:text-white transition-all duration-300 flex items-center justify-center"
                 >
                   <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -149,7 +149,7 @@ export default function BadRequestPage() {
 
                 <Link
                   href="/"
-                  className="flex-1 bg-gradient-to-r from-[#6B8E7B] to-[#4a7768] text-white font-semibold px-6 py-3 rounded-lg hover:shadow-md transition-all duration-300 flex items-center justify-center"
+                  className="min-w-0 flex-1 bg-gradient-to-r from-[#6B8E7B] to-[#4a7768] text-white font-semibold px-6 py-3 rounded-lg hover:shadow-md transition-all duration-300 flex items-center justify-center"
                 >
                   <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />

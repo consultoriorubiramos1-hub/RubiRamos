@@ -67,7 +67,7 @@ export default function LoginForm() {
       </div>
 
       <div className="relative z-10">
-        <div className="bg-[#6B8E7B] p-6 text-white border-b-2 border-[#F58634]">
+        <div className="bg-[#6B8E7B] p-4 sm:p-6 text-white border-b-2 border-[#F58634]">
           <div className="flex items-center justify-center space-x-3">
             <BriefcaseMedical className="h-8 w-8 text-[#F58634]" />
             <h2 className="text-2xl font-bold">Rubí Ramos</h2>
@@ -77,7 +77,7 @@ export default function LoginForm() {
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="p-8 space-y-6">
+        <form onSubmit={handleSubmit} className="p-5 sm:p-8 space-y-6">
           <h3 className="text-xl font-semibold text-[#2C3E34] text-center">
             Iniciar sesión
           </h3>
@@ -123,7 +123,7 @@ export default function LoginForm() {
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-[#6E7C72] hover:text-[#2C3E34] transition"
-                  tabIndex={-1}
+                  aria-label={showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'}
                 >
                   {showPassword ? <Eye size={18} /> : <EyeOff size={18} />}
                 </button>
@@ -134,11 +134,11 @@ export default function LoginForm() {
           {error && (
             <div className="bg-red-50 border-l-4 border-[#F58634] p-3 rounded flex items-start gap-2">
               <AlertTriangle className="h-5 w-5 text-[#F58634] flex-shrink-0 mt-0.5" />
-              <p className="text-red-700 text-sm font-medium">{error}</p>
+              <p role="alert" className="text-red-700 text-sm font-medium">{error}</p>
             </div>
           )}
 
-          <div className="flex justify-between items-center pt-1">
+          <div className="flex flex-wrap gap-3 justify-between items-center pt-1">
             <Link
               href="/login/recuperacion"
               className="text-sm text-[#6B8E7B] hover:text-[#F58634] transition flex items-center"

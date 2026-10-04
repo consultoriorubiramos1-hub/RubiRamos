@@ -1,6 +1,8 @@
 'use client';
+import ModalSurface from "@/components/ui/ModalSurface";
 
 import { useState, useEffect } from 'react';
+import AdaptiveTable from "@/components/ui/AdaptiveTable";
 import { obtenerMetricasBaseDatos, MetricasBaseDatos } from '@/lib/metricas-db';
 import { toast } from 'react-hot-toast';
 
@@ -37,7 +39,7 @@ export default function MetricasCards() {
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         {[1, 2, 3, 4].map(i => (
-          <div key={i} className="bg-white rounded-xl shadow-sm p-6 animate-pulse">
+          <div key={i} className="bg-white rounded-xl shadow-sm p-4 sm:p-6 animate-pulse">
             <div className="h-4 bg-gray-200 rounded w-1/2 mb-4"></div>
             <div className="h-8 bg-gray-200 rounded w-3/4"></div>
           </div>
@@ -55,7 +57,7 @@ export default function MetricasCards() {
       {/* Cards principales */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Card: Tamaño total DB */}
-        <div className="bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition-shadow border border-[#E6E3DE]">
+        <div className="bg-white rounded-xl shadow-sm p-4 sm:p-6 hover:shadow-md transition-shadow border border-[#E6E3DE]">
           <div className="flex items-center justify-between mb-2">
             <h3 className="text-sm font-semibold text-[#6E7C72]">Tamaño Total DB</h3>
             <svg className="w-5 h-5 text-[#6B8E7B]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -73,7 +75,7 @@ export default function MetricasCards() {
         </div>
 
         {/* Card: Sesiones Activas */}
-        <div className="bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition-shadow border border-[#E6E3DE]">
+        <div className="bg-white rounded-xl shadow-sm p-4 sm:p-6 hover:shadow-md transition-shadow border border-[#E6E3DE]">
           <div className="flex items-center justify-between mb-2">
             <h3 className="text-sm font-semibold text-[#6E7C72]">Sesiones Activas</h3>
             <svg className="w-5 h-5 text-[#6B8E7B]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -90,7 +92,7 @@ export default function MetricasCards() {
         </div>
 
         {/* Card: Conexiones */}
-        <div className="bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition-shadow border border-[#E6E3DE]">
+        <div className="bg-white rounded-xl shadow-sm p-4 sm:p-6 hover:shadow-md transition-shadow border border-[#E6E3DE]">
           <div className="flex items-center justify-between mb-2">
             <h3 className="text-sm font-semibold text-[#6E7C72]">Conexiones</h3>
             <svg className="w-5 h-5 text-[#6B8E7B]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -111,18 +113,18 @@ export default function MetricasCards() {
         </div>
 
         {/* Card: Tablas e Índices */}
-        <div className="bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition-shadow border border-[#E6E3DE]">
+        <div className="bg-white rounded-xl shadow-sm p-4 sm:p-6 hover:shadow-md transition-shadow border border-[#E6E3DE]">
           <div className="flex items-center justify-between mb-2">
             <h3 className="text-sm font-semibold text-[#6E7C72]">Estructura</h3>
             <svg className="w-5 h-5 text-[#6B8E7B]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M6 14h6m-6 4h12M5 4h14a2 2 0 012 2v12a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2z" />
             </svg>
           </div>
-          <div className="flex justify-between items-baseline">
+          <div className="flex flex-wrap gap-3 justify-between items-baseline">
             <p className="text-2xl font-bold text-[#2C3E34]">{estadisticas.total_tablas}</p>
             <p className="text-sm text-[#6E7C72]">tablas</p>
           </div>
-          <div className="flex justify-between items-baseline mt-1">
+          <div className="flex flex-wrap gap-3 justify-between items-baseline mt-1">
             <p className="text-xs text-[#6E7C72]">{estadisticas.total_indices} índices</p>
             <p className="text-xs text-[#6E7C72]">{estadisticas.total_vistas} vistas</p>
           </div>
@@ -136,7 +138,7 @@ export default function MetricasCards() {
           <p className="text-sm text-[#6E7C72] mt-1">Top 5 tablas por tamaño total</p>
         </div>
         <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-[#E6E3DE]">
+          <AdaptiveTable mobile="scroll" label="Tabla de comparación y detalles"><table className="min-w-full divide-y divide-[#E6E3DE]">
             <thead className="bg-[#FAF9F7]">
               <tr>
                 <th className="px-6 py-3 text-left text-xs font-semibold text-[#6E7C72] uppercase tracking-wider">Tabla</th>
@@ -179,7 +181,7 @@ export default function MetricasCards() {
                 </tr>
               ))}
             </tbody>
-          </table>
+          </table></AdaptiveTable>
         </div>
       </div>
 
@@ -212,8 +214,8 @@ export default function MetricasCards() {
       {/* Modal de Sesiones Activas */}
       {sesionesModalOpen && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-xl shadow-xl max-w-4xl w-full max-h-[80vh] overflow-y-auto">
-            <div className="sticky top-0 bg-white border-b border-[#E6E3DE] px-6 py-4 flex justify-between items-center bg-[#FAF9F7]">
+          <ModalSurface onClose={() => setSesionesModalOpen(false)} className="modal-surface bg-white rounded-xl shadow-xl max-w-4xl w-full max-h-[80vh] overflow-y-auto">
+            <div className="sticky top-0 bg-white border-b border-[#E6E3DE] px-6 py-4 flex flex-wrap gap-3 justify-between items-center bg-[#FAF9F7]">
               <h3 className="text-lg font-bold text-[#6B8E7B]">
                 Sesiones Activas ({sesiones_activas.total})
               </h3>
@@ -226,14 +228,14 @@ export default function MetricasCards() {
                 </svg>
               </button>
             </div>
-            <div className="p-6">
+            <div className="p-4 sm:p-6">
               {sesiones_activas.detalle.length === 0 ? (
                 <p className="text-center text-[#6E7C72] py-8">No hay sesiones activas</p>
               ) : (
                 <div className="space-y-4">
                   {sesiones_activas.detalle.map((sesion) => (
                     <div key={sesion.pid} className="border border-[#E6E3DE] rounded-lg p-4 bg-[#FAF9F7]">
-                      <div className="grid grid-cols-2 gap-4 text-sm">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
                         <div>
                           <span className="font-semibold text-[#6B8E7B]">PID:</span>
                           <span className="ml-2 text-[#2C3E34]">{sesion.pid}</span>
@@ -276,15 +278,15 @@ export default function MetricasCards() {
                 </div>
               )}
             </div>
-          </div>
+          </ModalSurface>
         </div>
       )}
 
       {/* Modal de Detalle de Tablas */}
       {tablasModalOpen && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-xl shadow-xl max-w-5xl w-full max-h-[80vh] overflow-y-auto">
-            <div className="sticky top-0 bg-white border-b border-[#E6E3DE] px-6 py-4 flex justify-between items-center bg-[#FAF9F7]">
+          <ModalSurface onClose={() => setTablasModalOpen(false)} className="modal-surface bg-white rounded-xl shadow-xl max-w-5xl w-full max-h-[80vh] overflow-y-auto">
+            <div className="sticky top-0 bg-white border-b border-[#E6E3DE] px-6 py-4 flex flex-wrap gap-3 justify-between items-center bg-[#FAF9F7]">
               <h3 className="text-lg font-bold text-[#6B8E7B]">
                 Detalle de Tablas - Tamaño Total: {tamano_total.humano}
               </h3>
@@ -297,8 +299,8 @@ export default function MetricasCards() {
                 </svg>
               </button>
             </div>
-            <div className="p-6">
-              <table className="min-w-full divide-y divide-[#E6E3DE]">
+            <div className="p-4 sm:p-6">
+              <AdaptiveTable mobile="scroll" label="Tabla de comparación y detalles"><table className="min-w-full divide-y divide-[#E6E3DE]">
                 <thead className="bg-[#FAF9F7]">
                   <tr>
                     <th className="px-6 py-3 text-left text-xs font-semibold text-[#6E7C72] uppercase tracking-wider">Tabla</th>
@@ -329,9 +331,9 @@ export default function MetricasCards() {
                     </tr>
                   ))}
                 </tbody>
-              </table>
+              </table></AdaptiveTable>
             </div>
-          </div>
+          </ModalSurface>
         </div>
       )}
     </div>

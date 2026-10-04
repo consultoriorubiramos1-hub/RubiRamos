@@ -45,3 +45,7 @@ ML/.venv/
 **/__pycache__/
 **/.ipynb_checkpoints/
 *.pyc
+
+# Local visual and PDF verification outputs
+/tmp/qa/
+/docs/ui-preview/

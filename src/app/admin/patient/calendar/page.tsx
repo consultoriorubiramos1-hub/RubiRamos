@@ -1192,7 +1192,7 @@ export default function PatientCalendarPage() {
           items-center
           justify-center
           bg-[#FAF9F7]
-          p-6
+          p-4 sm:p-6
         "
       >
         <div className="text-[#6E7C72]">
@@ -1208,7 +1208,7 @@ export default function PatientCalendarPage() {
   // ==========================================================
 
   return (
-    <div className="min-h-screen bg-[#FAF9F7] p-6">
+    <div className="min-h-screen bg-[#FAF9F7] p-4 sm:p-6">
       <div className="mx-auto max-w-6xl">
         {/* Encabezado */}
         <div className="mb-6">
@@ -1230,7 +1230,7 @@ export default function PatientCalendarPage() {
               border
               border-[#E6E3DE]
               bg-white
-              p-6
+              p-4 sm:p-6
               shadow-sm
               lg:col-span-2
             "
@@ -1290,7 +1290,7 @@ export default function PatientCalendarPage() {
             </div>
 
 
-            <div className="mb-2 grid grid-cols-7 gap-2">
+            <p className="mb-3 text-sm text-[#6E7C72] sm:hidden">Desliza el calendario para ver todos los días ↔</p><div className="calendar-scroll" role="region" aria-label="Calendario mensual" tabIndex={0}><div className="mb-2 grid calendar-grid grid-cols-7 gap-2">
               {[
                 'Dom',
                 'Lun',
@@ -1320,7 +1320,7 @@ export default function PatientCalendarPage() {
             </div>
 
 
-            <div className="grid grid-cols-7 gap-2">
+            <div className="grid calendar-grid grid-cols-7 gap-2">
               {calendarDays.map(
                 day => {
                   const isDisabled =
@@ -1351,14 +1351,16 @@ export default function PatientCalendarPage() {
                             day,
                           )
                       }
+                      aria-pressed={isSelected}
+                      aria-label={`${day.date.toLocaleDateString('es-MX', { weekday: 'long', day: 'numeric', month: 'long' })}${day.hasAppointment ? ' · Tienes una cita' : ''}${!day.isWorkingDay ? ' · No laborable' : ''}`}
                       disabled={
                         isDisabled
                       }
                       className={`
-                        min-h-20
+                        calendar-day min-h-20
                         rounded-xl
                         border-2
-                        p-3
+                        p-1 sm:p-3
                         text-center
                         transition-all
 
@@ -1428,14 +1430,14 @@ export default function PatientCalendarPage() {
                             text-gray-500
                           "
                         >
-                          No laborable
+                          Cerrado
                         </div>
                       )}
                     </button>
                   );
                 },
               )}
-            </div>
+            </div></div>
           </div>
 
 
@@ -1449,7 +1451,7 @@ export default function PatientCalendarPage() {
                 border
                 border-[#E6E3DE]
                 bg-white
-                p-6
+                p-4 sm:p-6
                 shadow-sm
               "
             >

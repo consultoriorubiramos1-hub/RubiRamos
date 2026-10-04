@@ -23,26 +23,13 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
   return (
     <div className="flex items-center justify-between border-t border-gray-200 px-4 py-3 sm:px-6">
       {/* Mobile view: flechas y páginas */}
-      <div className="flex flex-1 justify-between sm:hidden">
+      <div className="flex min-w-0 flex-1 justify-between sm:hidden">
         <PaginationArrow
           direction="left"
           href={createPageURL(currentPage - 1)}
           isDisabled={currentPage <= 1}
         />
-        <div className="flex items-center gap-1">
-          {allPages.map((page, index) =>
-            typeof page === 'number' ? (
-              <PaginationNumber
-                key={index}
-                href={createPageURL(page)}
-                page={page}
-                isActive={currentPage === page}
-              />
-            ) : (
-              <span key={index} className="px-2 text-sm text-gray-500">…</span>
-            )
-          )}
-        </div>
+        <p className="self-center text-sm text-[#6E7C72]" aria-live="polite">{currentPage} / {totalPages}</p>
         <PaginationArrow
           direction="right"
           href={createPageURL(currentPage + 1)}
@@ -107,9 +94,9 @@ function PaginationNumber({
   isActive: boolean;
 }) {
   const className = clsx(
-    'relative inline-flex items-center px-3 py-1 text-sm font-medium rounded',
+    'min-h-11 min-w-11 relative inline-flex items-center justify-center px-3 py-1 text-sm font-medium rounded',
     {
-      'bg-[#1e343b] text-white': isActive,
+      'bg-[#5A8C7A] text-white': isActive,
       'text-gray-900 hover:bg-gray-100': !isActive,
     }
   );
@@ -135,7 +122,7 @@ function PaginationArrow({
   isDisabled?: boolean;
 }) {
   const className = clsx(
-    'relative inline-flex items-center rounded-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 focus:z-20',
+    'min-h-11 min-w-11 relative inline-flex items-center justify-center rounded-xl px-2 py-2 text-[#5A8C7A] ring-1 ring-inset ring-gray-300 focus:z-20',
     {
       'cursor-not-allowed opacity-50': isDisabled,
       'hover:bg-gray-50': !isDisabled,

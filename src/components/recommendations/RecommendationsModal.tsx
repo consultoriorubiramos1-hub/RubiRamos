@@ -1,4 +1,5 @@
 'use client';
+import ModalSurface from "@/components/ui/ModalSurface";
 
 import { useState, useEffect } from 'react';
 import { getRecommendations, createRecommendation, updateRecommendation, deleteRecommendation, reorderRecommendations, uploadRecommendationImage } from '@/lib/recommendations-actions';
@@ -178,8 +179,8 @@ export default function RecommendationsModal({ isOpen, onClose, onSave }: Recomm
   return (
     <>
       <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-        <div className="bg-white rounded-xl shadow-xl max-w-5xl w-full max-h-[90vh] overflow-y-auto border border-[#E6E3DE]">
-          <div className="sticky top-0 bg-white border-b border-[#E6E3DE] px-6 py-4 bg-[#FAF9F7] flex justify-between items-center">
+        <ModalSurface onClose={onClose} className="modal-surface bg-white rounded-xl shadow-xl max-w-5xl w-full max-h-[90vh] overflow-y-auto border border-[#E6E3DE]">
+          <div className="sticky top-0 bg-white border-b border-[#E6E3DE] px-6 py-4 bg-[#FAF9F7] flex flex-wrap gap-3 justify-between items-center">
             <h2 className="text-xl font-bold text-[#5A8C7A]">Recomendaciones Generales</h2>
             <button onClick={onClose} className="text-[#6E7C72] hover:text-[#2C3E34]">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -188,7 +189,7 @@ export default function RecommendationsModal({ isOpen, onClose, onSave }: Recomm
             </button>
           </div>
 
-          <div className="p-6">
+          <div className="p-4 sm:p-6">
             {/* Formulario para nueva recomendación */}
             <div className="bg-[#FAF9F7] rounded-lg p-4 mb-6 border border-[#E6E3DE]">
               <h3 className="text-md font-bold text-[#5A8C7A] mb-4">
@@ -268,7 +269,7 @@ export default function RecommendationsModal({ isOpen, onClose, onSave }: Recomm
                   </div>
                 )}
                 
-                <div className="flex justify-end gap-3">
+                <div className="flex flex-wrap justify-end gap-3">
                   <button
                     type="button"
                     onClick={resetForm}
@@ -301,8 +302,8 @@ export default function RecommendationsModal({ isOpen, onClose, onSave }: Recomm
                       key={rec.id}
                       className="border border-[#E6E3DE] rounded-lg p-4 bg-white"
                     >
-                      <div className="flex justify-between items-start">
-                        <div className="flex-1">
+                      <div className="flex flex-wrap gap-3 justify-between items-start">
+                        <div className="min-w-0 flex-1">
                           <div className="flex items-center gap-2 flex-wrap">
                             <span className="text-sm text-[#6E7C72]">#{rec.display_order}</span>
                             <h4 className="font-semibold text-[#2C3E34]">{rec.title}</h4>
@@ -376,14 +377,14 @@ export default function RecommendationsModal({ isOpen, onClose, onSave }: Recomm
               )}
             </div>
           </div>
-        </div>
+        </ModalSurface>
       </div>
 
       {/* Modal de confirmación con Tailwind */}
       {confirmDelete.isOpen && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[60] p-4">
-          <div className="bg-white rounded-xl shadow-xl max-w-md w-full border border-[#E6E3DE]">
-            <div className="p-6">
+          <ModalSurface onClose={() => setConfirmDelete({ isOpen: false, id: null, title: '' })} className="modal-surface bg-white rounded-xl shadow-xl max-w-md w-full border border-[#E6E3DE]">
+            <div className="p-4 sm:p-6">
               <div className="flex items-center justify-center mb-4">
                 <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center">
                   <svg className="w-6 h-6 text-[#F58634]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -398,7 +399,7 @@ export default function RecommendationsModal({ isOpen, onClose, onSave }: Recomm
                 ¿Estás seguro de que deseas eliminar la recomendación <strong className="text-[#2C3E34]">"{confirmDelete.title}"</strong>?<br />
                 Esta acción no se puede deshacer.
               </p>
-              <div className="flex justify-end gap-3">
+              <div className="flex flex-wrap justify-end gap-3">
                 <button
                   onClick={handleCancelDelete}
                   className="px-4 py-2 border border-[#E6E3DE] rounded-lg text-[#6E7C72] hover:bg-[#FAF9F7] transition-colors"
@@ -413,7 +414,7 @@ export default function RecommendationsModal({ isOpen, onClose, onSave }: Recomm
                 </button>
               </div>
             </div>
-          </div>
+          </ModalSurface>
         </div>
       )}
     </>

@@ -1,6 +1,8 @@
 'use client';
+import ModalSurface from "@/components/ui/ModalSurface";
 
 import { useState, useEffect } from 'react';
+import AdaptiveTable from "@/components/ui/AdaptiveTable";
 import { toast } from 'react-hot-toast';
 
 interface ClinicalEvaluationModalProps {
@@ -547,9 +549,9 @@ export default function ClinicalEvaluationModal({ isOpen, onClose, appointment, 
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-xl shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto border border-[#E6E3DE]">
+      <ModalSurface onClose={onClose} className="modal-surface bg-white rounded-xl shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto border border-[#E6E3DE]">
         {/* Header */}
-        <div className="sticky top-0 bg-white border-b border-[#E6E3DE] px-6 py-4 bg-[#FAF9F7] flex justify-between items-center">
+        <div className="sticky top-0 bg-white border-b border-[#E6E3DE] px-6 py-4 bg-[#FAF9F7] flex flex-wrap gap-3 justify-between items-center">
           <div>
             <h2 className="text-xl font-bold text-[#5A8C7A]">
               {isInitialEvaluation ? 'Evaluación Inicial' : 'Evaluación de Seguimiento'}
@@ -579,7 +581,7 @@ export default function ClinicalEvaluationModal({ isOpen, onClose, appointment, 
         </div>
 
         {/* Formulario - Se mantiene igual, solo se muestra el contenido según la sección */}
-        <div className="p-6">
+        <div className="p-4 sm:p-6">
           {/* Motivo de Consulta */}
           {currentSectionData.id === 'motivo' && (
             <div className="space-y-4">
@@ -618,7 +620,7 @@ export default function ClinicalEvaluationModal({ isOpen, onClose, appointment, 
           {/* Antecedentes Heredofamiliares */}
           {currentSectionData.id === 'heredo' && (
             <div className="space-y-4">
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <label className="flex items-center gap-2"><input type="checkbox" checked={formData.diabetes} onChange={(e) => handleInputChange('diabetes', e.target.checked)} className="rounded text-[#5A8C7A]" /><span>Diabetes</span></label>
                 <label className="flex items-center gap-2"><input type="checkbox" checked={formData.hypertension} onChange={(e) => handleInputChange('hypertension', e.target.checked)} className="rounded text-[#5A8C7A]" /><span>Hipertensión</span></label>
                 <label className="flex items-center gap-2"><input type="checkbox" checked={formData.obesity} onChange={(e) => handleInputChange('obesity', e.target.checked)} className="rounded text-[#5A8C7A]" /><span>Obesidad</span></label>
@@ -648,7 +650,7 @@ export default function ClinicalEvaluationModal({ isOpen, onClose, appointment, 
 
           {/* Antecedentes No Patológicos */}
           {currentSectionData.id === 'no_patologicos' && (
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div><label className="block text-sm font-semibold">Actividad física (tipo):</label><input type="text" value={formData.physical_activity_type} onChange={(e) => handleInputChange('physical_activity_type', e.target.value)} className="w-full px-3 py-2 border rounded-lg" /></div>
               <div><label className="block text-sm font-semibold">Frecuencia:</label><input type="text" value={formData.physical_activity_frequency} onChange={(e) => handleInputChange('physical_activity_frequency', e.target.value)} className="w-full px-3 py-2 border rounded-lg" /></div>
               <div><label className="block text-sm font-semibold">Duración:</label><input type="text" value={formData.physical_activity_duration} onChange={(e) => handleInputChange('physical_activity_duration', e.target.value)} className="w-full px-3 py-2 border rounded-lg" /></div>
@@ -662,7 +664,7 @@ export default function ClinicalEvaluationModal({ isOpen, onClose, appointment, 
 
           {/* Historia Ginecológica */}
           {currentSectionData.id === 'ginecologicos' && (
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div><label className="block text-sm font-semibold">Edad de menarca:</label><input type="number" value={formData.menarche_age} onChange={(e) => handleInputChange('menarche_age', e.target.value)} className="w-full px-3 py-2 border rounded-lg" /></div>
               <div><label className="block text-sm font-semibold">Ciclo menstrual:</label><select value={formData.menstrual_cycle} onChange={(e) => handleInputChange('menstrual_cycle', e.target.value)} className="w-full px-3 py-2 border rounded-lg"><option value="">Seleccionar</option><option value="regular">Regular</option><option value="irregular">Irregular</option></select></div>
               <div><label className="block text-sm font-semibold">Duración del ciclo:</label><input type="number" value={formData.cycle_duration} onChange={(e) => handleInputChange('cycle_duration', e.target.value)} className="w-full px-3 py-2 border rounded-lg" /></div>
@@ -677,7 +679,7 @@ export default function ClinicalEvaluationModal({ isOpen, onClose, appointment, 
           {currentSectionData.id === 'dietetica' && (
             <div className="space-y-6">
               <div><h3 className="text-md font-semibold text-[#5A8C7A] mb-3">Recordatorio de 24 horas</h3>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div><label className="block text-sm font-semibold">Desayuno:</label><textarea value={formData.breakfast} onChange={(e) => handleInputChange('breakfast', e.target.value)} rows={2} className="w-full px-3 py-2 border rounded-lg" /></div>
                   <div><label className="block text-sm font-semibold">Colación AM:</label><textarea value={formData.morning_snack} onChange={(e) => handleInputChange('morning_snack', e.target.value)} rows={2} className="w-full px-3 py-2 border rounded-lg" /></div>
                   <div><label className="block text-sm font-semibold">Comida:</label><textarea value={formData.lunch} onChange={(e) => handleInputChange('lunch', e.target.value)} rows={2} className="w-full px-3 py-2 border rounded-lg" /></div>
@@ -687,7 +689,7 @@ export default function ClinicalEvaluationModal({ isOpen, onClose, appointment, 
                 </div>
               </div>
               <div><h3 className="text-md font-semibold mb-3">Frecuencia de consumo</h3>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div><label className="block text-sm font-semibold">Frutas:</label><input type="text" value={formData.fruits} onChange={(e) => handleInputChange('fruits', e.target.value)} className="w-full px-3 py-2 border rounded-lg" /></div>
                   <div><label className="block text-sm font-semibold">Verduras:</label><input type="text" value={formData.vegetables} onChange={(e) => handleInputChange('vegetables', e.target.value)} className="w-full px-3 py-2 border rounded-lg" /></div>
                   <div><label className="block text-sm font-semibold">Proteínas:</label><input type="text" value={formData.proteins} onChange={(e) => handleInputChange('proteins', e.target.value)} className="w-full px-3 py-2 border rounded-lg" /></div>
@@ -713,7 +715,7 @@ export default function ClinicalEvaluationModal({ isOpen, onClose, appointment, 
             {currentSectionData.id === 'antropometrica' && (
             <div className="space-y-6">
                 {/* Medidas básicas */}
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                   <div><label className="block text-sm font-semibold">Estatura (cm):</label><input type="number" step="0.1" value={formData.height} onChange={(e) => handleInputChange('height', e.target.value)} className="w-full px-3 py-2 border rounded-lg" /></div>
                   <div><label className="block text-sm font-semibold">Peso (kg):</label><input type="number" step="0.1" value={formData.weight} onChange={(e) => handleInputChange('weight', e.target.value)} className="w-full px-3 py-2 border rounded-lg" /></div>
                   <div><label className="block text-sm font-semibold">% Grasa:</label><input type="number" step="0.1" value={formData.body_fat_percentage} onChange={(e) => handleInputChange('body_fat_percentage', e.target.value)} className="w-full px-3 py-2 border rounded-lg" /></div>
@@ -736,7 +738,7 @@ export default function ClinicalEvaluationModal({ isOpen, onClose, appointment, 
                 <div>
                 <h3 className="text-md font-semibold text-[#5A8C7A] mb-3">Medidas por Extremidad</h3>
                 <div className="overflow-x-auto">
-                    <table className="min-w-full border-collapse border border-[#E6E3DE]">
+                    <AdaptiveTable mobile="scroll" label="Tabla de comparación y detalles"><table className="min-w-full border-collapse border border-[#E6E3DE]">
                     <thead>
                         <tr className="bg-[#FAF9F7]">
                         <th rowSpan={2} className="border border-[#E6E3DE] px-3 py-2 text-center text-sm font-semibold text-[#2C3E34]">Extremidad</th>
@@ -795,7 +797,7 @@ export default function ClinicalEvaluationModal({ isOpen, onClose, appointment, 
                         </td>
                         </tr>
                     </tbody>
-                    </table>
+                    </table></AdaptiveTable>
                 </div>
                 <p className="text-xs text-[#6E7C72] mt-2">Complete los valores de grasa y músculo para cada extremidad</p>
                 </div>
@@ -804,7 +806,7 @@ export default function ClinicalEvaluationModal({ isOpen, onClose, appointment, 
 
           {/* Parámetros Bioquímicos */}
           {currentSectionData.id === 'bioquimicos' && (
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
               <div><label className="block text-sm font-semibold">Glucosa:</label><input type="number" step="0.1" value={formData.glucose} onChange={(e) => handleInputChange('glucose', e.target.value)} className="w-full px-3 py-2 border rounded-lg" /></div>
               <div><label className="block text-sm font-semibold">Insulina:</label><input type="number" step="0.1" value={formData.insulin} onChange={(e) => handleInputChange('insulin', e.target.value)} className="w-full px-3 py-2 border rounded-lg" /></div>
               <div><label className="block text-sm font-semibold">HOMA-IR:</label><input type="number" step="0.1" value={formData.homa_ir} onChange={(e) => handleInputChange('homa_ir', e.target.value)} className="w-full px-3 py-2 border rounded-lg" /></div>
@@ -845,7 +847,7 @@ export default function ClinicalEvaluationModal({ isOpen, onClose, appointment, 
           )}
 
           {/* Botones de navegación */}
-          <div className="flex justify-between gap-3 pt-6 mt-6 border-t border-[#E6E3DE]">
+          <div className="flex flex-wrap gap-3 justify-between gap-3 pt-6 mt-6 border-t border-[#E6E3DE]">
             <button
               type="button"
               onClick={handlePrevious}
@@ -864,7 +866,7 @@ export default function ClinicalEvaluationModal({ isOpen, onClose, appointment, 
             </button>
           </div>
         </div>
-      </div>
+      </ModalSurface>
     </div>
   );
 }

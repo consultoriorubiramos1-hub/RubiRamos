@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import ModalSurface from '@/components/ui/ModalSurface';
 
 interface PatientImageCarouselProps {
   images: { id: number; url: string }[];
@@ -57,7 +58,7 @@ export default function PatientImageCarousel({ images }: PatientImageCarouselPro
       <div className="relative rounded-lg overflow-hidden bg-[#FAF9F7]">
         {images.length === 1 ? (
           <button
-            onClick={() => openModal(images[0].url)}
+            aria-label="Ampliar imagen" onClick={() => openModal(images[0].url)}
             className="w-full cursor-pointer group"
           >
             <img
@@ -70,7 +71,7 @@ export default function PatientImageCarousel({ images }: PatientImageCarouselPro
           <div className="relative group">
             <div className="overflow-hidden">
               <button
-                onClick={() => openModal(images[currentIndex].url)}
+                aria-label="Ampliar imagen" onClick={() => openModal(images[currentIndex].url)}
                 className="w-full cursor-pointer"
               >
                 <img
@@ -84,7 +85,7 @@ export default function PatientImageCarousel({ images }: PatientImageCarouselPro
             {images.length > 1 && (
               <>
                 <button
-                  onClick={prevImage}
+                  aria-label="Imagen anterior" onClick={prevImage}
                   className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/75 transition-all opacity-0 group-hover:opacity-100"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -92,7 +93,7 @@ export default function PatientImageCarousel({ images }: PatientImageCarouselPro
                   </svg>
                 </button>
                 <button
-                  onClick={nextImage}
+                  aria-label="Imagen siguiente" onClick={nextImage}
                   className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/75 transition-all opacity-0 group-hover:opacity-100"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -102,9 +103,9 @@ export default function PatientImageCarousel({ images }: PatientImageCarouselPro
                 <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1.5">
                   {images.map((_, idx) => (
                     <button
-                      key={idx}
+                      key={idx} aria-label={`Ver imagen ${idx + 1}`} aria-pressed={idx === currentIndex}
                       onClick={() => setCurrentIndex(idx)}
-                      className={`w-2 h-2 rounded-full transition-all ${
+                      className={`w-11 h-11 rounded-full border-[18px] border-transparent bg-clip-content transition-colors ${
                         idx === currentIndex 
                           ? 'bg-white w-4' 
                           : 'bg-white/50 hover:bg-white/75'
@@ -122,16 +123,16 @@ export default function PatientImageCarousel({ images }: PatientImageCarouselPro
       {modalOpen && (
         <div 
           className="fixed inset-0 bg-black/95 flex items-center justify-center z-50"
-          onClick={closeModal}
+          aria-label="Cerrar imagen" onClick={closeModal}
         >
-          <div className="relative w-full h-full flex items-center justify-center p-4">
+          <ModalSurface onClose={closeModal} aria-label="Vista ampliada de la imagen" className="modal-surface relative h-[calc(100dvh-2rem)] flex items-center justify-center p-4">
             <img
               src={selectedImage}
               alt="Imagen ampliada"
               className="max-w-full max-h-full object-contain"
             />
             <button
-              onClick={closeModal}
+              aria-label="Cerrar imagen" onClick={closeModal}
               className="absolute top-4 right-4 text-white bg-black/50 rounded-full p-2 hover:bg-black/75 transition-colors"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -147,7 +148,7 @@ export default function PatientImageCarousel({ images }: PatientImageCarouselPro
                     setCurrentIndex(newIndex);
                     setSelectedImage(images[newIndex].url);
                   }}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-black/75 transition-colors"
+                  aria-label="Imagen anterior" className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-black/75 transition-colors"
                 >
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -160,24 +161,24 @@ export default function PatientImageCarousel({ images }: PatientImageCarouselPro
                     setCurrentIndex(newIndex);
                     setSelectedImage(images[newIndex].url);
                   }}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-black/75 transition-colors"
+                  aria-label="Imagen siguiente" className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-black/75 transition-colors"
                 >
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
                 </button>
-                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-wrap justify-center gap-1 w-full max-w-64">
                   {images.map((_, idx) => (
                     <button
-                      key={idx}
+                      key={idx} aria-label={`Ver imagen ${idx + 1}`} aria-pressed={idx === currentIndex}
                       onClick={(e) => {
                         e.stopPropagation();
                         setCurrentIndex(idx);
                         setSelectedImage(images[idx].url);
                       }}
-                      className={`w-2 h-2 rounded-full transition-all ${
+                      className={`w-11 h-11 rounded-full border-[18px] border-transparent bg-clip-content transition-colors ${
                         idx === currentIndex 
-                          ? 'bg-white w-6' 
+                          ? 'bg-white'
                           : 'bg-white/50 hover:bg-white/75'
                       }`}
                     />
@@ -185,7 +186,7 @@ export default function PatientImageCarousel({ images }: PatientImageCarouselPro
                 </div>
               </>
             )}
-          </div>
+          </ModalSurface>
         </div>
       )}
     </>

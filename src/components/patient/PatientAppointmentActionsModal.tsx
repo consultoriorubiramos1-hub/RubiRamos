@@ -1,4 +1,5 @@
 'use client';
+import ModalSurface from "@/components/ui/ModalSurface";
 
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
@@ -79,8 +80,8 @@ export default function PatientAppointmentActionsModal({
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[60] p-4">
-      <div className="bg-white rounded-xl shadow-xl max-w-md w-full border border-[#E6E3DE]">
-        <div className="p-6">
+      <ModalSurface onClose={onClose} className="modal-surface bg-white rounded-xl shadow-xl max-w-md w-full border border-[#E6E3DE]">
+        <div className="p-4 sm:p-6">
           <h3 className="text-lg font-bold text-[#6B8E7B] mb-4">
             {action === 'cancel' ? 'Cancelar cita' : action === 'reschedule' ? 'Reagendar cita' : 'Opciones de cita'}
           </h3>
@@ -133,7 +134,7 @@ export default function PatientAppointmentActionsModal({
                 </p>
               </div>
 
-              <div className="flex justify-end gap-3">
+              <div className="flex flex-wrap justify-end gap-3">
                 <button
                   onClick={() => setAction(null)}
                   className="px-4 py-2 border border-[#E6E3DE] rounded-lg text-[#6E7C72] hover:bg-[#FAF9F7]"
@@ -178,7 +179,7 @@ export default function PatientAppointmentActionsModal({
                 </div>
               )}
 
-              <div className="flex justify-end gap-3">
+              <div className="flex flex-wrap justify-end gap-3">
                 <button
                   onClick={() => setAction(null)}
                   className="px-4 py-2 border border-[#E6E3DE] rounded-lg text-[#6E7C72] hover:bg-[#FAF9F7]"
@@ -196,7 +197,7 @@ export default function PatientAppointmentActionsModal({
             </>
           )}
         </div>
-      </div>
+      </ModalSurface>
     </div>
   );
 }

@@ -1,10 +1,12 @@
 'use client';
+import ModalSurface from "@/components/ui/ModalSurface";
 
 import {
   useEffect,
   useMemo,
   useState,
 } from 'react';
+import AdaptiveTable from "@/components/ui/AdaptiveTable";
 
 import {
   getActiveNutritionPlan,
@@ -1442,7 +1444,7 @@ export default function NutritionPlan({
 
 
         <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-[#E6E3DE]">
+          <AdaptiveTable mobile="scroll" label="Tabla de comparación y detalles"><table className="min-w-full divide-y divide-[#E6E3DE]">
             <thead className="bg-[#FAF9F7]">
               <tr>
                 <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-[#6E7C72]">
@@ -1576,7 +1578,7 @@ export default function NutritionPlan({
                 ),
               )}
             </tbody>
-          </table>
+          </table></AdaptiveTable>
         </div>
       </div>
 
@@ -1605,8 +1607,8 @@ export default function NutritionPlan({
             }
           }
         >
-          <div
-            className="
+          <ModalSurface onClose={closeMealEditor}
+            className="modal-surface
               flex
               max-h-[92vh]
               w-full
@@ -1684,7 +1686,7 @@ export default function NutritionPlan({
             <div
               className="
                 grid
-                flex-1
+                min-w-0 flex-1
                 overflow-hidden
                 md:grid-cols-2
               "
@@ -2013,7 +2015,7 @@ export default function NutritionPlan({
                 Asignar a la celda
               </button>
             </div>
-          </div>
+          </ModalSurface>
         </div>
       )}
     </div>

@@ -19,7 +19,7 @@ export default function ProductCard({ producto }: ProductCardProps) {
   const cloudinaryUrl = producto.image_url || 'https://res.cloudinary.com/demo/image/upload/v1/sample';
 
   return (
-    <div className="bg-white rounded-lg border border-[#E6E3DE] overflow-hidden hover:shadow-md transition-shadow">
+    <div className="ui-card min-w-0 bg-white rounded-2xl overflow-hidden">
       <div className="relative h-48 bg-[#FAF9F7]">
         <Image
           src={cloudinaryUrl}

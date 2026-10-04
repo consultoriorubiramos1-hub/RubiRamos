@@ -156,7 +156,7 @@ export default function RecuperacionForm() {
       </div>
 
       <div className="relative z-10">
-        <div className="bg-[#6B8E7B] p-6 text-white text-center border-b-2 border-[#F58634]">
+        <div className="bg-[#6B8E7B] p-4 sm:p-6 text-white text-center border-b-2 border-[#F58634]">
           <div className="flex items-center justify-center space-x-2">
             <Key className="h-6 w-6 text-[#F58634]" />
             <h2 className="text-xl font-bold">Recuperación de Contraseña</h2>
@@ -166,7 +166,7 @@ export default function RecuperacionForm() {
           </p>
         </div>
 
-        <div className="p-8 space-y-6">
+        <div className="p-5 sm:p-8 space-y-6">
           {fase === 'email' && (
             <>
               <div className="space-y-4">

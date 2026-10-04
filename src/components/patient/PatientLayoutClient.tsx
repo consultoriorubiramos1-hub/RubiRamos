@@ -13,6 +13,7 @@ export default function PatientLayoutClient({ children }: { children: React.Reac
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
+      if (event.target instanceof Element && event.target.closest('[aria-controls="patient-mobile-menu"]')) return;
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
         setIsMenuOpen(false);
       }
@@ -29,9 +30,15 @@ export default function PatientLayoutClient({ children }: { children: React.Reac
     <>
       <Toaster position="top-right" toastOptions={{ duration: 4000 }} />
 
-      <div className="flex h-screen flex-col lg:flex-row lg:overflow-hidden" style={{ backgroundColor: '#FAF9F7' }}>
+      <div className="flex min-h-dvh flex-col lg:h-dvh lg:flex-row" style={{ backgroundColor: '#FAF9F7' }}>
         {/* Header móvil */}
-        <header className="flex items-center justify-between p-4 lg:hidden shadow-sm" 
+        <header className="relative flex shrink-0 items-center justify-between p-4 lg:hidden shadow-sm"
+          onKeyDown={event => {
+            if (event.key === 'Escape') {
+              setIsMenuOpen(false);
+              event.currentTarget.querySelector<HTMLButtonElement>('[aria-controls="patient-mobile-menu"]')?.focus();
+            }
+          }}
           style={{ 
             backgroundColor: '#5A8C7A',
             color: '#FFFFFF'
@@ -49,8 +56,10 @@ export default function PatientLayoutClient({ children }: { children: React.Reac
 
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="p-2 rounded-md transition-colors hover:bg-white/10"
-            aria-label="Abrir menú"
+            className="min-h-11 min-w-11 p-2 rounded-xl transition-colors hover:bg-white/10"
+            aria-label={isMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
+            aria-expanded={isMenuOpen}
+            aria-controls="patient-mobile-menu"
           >
             <Bars3Icon className="h-6 w-6" />
           </button>
@@ -58,7 +67,8 @@ export default function PatientLayoutClient({ children }: { children: React.Reac
           {isMenuOpen && (
             <div
               ref={menuRef}
-              className="absolute top-16 right-4 z-50 w-64 rounded-lg shadow-xl"
+              id="patient-mobile-menu"
+              className="absolute top-full inset-x-4 z-50 max-h-[calc(100dvh-6rem)] overflow-y-auto rounded-xl shadow-xl"
               style={{ 
                 backgroundColor: '#2C3E34',
                 border: '1px solid #5A8C7A'
@@ -70,13 +80,13 @@ export default function PatientLayoutClient({ children }: { children: React.Reac
         </header>
 
         {/* Sidebar escritorio */}
-        <div className="hidden lg:flex w-64 flex-none flex-col shadow-lg" style={{ backgroundColor: '#2C3E34' }}>
+        <div className="hidden lg:flex w-64 flex-none flex-col overflow-y-auto shadow-sm" style={{ backgroundColor: '#2C3E34' }}>
           <SideNav />
         </div>
 
         {/* Contenido principal */}
-        <main className="flex-grow p-4 lg:overflow-y-auto lg:p-8">
-          <div className="mx-auto max-w-7xl">{children}</div>
+        <main id="main-content" className="min-w-0 flex-1 p-3 sm:p-4 lg:overflow-y-auto lg:p-8">
+          <div className="mx-auto min-w-0 max-w-7xl">{children}</div>
         </main>
       </div>
     </>

@@ -8,7 +8,7 @@ export default function InternalServerError({
   reset: () => void;
 }) {
   return (
-    <main className="min-h-screen flex items-center justify-center bg-[#FAF9F7] p-6">
+    <main className="min-h-screen flex items-center justify-center bg-[#FAF9F7] p-4 sm:p-6">
       <div className="max-w-4xl w-full">
         {/* Encabezado minimalista */}
         <div className="text-center mb-12">
@@ -28,7 +28,7 @@ export default function InternalServerError({
           {/* Diagnóstico visual */}
           <div className="relative">
             {/* Gráfico de diagnóstico */}
-            <div className="relative bg-white rounded-2xl p-8 shadow-sm border border-[#E6E3DE]">
+            <div className="relative bg-white rounded-2xl p-5 sm:p-8 shadow-sm border border-[#E6E3DE]">
               {/* Título del gráfico */}
               <div className="flex items-center justify-between mb-8">
                 <h3 className="text-lg font-semibold font-serif text-[#2C3E34]">
@@ -48,7 +48,7 @@ export default function InternalServerError({
                   { label: 'Respuesta', value: 25, color: '#F58634' },
                 ].map((metric, index) => (
                   <div key={index} className="space-y-2">
-                    <div className="flex justify-between text-sm">
+                    <div className="flex flex-wrap gap-3 justify-between text-sm">
                       <span className="text-[#6E7C72]">{metric.label}</span>
                       <span className="font-medium" style={{ color: metric.color }}>
                         {metric.value}%
