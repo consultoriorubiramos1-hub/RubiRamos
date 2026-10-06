@@ -37,6 +37,7 @@ import Db from '../../src/app/admin/db/page';
 import Alexa from '../../src/app/admin/alexa/page';
 import Payments from '../../src/components/citas/PendingPaymentsReview';
 import Predictive from '../../src/components/medical-history/PredictiveModule';
+import ConnectionStatus from '../../src/components/pwa/ConnectionStatus';
 
 const close = () => { window.__closed = true; };
 const d = data;
@@ -55,8 +56,9 @@ const screens: Record<string, React.ReactNode> = {
   'appointment-admin': <AppointmentModal {...common} selectedDate={new Date(d.dateString)} />,
   'patient-appointment': <PatientAppointmentModal {...common} selectedDate={new Date(d.dateString)} patientId={d.patient.id} depositAmount={100} />,
   'patient-profile': <Profile initialProfile={d.patient} userId={d.patient.id} />,
-  'patient-dashboard': <PatientDashboard patient={d.patient} upcomingAppointments={[d.appointment]} appointmentHistory={[d.appointment]} stats={d.stats} posts={[]} />,
-  'admin-dashboard': <AdminDashboard stats={d.stats} />,
+  'patient-dashboard': <PatientDashboard patient={d.patient} upcomingAppointments={[d.appointment]} appointmentHistory={[d.appointment]} stats={d.stats} posts={[{...d.post,images:d.post.images.map(image=>image.url)}]} />,
+  'patient-dashboard-empty': <PatientDashboard patient={d.patient} upcomingAppointments={[]} appointmentHistory={[]} stats={{...d.stats,pesoInicial:null,pesoActual:null,proximaCita:null}} posts={[]} />,
+  'admin-dashboard': <AdminDashboard stats={d.stats} userName="Rubí de prueba" />,
   'patient-progress': <PatientProgress followUpEvaluations={[d.evaluation]} />,
   'patient-plan': <PatientPlan nutritionPlan={d.plan} />,
   'patient-predictive': <PatientPredictive patient={d.patient} weightHistory={[{evaluation_date:d.dateString,weight:75,height:165,anthropometric:d.evaluation.anthropometric}]} />,
@@ -79,4 +81,4 @@ const screens: Record<string, React.ReactNode> = {
 };
 const screen = new URLSearchParams(location.search).get('screen') || 'patients';
 const Layout = screen.startsWith('patient-') && screen !== 'patient-edit' ? PatientLayout : AdminLayout;
-createRoot(document.getElementById('root')!).render(<Layout>{screens[screen] || 'Pantalla desconocida'}</Layout>);
+createRoot(document.getElementById('root')!).render(<><ConnectionStatus /><Layout>{screens[screen] || 'Pantalla desconocida'}</Layout></>);
