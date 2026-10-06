@@ -22,10 +22,10 @@ export default function SideNav({ mobile = false, onClose }: SideNavProps) {
   const isAdmin = userRole === 1;
 
   return (
-    <div className={`flex flex-col ${mobile ? 'h-auto' : 'h-full'}`}>
+    <div className={`workspace-sidebar flex flex-col ${mobile ? 'h-auto' : 'h-full'}`}>
       {/* Logo - solo en desktop */}
       {!mobile && (
-        <div className="flex h-24 items-center justify-center p-4 border-b" style={{ borderColor: '#5A8C7A' }}>
+        <div className="sidebar-brand flex flex-col items-center justify-center px-4 py-6 border-b" style={{ borderColor: 'rgba(255,255,255,.12)' }}>
           <div className="relative w-44 h-14">
             <Image
               src="/logo_rubi.png"
@@ -35,6 +35,7 @@ export default function SideNav({ mobile = false, onClose }: SideNavProps) {
               className="object-contain"
             />
           </div>
+          <p className="mt-2 text-[10px] uppercase tracking-[.18em] text-[#E6E3DE]">{isAdmin ? 'Gestión del consultorio' : 'Tu espacio de bienestar'}</p>
         </div>
       )}
 
@@ -47,7 +48,7 @@ export default function SideNav({ mobile = false, onClose }: SideNavProps) {
       <div className="px-3 py-3 border-t" style={{ borderColor: '#5A8C7A' }}>
         <button
           onClick={() => signOut({ callbackUrl: '/login' })}
-          className={`flex items-center gap-3 rounded-lg px-3 py-3 text-sm font-medium transition-colors w-full ${
+          className={`sidebar-signout flex items-center gap-3 rounded-lg px-3 py-3 text-sm font-medium transition-colors w-full ${
             mobile 
               ? 'hover:bg-red-600/20 justify-center' 
               : 'hover:bg-red-600/20 justify-start'
@@ -61,9 +62,9 @@ export default function SideNav({ mobile = false, onClose }: SideNavProps) {
 
       {/* Perfil - al final */}
       <div className="px-3 py-4 border-t" style={{ borderColor: '#5A8C7A' }}>
-        <div className="flex items-center gap-3 p-3 rounded-lg" 
+        <div className="sidebar-profile flex items-center gap-3 p-3 rounded-lg"
           style={{ 
-            backgroundColor: mobile ? 'rgba(90, 140, 122, 0.2)' : '#5A8C7A' 
+            backgroundColor: 'rgba(255,255,255,.07)'
           }}
         >
           <div className="h-10 w-10 rounded-full flex items-center justify-center" 

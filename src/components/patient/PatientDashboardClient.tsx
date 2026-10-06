@@ -45,19 +45,24 @@ export default function PatientDashboardClient({
     : null;
 
   return (
-    <div className="space-y-6">
+    <div className="dashboard-overview space-y-6">
       {/* Título de bienvenida */}
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold text-[#5A8C7A]">
+      <div className="dashboard-welcome dashboard-welcome--patient mb-6">
+        <p className="dashboard-eyebrow">Cada paso cuenta</p>
+        <h1 className="text-2xl font-bold text-[#2C3E34]">
           Hola, {patient.first_name} {patient.first_lastname}
         </h1>
         <p className="text-sm text-[#6E7C72] mt-1">
           Este es tu espacio personal para dar seguimiento a tu tratamiento nutricional
         </p>
+        <div className="dashboard-shortcuts">
+          <Link href="/admin/patient/calendar">Mi calendario <span aria-hidden="true">↗</span></Link>
+          <Link href="/admin/patient/perfil">Mi perfil <span aria-hidden="true">↗</span></Link>
+        </div>
       </div>
       
       {/* Tarjetas de estadísticas */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="dashboard-metrics grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
         <div className="bg-white rounded-xl shadow-sm p-4 border-l-4 border-[#5A8C7A]">
           <p className="text-[#6E7C72] text-sm">Total de citas</p>
           <p className="text-2xl font-bold text-[#2C3E34]">{stats.totalCitas}</p>
@@ -148,7 +153,7 @@ export default function PatientDashboardClient({
                       ></div>
                     </div>
                     <div className="text-center">
-                      <p className="text-sm text-[#A8CF45] font-semibold">
+                      <p className="text-sm text-[#456D5E] font-semibold">
                         Has perdido {pesoPerdido.toFixed(1)} kg
                       </p>
                     </div>

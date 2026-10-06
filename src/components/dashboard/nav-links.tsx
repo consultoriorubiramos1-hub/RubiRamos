@@ -93,7 +93,7 @@ export default function NavLinks({ mobile = false, onLinkClick, userRole = 1 }: 
             aria-current={isActive ? 'page' : undefined}
             onClick={onLinkClick}
             className={clsx(
-              'flex items-center gap-3 rounded-lg px-3 py-3 text-sm font-medium transition-all duration-200 relative mb-1',
+              'sidebar-link flex items-center gap-3 rounded-lg px-3 py-3 text-sm font-medium transition-all duration-200 relative mb-1',
               isActive && 'font-semibold'
             )}
             style={
@@ -144,7 +144,7 @@ export default function NavLinks({ mobile = false, onLinkClick, userRole = 1 }: 
           onClick={() => setIsConfigOpen(!isConfigOpen)}
           aria-expanded={isConfigOpen || mobile}
           className={clsx(
-            'flex items-center justify-between w-full rounded-lg px-3 py-3 text-sm font-medium transition-all duration-200 mb-1',
+            'sidebar-link flex items-center justify-between w-full rounded-lg px-3 py-3 text-sm font-medium transition-all duration-200 mb-1',
             isAnyConfigActive && !mobile && 'font-semibold'
           )}
           style={{
@@ -183,7 +183,7 @@ export default function NavLinks({ mobile = false, onLinkClick, userRole = 1 }: 
                   aria-current={isActive ? 'page' : undefined}
                   onClick={onLinkClick}
                   className={clsx(
-                    'flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-all duration-200',
+                    'sidebar-link flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-all duration-200',
                     isActive && 'font-semibold'
                   )}
                   style={

@@ -30,7 +30,7 @@ export default function PatientLayoutClient({ children }: { children: React.Reac
     <>
       <Toaster position="top-right" toastOptions={{ duration: 4000 }} />
 
-      <div className="flex min-h-dvh flex-col lg:h-dvh lg:flex-row" style={{ backgroundColor: '#FAF9F7' }}>
+      <div className="workspace-shell flex min-h-dvh flex-col lg:h-dvh lg:flex-row" style={{ backgroundColor: '#FAF9F7' }}>
         {/* Header móvil */}
         <header className="relative flex shrink-0 items-center justify-between p-4 lg:hidden shadow-sm"
           onKeyDown={event => {
@@ -68,7 +68,7 @@ export default function PatientLayoutClient({ children }: { children: React.Reac
             <div
               ref={menuRef}
               id="patient-mobile-menu"
-              className="absolute top-full inset-x-4 z-50 max-h-[calc(100dvh-6rem)] overflow-y-auto rounded-xl shadow-xl"
+              className="workspace-mobile-menu absolute top-full inset-x-4 z-50 max-h-[calc(100dvh-6rem)] overflow-y-auto rounded-xl shadow-xl"
               style={{ 
                 backgroundColor: '#2C3E34',
                 border: '1px solid #5A8C7A'
@@ -85,7 +85,7 @@ export default function PatientLayoutClient({ children }: { children: React.Reac
         </div>
 
         {/* Contenido principal */}
-        <main id="main-content" className="min-w-0 flex-1 p-3 sm:p-4 lg:overflow-y-auto lg:p-8">
+        <main id="main-content" className="workspace-content min-w-0 flex-1 p-3 sm:p-4 lg:overflow-y-auto lg:p-8">
           <div className="mx-auto min-w-0 max-w-7xl">{children}</div>
         </main>
       </div>

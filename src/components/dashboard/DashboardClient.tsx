@@ -357,22 +357,27 @@ export default function DashboardClient({
     [];
 
   return (
-    <div className="p-4 sm:p-6">
+    <div className="dashboard-overview">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold text-[#6B8E7B]">
+        <div className="dashboard-welcome mb-8">
+          <p className="dashboard-eyebrow">Tu consultorio, de un vistazo</p>
+          <h1 className="text-2xl font-bold text-[#2C3E34]">
             Bienvenida, {userName}
           </h1>
 
           <p className="text-sm text-[#6E7C72] mt-1">
             Hoy es {formatDashboardDate()}
           </p>
+          <div className="dashboard-shortcuts">
+            <Link href="/admin/calendar">Ver calendario <span aria-hidden="true">↗</span></Link>
+            <Link href="/admin/pacientes">Ver pacientes <span aria-hidden="true">↗</span></Link>
+          </div>
         </div>
 
 
         {/* Tarjetas de estadísticas */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <div className="dashboard-metrics grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-8">
           {/* Citas hoy */}
           <div className="bg-white rounded-xl shadow-sm p-4 border-l-4 border-[#6B8E7B]">
             <div className="flex items-center justify-between">
@@ -960,10 +965,10 @@ export default function DashboardClient({
                     patient => (
                       <div
                         key={patient.id}
-                        className="flex items-center justify-between p-3 bg-[#FAF9F7] rounded-lg"
+                        className="flex items-center justify-between gap-3 p-3 bg-[#FAF9F7] rounded-lg"
                       >
                         <div>
-                          <p className="font-medium text-[#2C3E34]">
+                          <p className="font-medium text-[#2C3E34] break-words">
                             {patient.name}
                           </p>
 
@@ -974,7 +979,7 @@ export default function DashboardClient({
                           </p>
                         </div>
 
-                        <span className="px-2 py-1 rounded-full text-xs font-medium bg-[#A8CF45]/20 text-[#2C3E34]">
+                        <span className="shrink-0 px-2 py-1 rounded-full text-xs font-medium bg-[#A8CF45]/20 text-[#2C3E34]">
                           {patient.status}
                         </span>
                       </div>
