@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "postbuild": "node scripts/build-public-offline.cjs",
     "start": "next start",
     "lint": "eslint src",
     "typecheck": "tsc --noEmit"

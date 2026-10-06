@@ -49,3 +49,6 @@ ML/.venv/
 # Local visual and PDF verification outputs
 /tmp/qa/
 /docs/ui-preview/
+
+# Public, session-free snapshots generated from the production build
+/public/offline-public/

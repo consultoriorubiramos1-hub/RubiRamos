@@ -42,10 +42,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}
       >
         <a className="skip-link" href="#main-content">Ir al contenido</a>
+        <ServiceWorkerRegistration />
         <SessionProviderWrapper>
           <ClientWrapper>{children}</ClientWrapper>
         </SessionProviderWrapper>
-        <ServiceWorkerRegistration />
       </body>
     </html>
   );

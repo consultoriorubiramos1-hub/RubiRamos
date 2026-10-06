@@ -77,10 +77,10 @@ export default function Home() {
 
               {/* Texto - Derecha */}
               <div className="min-w-0 text-center md:text-left">
-                <h1 className="text-[clamp(1.75rem,4vw,3rem)] leading-tight font-bold mb-3 font-serif" style={{ color: '#FFFFFF' }}>
+                <h1 className="hero-reveal hero-reveal--title text-[clamp(1.75rem,4vw,3rem)] leading-tight font-bold mb-3 font-serif" style={{ color: '#FFFFFF' }}>
                   Consultorio Nutricional
                 </h1>
-                <h2 className="text-xl md:text-3xl font-semibold mb-5" style={{ color: '#F58634' }}>
+                <h2 className="hero-reveal hero-reveal--subtitle text-xl md:text-3xl font-semibold mb-5" style={{ color: '#F58634' }}>
                   Nutrióloga Rubí Ramos Álvarez
                 </h2>
                 
@@ -95,14 +95,14 @@ export default function Home() {
                 </div>
 
                 {/* Misión */}
-                <div className="mb-8">
+                <div className="hero-reveal hero-reveal--copy mb-8">
                   <p className="text-sm md:text-lg leading-relaxed" style={{ color: '#FFFFFF' }}>
-                    <strong className="font-bold" style={{ color: '#BD7D4A' }}>Misión:</strong> Brindar atención nutricional integral a personas de distintas edades mediante evaluaciones personalizadas, planes alimenticios adecuados y asesoría profesional.
+                    <strong className="font-bold" style={{ color: '#F58634' }}>Misión:</strong> Brindar atención nutricional integral a personas de distintas edades mediante evaluaciones personalizadas, planes alimenticios adecuados y asesoría profesional.
                   </p>
                 </div>
                 
                 {/* Botones */}
-                <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                <div className="hero-reveal hero-reveal--actions flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                   <Link href="/citas"
                     className="px-6 py-3 rounded-xl font-bold text-sm md:text-base shadow-md transition-all duration-300 hover:shadow-lg transform hover:-translate-y-1 active:scale-[0.98] flex items-center justify-center gap-2"
                     style={{ 
@@ -128,7 +128,7 @@ export default function Home() {
             </div>
 
             {/* Información de contacto inmediata */}
-            <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-md p-4 sm:p-6 border border-[#E6E3DE]">
+            <div className="hero-reveal hero-reveal--info bg-white/95 backdrop-blur-sm rounded-2xl shadow-md p-4 sm:p-6 border border-[#E6E3DE]">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="flex min-w-0 items-center justify-start gap-3 p-2 rounded-xl hover:bg-[#FAF9F7] transition-colors">
                   <div className="h-10 w-10 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#2C3E34' }}>
